@@ -1,0 +1,151 @@
+{
+  "_meta": {
+    "taxYear": 2026,
+    "note": "Every parameter has value, sourceUrl, verifiedBy (name) and verifiedOn (YYYY-MM-DD). All stay null until Elias verifies them against AADE / the law text. Never fill in estimates. 'description' is documentation only."
+  },
+  "incomeTax": {
+    "brackets": {
+      "description": "Income tax scale for employment income, tax year 2026. Expected shape: [{ \"upTo\": number | null, \"rate\": number }], upTo in EUR of taxable income per year (null = no upper limit), rate as a fraction (0.22 = 22%).",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    }
+  },
+  "taxReduction": {
+    "baseAmountByChildren": {
+      "description": "Employee tax reduction (μείωση φόρου) in EUR by number of dependent children. Expected shape: { \"0\": number, \"1\": number, ... } plus how to handle more children than listed.",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "phaseOutThreshold": {
+      "description": "Taxable income in EUR above which the tax reduction starts to shrink (and whether it differs by number of children).",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "phaseOutRate": {
+      "description": "How fast the tax reduction shrinks above the threshold, e.g. EUR per EUR 1,000 of income above it.",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    }
+  },
+  "efka": {
+    "employeeRate": {
+      "description": "EFKA employee social contribution rate as a fraction of gross pay (total of all employee contributions; list the components in the source note if they differ).",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "monthlyInsurableCeiling": {
+      "description": "Monthly insurable-earnings ceiling in EUR above which no employee contributions are due.",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    }
+  },
+  "solidarityContribution": {
+    "appliesToEmploymentIncome": {
+      "description": "true / false: whether the special solidarity contribution applies to employment income in tax year 2026.",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "brackets": {
+      "description": "Solidarity contribution scale, same shape as incomeTax.brackets. If it does not apply, set to [] (still with source and verification).",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    }
+  },
+  "salaryPaymentsPerYear": {
+    "description": "Number of salary payments per year for private-sector employees (expected 14; verify).",
+    "value": null,
+    "sourceUrl": null,
+    "verifiedBy": null,
+    "verifiedOn": null
+  },
+  "art5c": {
+    "exemptionRate": {
+      "description": "Share of the covered income exempted under Article 5C, as a fraction (expected 0.5; verify).",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "exemptionAppliesTo": {
+      "description": "Which items the exemption reduces. Expected shape: list drawn from [\"incomeTax\", \"solidarityContribution\", \"socialContributions\"]. Expected: not social contributions; verify.",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "taxReductionInteraction": {
+      "description": "How the employee tax reduction interacts with 5C: whether it is computed on the reduced taxable amount or some other way. Free text until the mechanics are confirmed; M2 turns it into an enum.",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "durationYears": {
+      "description": "Number of tax years the 5C exemption applies for.",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "lookbackYears": {
+      "description": "Quiz Q1: length of the look-back window in years for prior Greek tax residence. OPEN ITEM: sources conflict (8 vs 5).",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "requiredNonResidentYears": {
+      "description": "Quiz Q1: years within the look-back window the person must NOT have been Greek tax resident. OPEN ITEM: sources conflict (7 of 8 vs 5).",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "minimumStayYears": {
+      "description": "Quiz Q4: minimum years the person must stay in Greece (expected 2; verify).",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "cooperationCountries": {
+      "GB": {
+        "description": "true / false: the United Kingdom meets the administrative-cooperation condition for 5C.",
+        "value": null,
+        "sourceUrl": null,
+        "verifiedBy": null,
+        "verifiedOn": null
+      },
+      "US": {
+        "description": "true / false: the United States meets the administrative-cooperation condition for 5C.",
+        "value": null,
+        "sourceUrl": null,
+        "verifiedBy": null,
+        "verifiedOn": null
+      },
+      "AU": {
+        "description": "true / false: Australia meets the administrative-cooperation condition for 5C.",
+        "value": null,
+        "sourceUrl": null,
+        "verifiedBy": null,
+        "verifiedOn": null
+      }
+    }
+  }
+}

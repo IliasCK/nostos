@@ -1,0 +1,4 @@
+# Data pipeline dependencies (Python 3.12). Versions get pinned in M5.
+requests
+pandas
+sdmx1
