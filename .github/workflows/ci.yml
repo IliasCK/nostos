@@ -16,6 +16,13 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Pipeline tests
+        run: python -m unittest discover -s pipeline/tests -p 'test_*.py'
+      - name: Validate committed data (rent staleness is a warning only)
+        run: python pipeline/validate.py
       - run: npm ci
       - run: npm run test
       - run: npm run build

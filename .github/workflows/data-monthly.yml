@@ -1,0 +1,52 @@
+name: Data (monthly OECD + Eurostat)
+
+# Annual/semi-annual series; checking monthly picks up new releases and revisions.
+on:
+  schedule:
+    - cron: '0 6 3 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-pipeline
+  cancel-in-progress: false
+
+jobs:
+  monthly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      # Each fetcher validates before writing; if one fails, the other's valid data is
+      # still committed, and the job fails at the end so GitHub emails the repo owner.
+      - name: OECD price level indices
+        id: oecd
+        continue-on-error: true
+        run: python pipeline/fetch_oecd.py
+      - name: Eurostat peers indicators
+        id: eurostat
+        continue-on-error: true
+        run: python pipeline/fetch_eurostat.py
+      - name: Rent staleness check (warning only)
+        run: python pipeline/validate.py
+      - name: Commit if the data changed
+        run: |
+          if git diff --quiet -- src/data; then
+            echo "No data change; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data
+          git commit -m "data: OECD price levels / Eurostat peers update"
+          git pull --rebase --quiet
+          git push
+      - name: Fail if a fetch or validation failed
+        if: steps.oecd.outcome == 'failure' || steps.eurostat.outcome == 'failure'
+        run: |
+          echo "::error::OECD: ${{ steps.oecd.outcome }}, Eurostat: ${{ steps.eurostat.outcome }}. See the step logs above."
+          exit 1
