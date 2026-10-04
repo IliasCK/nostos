@@ -182,6 +182,20 @@
       "verifiedBy": null,
       "verifiedOn": null
     },
+    "euEeaQualifies": {
+      "description": "Quiz Q2: true / false: moving tax residence from an EU or EEA member state satisfies the 5C origin condition. Source for the EU/EEA pass.",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "qualifyingWorkTypes": {
+      "description": "Quiz Q3: work types that qualify for 5C. Shape: list drawn from [\"greek_employer\", \"greek_branch\", \"public_sector\", \"self_employed\"]. Listed types pass, unlisted ones fail. Remote work for a foreign employer with no Greek presence is always borderline and not working / retired always fails (SPEC §5.2), but only once this parameter is verified.",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
     "cooperationCountries": {
       "GB": {
         "description": "true / false: the United Kingdom meets the administrative-cooperation condition for 5C.",

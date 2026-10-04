@@ -266,6 +266,23 @@
       "verifiedBy": null,
       "verifiedOn": null
     },
+    "euEeaQualifies": {
+      "value": true,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "qualifyingWorkTypes": {
+      "value": [
+        "greek_employer",
+        "greek_branch",
+        "public_sector",
+        "self_employed"
+      ],
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
     "cooperationCountries": {
       "GB": {
         "value": true,
