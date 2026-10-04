@@ -1,0 +1,308 @@
+{
+  "_note": "Real-world oracle (SPEC §6.3). Elias picks two reputable Greek net-salary calculators and fills in their name/url/retrievedOn, then for every case enters what each calculator shows. Most Greek calculators take a monthly gross: enter grossAnnual ÷ salaryPaymentsPerYear. netPerPayment = the monthly net they show (one of the salaryPaymentsPerYear payments); annualNet = their yearly net if shown. Leave a value null if the calculator doesn't show it. A case runs automatically once any expected value is set and the real config has every parameter the case needs; until then it is reported as todo. No 5C in these cases.",
+  "toleranceEurPerMonth": 2,
+  "calculators": [
+    {
+      "id": "calculatorA",
+      "name": null,
+      "url": null,
+      "retrievedOn": null
+    },
+    {
+      "id": "calculatorB",
+      "name": null,
+      "url": null,
+      "retrievedOn": null
+    }
+  ],
+  "cases": [
+    {
+      "id": "31plus-12k-0c",
+      "grossAnnual": 12000,
+      "children": 0,
+      "ageBand": "31plus",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "31plus-12k-2c",
+      "grossAnnual": 12000,
+      "children": 2,
+      "ageBand": "31plus",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "31plus-18k-0c",
+      "grossAnnual": 18000,
+      "children": 0,
+      "ageBand": "31plus",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "31plus-18k-2c",
+      "grossAnnual": 18000,
+      "children": 2,
+      "ageBand": "31plus",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "31plus-25k-0c",
+      "grossAnnual": 25000,
+      "children": 0,
+      "ageBand": "31plus",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "31plus-25k-2c",
+      "grossAnnual": 25000,
+      "children": 2,
+      "ageBand": "31plus",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "31plus-35k-0c",
+      "grossAnnual": 35000,
+      "children": 0,
+      "ageBand": "31plus",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "31plus-35k-2c",
+      "grossAnnual": 35000,
+      "children": 2,
+      "ageBand": "31plus",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "31plus-50k-0c",
+      "grossAnnual": 50000,
+      "children": 0,
+      "ageBand": "31plus",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "31plus-50k-2c",
+      "grossAnnual": 50000,
+      "children": 2,
+      "ageBand": "31plus",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "31plus-80k-0c",
+      "grossAnnual": 80000,
+      "children": 0,
+      "ageBand": "31plus",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "31plus-80k-2c",
+      "grossAnnual": 80000,
+      "children": 2,
+      "ageBand": "31plus",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "26to30-15k-0c",
+      "grossAnnual": 15000,
+      "children": 0,
+      "ageBand": "26to30",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "26to30-20k-0c",
+      "grossAnnual": 20000,
+      "children": 0,
+      "ageBand": "26to30",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "26to30-25k-0c",
+      "grossAnnual": 25000,
+      "children": 0,
+      "ageBand": "26to30",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "26to30-35k-0c",
+      "grossAnnual": 35000,
+      "children": 0,
+      "ageBand": "26to30",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "upTo25-15k-0c",
+      "grossAnnual": 15000,
+      "children": 0,
+      "ageBand": "upTo25",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    },
+    {
+      "id": "upTo25-25k-0c",
+      "grossAnnual": 25000,
+      "children": 0,
+      "ageBand": "upTo25",
+      "expected": {
+        "calculatorA": {
+          "netPerPayment": null,
+          "annualNet": null
+        },
+        "calculatorB": {
+          "netPerPayment": null,
+          "annualNet": null
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "_note": "Hand-built Article 5C cases derived by Elias from the law text (SPEC §6.3). Each case runs computeGreekNet with apply5C: true against the real config. Set any of the expected fields you have worked out; null fields are not checked. Cases with no expected values, or whose parameters are still null in the config, are reported as todo. Copy _exampleCase into cases to add one.",
+  "toleranceEur": 1,
+  "_exampleCase": {
+    "id": "example-30k-0c",
+    "description": "What this case demonstrates, in one line",
+    "lawReference": "e.g. art. 5C par. 1 ΚΦΕ + circular number",
+    "grossAnnual": 30000,
+    "children": 0,
+    "ageBand": "31plus",
+    "expected": {
+      "employeeContributions": null,
+      "incomeTaxBase": null,
+      "taxReduction": null,
+      "finalIncomeTax": null,
+      "otherLeviesTotal": null,
+      "annualNet": null
+    }
+  },
+  "cases": []
+}
