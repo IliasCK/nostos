@@ -80,5 +80,7 @@
   "quiz.note.notWorking": "Article 5C covers income from work. Other regimes exist for pensioners and investors; they're not covered by this tool.",
   "quiz.note.otherCountry": "Check whether Greece has an administrative-cooperation agreement on tax matters in force with this country.",
   "quiz.note.cooperationUnconfirmed": "We haven't yet confirmed that this country meets the cooperation condition.",
-  "quiz.disclaimer": "This checks the main published conditions. It is not a ruling. Only AADE decides eligibility."
+  "quiz.disclaimer": "This checks the main published conditions. It is not a ruling. Only AADE decides eligibility.",
+  "footer.disclaimer": "Estimates only, not tax or financial advice.",
+  "footer.methodology": "Methodology"
 }

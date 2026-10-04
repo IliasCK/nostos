@@ -1,0 +1,18 @@
+---
+import { methodologyPath, t, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<footer class="mt-16 border-t border-line">
+  <div class="mx-auto max-w-page px-4 py-8 text-sm text-muted">
+    <p>
+      {t(locale, 'footer.disclaimer')}
+      <a href={methodologyPath(locale)} class="ml-1 text-accent underline">{t(locale, 'footer.methodology')}</a>
+    </p>
+  </div>
+</footer>

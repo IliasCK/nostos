@@ -19,6 +19,8 @@ export interface EligibilityQuizProps {
   config: unknown;
   /** Called with the outcome when the user finishes the quiz (used by the M4 calculator). */
   onComplete?: (result: EligibilityResult, answers: Answers) => void;
+  /** Called when the user goes back from the result or starts again. */
+  onReset?: () => void;
 }
 
 interface Option {
@@ -30,21 +32,25 @@ function fill(template: string, values: Record<string, number | string>): string
   return template.replace(/\{(\w+)\}/g, (match, name: string) => (name in values ? String(values[name]) : match));
 }
 
+// Outcomes and verdicts never rely on colour alone: each has an icon and a word.
 const OUTCOME_STYLE: Record<Outcome, string> = {
-  likely_eligible: 'border-emerald-700 bg-emerald-50',
-  borderline: 'border-amber-600 bg-amber-50',
-  likely_not_eligible: 'border-stone-700 bg-stone-100',
+  likely_eligible: 'border-accent bg-accent-soft',
+  borderline: 'border-caution bg-caution-soft',
+  likely_not_eligible: 'border-ink bg-surface-muted',
 };
 
 const VERDICT_STYLE: Record<Verdict, string> = {
-  pass: 'bg-emerald-700 text-white',
-  borderline: 'bg-amber-500 text-stone-950',
-  fail: 'bg-stone-800 text-white',
+  pass: 'bg-accent text-accent-ink',
+  borderline: 'bg-caution-soft text-caution ring-1 ring-caution',
+  fail: 'bg-ink text-bg',
 };
+
+export const VERDICT_ICON: Record<Verdict, string> = { pass: '✓', borderline: '?', fail: '✕' };
+const OUTCOME_ICON: Record<Outcome, string> = { likely_eligible: '✓', borderline: '?', likely_not_eligible: '✕' };
 
 const REASONS_WITH_TEXT = new Set(['rule_not_verified', 'not_sure', 'invalid_config', 'not_answered']);
 
-export default function EligibilityQuiz({ strings, config, onComplete }: EligibilityQuizProps) {
+export default function EligibilityQuiz({ strings, config, onComplete, onReset }: EligibilityQuizProps) {
   const s = (key: string) => strings[key] ?? key;
   const numbers = useMemo(() => questionNumbers(config), [config]);
 
@@ -118,14 +124,17 @@ export default function EligibilityQuiz({ strings, config, onComplete }: Eligibi
   }
 
   function back() {
-    if (result) setResult(null);
-    else setStep(Math.max(0, step - 1));
+    if (result) {
+      setResult(null);
+      onReset?.();
+    } else setStep(Math.max(0, step - 1));
   }
 
   function restart() {
     setAnswers({});
     setResult(null);
     setStep(0);
+    onReset?.();
   }
 
   const skipped = questions.length < 4;
@@ -133,7 +142,7 @@ export default function EligibilityQuiz({ strings, config, onComplete }: Eligibi
     <button
       type="button"
       onClick={back}
-      class="min-h-11 rounded px-3 py-2 text-sm font-medium text-stone-700 underline hover:bg-stone-100"
+      class="min-h-11 rounded-md px-3 py-2 text-sm font-medium text-muted underline hover:bg-surface-muted"
     >
       ← {s('quiz.back')}
     </button>
@@ -142,41 +151,43 @@ export default function EligibilityQuiz({ strings, config, onComplete }: Eligibi
   if (result) {
     return (
       <section aria-labelledby="quiz-result-heading" class="space-y-6">
-        <div class={`rounded-lg border-l-4 p-4 ${OUTCOME_STYLE[result.outcome]}`} data-outcome={result.outcome}>
-          <p class="text-sm font-medium text-stone-600">{s('quiz.results.title')}</p>
-          <h2 id="quiz-result-heading" ref={headingRef} tabIndex={-1} class="mt-1 text-xl font-bold outline-none">
+        <div class={`rounded-lg border-l-4 p-5 ${OUTCOME_STYLE[result.outcome]}`} data-outcome={result.outcome}>
+          <p class="text-sm font-medium text-muted">{s('quiz.results.title')}</p>
+          <h2 id="quiz-result-heading" ref={headingRef} tabIndex={-1} class="mt-1 text-2xl outline-none">
+            <span aria-hidden="true" class="mr-2">{OUTCOME_ICON[result.outcome]}</span>
             {s(`quiz.outcome.${result.outcome}`)}
           </h2>
-          <p class="mt-2 text-stone-800">{s(`quiz.outcome.${result.outcome}.body`)}</p>
+          <p class="mt-2">{s(`quiz.outcome.${result.outcome}.body`)}</p>
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold">{s('quiz.ruleCards.title')}</h3>
+          <h3 class="text-xl">{s('quiz.ruleCards.title')}</h3>
           <ul class="mt-3 space-y-3">
             {result.rules.map((r) => (
-              <li key={r.question} class="rounded-lg border border-stone-200 p-4" data-question={r.question}>
+              <li key={r.question} class="rounded-lg border border-line bg-surface p-4" data-question={r.question}>
                 <div class="flex flex-wrap items-start justify-between gap-2">
-                  <h4 class="font-semibold">{s(`quiz.card.${r.question}`)}</h4>
-                  <span class={`rounded px-2 py-0.5 text-sm font-medium ${VERDICT_STYLE[r.verdict]}`} data-verdict={r.verdict}>
+                  <h4 class="text-lg">{s(`quiz.card.${r.question}`)}</h4>
+                  <span class={`rounded-md px-2 py-0.5 text-sm font-medium ${VERDICT_STYLE[r.verdict]}`} data-verdict={r.verdict}>
+                    <span aria-hidden="true" class="mr-1">{VERDICT_ICON[r.verdict]}</span>
                     {s(`quiz.verdict.${r.verdict}`)}
                   </span>
                 </div>
                 <dl class="mt-2 space-y-2 text-sm">
                   <div>
-                    <dt class="font-medium text-stone-600">{s('quiz.rule.label')}</dt>
+                    <dt class="font-medium text-muted">{s('quiz.rule.label')}</dt>
                     <dd>{fill(s(r.ruleKey), r.ruleValues)}</dd>
                   </div>
                   <div>
-                    <dt class="font-medium text-stone-600">{s('quiz.answer.label')}</dt>
+                    <dt class="font-medium text-muted">{s('quiz.answer.label')}</dt>
                     <dd>{answerLabel(r)}</dd>
                   </div>
                   <div>
-                    <dt class="font-medium text-stone-600">{s('quiz.source.label')}</dt>
+                    <dt class="font-medium text-muted">{s('quiz.source.label')}</dt>
                     <dd>
                       {r.sourceUrls.length === 0
                         ? s('quiz.source.none')
                         : r.sourceUrls.map((url) => (
-                            <a key={url} href={url} rel="noopener noreferrer" target="_blank" class="block break-all underline">
+                            <a key={url} href={url} rel="noopener noreferrer" target="_blank" class="block break-all text-accent underline">
                               {url}
                             </a>
                           ))}
@@ -184,10 +195,10 @@ export default function EligibilityQuiz({ strings, config, onComplete }: Eligibi
                   </div>
                 </dl>
                 {REASONS_WITH_TEXT.has(r.reason) && (
-                  <p class="mt-2 text-sm font-medium text-amber-800">{s(`quiz.reason.${r.reason}`)}</p>
+                  <p class="mt-2 text-sm font-medium text-caution">{s(`quiz.reason.${r.reason}`)}</p>
                 )}
                 {r.noteKeys.map((key) => (
-                  <p key={key} class="mt-2 rounded bg-stone-100 p-2 text-sm">
+                  <p key={key} class="mt-2 rounded-md bg-surface-muted p-3 text-sm">
                     {s(key)}
                   </p>
                 ))}
@@ -196,14 +207,14 @@ export default function EligibilityQuiz({ strings, config, onComplete }: Eligibi
           </ul>
         </div>
 
-        <p class="text-sm text-stone-600">{s('quiz.disclaimer')}</p>
+        <p class="text-sm text-muted">{s('quiz.disclaimer')}</p>
 
         <div class="flex flex-wrap gap-2">
           {backButton}
           <button
             type="button"
             onClick={restart}
-            class="min-h-11 rounded bg-stone-900 px-4 py-2 text-sm font-medium text-white hover:bg-stone-700"
+            class="min-h-11 rounded-md bg-ink px-4 py-2 text-sm font-medium text-bg hover:opacity-90"
           >
             {s('quiz.restart')}
           </button>
@@ -218,13 +229,13 @@ export default function EligibilityQuiz({ strings, config, onComplete }: Eligibi
 
   return (
     <section aria-labelledby="quiz-question" class="space-y-4">
-      <p class="text-sm text-stone-600" aria-live="polite">
+      <p class="text-sm text-muted" aria-live="polite">
         {fill(s('quiz.progress'), { current: step + 1, total: questions.length })}
       </p>
-      <h2 id="quiz-question" ref={headingRef} tabIndex={-1} class="text-xl font-bold outline-none">
+      <h2 id="quiz-question" ref={headingRef} tabIndex={-1} class="text-2xl outline-none">
         {questionText(q)}
       </h2>
-      {q === 'priorResidence' && <p class="text-sm text-stone-600">{s('quiz.q.priorResidence.hint')}</p>}
+      {q === 'priorResidence' && <p class="text-sm text-muted">{s('quiz.q.priorResidence.hint')}</p>}
 
       <div class={isNumberGrid ? 'grid grid-cols-4 gap-2' : 'flex flex-col gap-2'}>
         {options(q).map((o) => (
@@ -234,10 +245,10 @@ export default function EligibilityQuiz({ strings, config, onComplete }: Eligibi
             aria-pressed={selected === o.value}
             onClick={() => choose(q, o.value)}
             class={[
-              'min-h-12 rounded-lg border px-4 py-3 text-left font-medium hover:border-stone-900 focus-visible:outline-2',
+              'min-h-12 rounded-lg border px-4 py-3 text-left font-medium hover:border-ink',
               isNumberGrid && typeof o.value === 'number' ? 'text-center' : '',
               isNumberGrid && o.value === 'not_sure' ? 'col-span-4' : '',
-              selected === o.value ? 'border-stone-900 bg-stone-900 text-white' : 'border-stone-300 bg-white',
+              selected === o.value ? 'border-ink bg-ink text-bg' : 'border-line-strong bg-surface',
             ].join(' ')}
           >
             {o.label}
@@ -247,8 +258,8 @@ export default function EligibilityQuiz({ strings, config, onComplete }: Eligibi
 
       <div class="flex min-h-11 items-center">{step > 0 && backButton}</div>
 
-      {skipped && <p class="text-sm text-amber-800">{s('quiz.skippedNotice')}</p>}
-      <p class="text-sm text-stone-600">{s('quiz.disclaimer')}</p>
+      {skipped && <p class="text-sm text-caution">{s('quiz.skippedNotice')}</p>}
+      <p class="text-sm text-muted">{s('quiz.disclaimer')}</p>
     </section>
   );
 }

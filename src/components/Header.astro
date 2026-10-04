@@ -10,9 +10,9 @@ interface Props {
 const { locale, alternates = {} } = Astro.props;
 ---
 
-<header class="border-b border-stone-200">
-  <div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
-    <a href={homePath(locale)} class="text-lg font-semibold" aria-label={t(locale, 'header.homeLabel')}>
+<header class="border-b border-line">
+  <div class="mx-auto flex max-w-page items-center justify-between px-4 py-3">
+    <a href={homePath(locale)} class="font-serif text-xl font-semibold tracking-tight" aria-label={t(locale, 'header.homeLabel')}>
       {t(locale, 'site.name')}
     </a>
     <nav aria-label={t(locale, 'header.languageNav')}>
@@ -27,8 +27,8 @@ const { locale, alternates = {} } = Astro.props;
                 title={t(l, `lang.${l}.name`)}
                 aria-current={l === locale ? 'true' : undefined}
                 class:list={[
-                  'inline-block min-w-11 rounded px-3 py-2 text-center',
-                  l === locale ? 'bg-stone-900 text-white' : 'text-stone-700 underline hover:bg-stone-100',
+                  'inline-block min-w-11 rounded-md px-3 py-2 text-center',
+                  l === locale ? 'bg-ink text-bg' : 'text-muted underline hover:bg-surface-muted',
                 ]}
               >
                 {t(l, `lang.${l}.short`)}

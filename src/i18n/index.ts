@@ -32,3 +32,13 @@ export function homePath(locale: Locale): string {
 export function format(template: string, values: Record<string, string | number>): string {
   return template.replace(/\{(\w+)\}/g, (match, name: string) => (name in values ? String(values[name]) : match));
 }
+
+/** Methodology page path (page itself arrives in M7). */
+export function methodologyPath(locale: Locale): string {
+  return locale === 'el' ? '/methodologia/' : '/en/methodology/';
+}
+
+/** Calculator page path. */
+export function calculatorPath(locale: Locale): string {
+  return locale === 'el' ? '/ypologistis/' : '/en/calculator/';
+}
