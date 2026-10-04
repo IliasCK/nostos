@@ -1,5 +1,8 @@
 {
   "_note": "SYNTHETIC TEST DATA. Made-up round numbers chosen so expected results can be worked out by hand. This is NOT Greek tax law and must never be used as, or copied into, src/config/greece-tax-2026.json.",
+  "_meta": {
+    "taxYear": 2026
+  },
   "incomeTax": {
     "brackets": {
       "value": {
