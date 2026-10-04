@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "check:params": "node scripts/check-params.mjs",
+    "check:params": "node scripts/check-params.ts",
     "build": "npm run check:params && astro check && astro build",
     "preview": "astro preview",
     "test": "vitest run"

@@ -1,30 +1,14 @@
-// Checks that every tax parameter in src/config/greece-tax-2026.json is verified.
-// A parameter is any object with a "value" key; it is verified only when value,
-// sourceUrl, verifiedBy and verifiedOn are all non-null.
+// Checks that every tax parameter in src/config/greece-tax-2026.json is verified
+// (value, sourceUrl, verifiedBy and verifiedOn all set).
 //
 // NOSTOS_ENV=production -> exit 1 if anything is unverified (blocks the build).
 // Otherwise               -> print a warning and exit 0 (pre-launch builds continue).
 import { readFileSync } from 'node:fs';
+import { isProduction, listParams } from '../src/lib/params/verification.ts';
 
 const CONFIG = new URL('../src/config/greece-tax-2026.json', import.meta.url);
-const FIELDS = ['value', 'sourceUrl', 'verifiedBy', 'verifiedOn'];
-
-const config = JSON.parse(readFileSync(CONFIG, 'utf8'));
-const params = [];
-
-(function walk(node, path) {
-  if (node === null || typeof node !== 'object' || Array.isArray(node)) return;
-  if ('value' in node) {
-    params.push({ path, missing: FIELDS.filter((f) => node[f] === null || node[f] === undefined) });
-    return;
-  }
-  for (const [key, child] of Object.entries(node)) {
-    if (!key.startsWith('_')) walk(child, path ? `${path}.${key}` : key);
-  }
-})(config, '');
-
+const params = listParams(JSON.parse(readFileSync(CONFIG, 'utf8')));
 const unverified = params.filter((p) => p.missing.length > 0);
-const production = process.env.NOSTOS_ENV === 'production';
 
 if (params.length === 0) {
   console.error('check:params: no parameters found in greece-tax-2026.json');
@@ -37,7 +21,7 @@ if (unverified.length === 0) {
 }
 
 const list = unverified.map((p) => `  - ${p.path} (missing: ${p.missing.join(', ')})`).join('\n');
-if (production) {
+if (isProduction(process.env.NOSTOS_ENV)) {
   console.error(
     `check:params: ERROR ${unverified.length} of ${params.length} tax parameters unverified. ` +
       `Production build blocked (NOSTOS_ENV=production).\n${list}`,
