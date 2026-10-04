@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Static assets only (v1): no Worker script and no "main" entry, so page
+  // requests are served from the asset store and never count against Worker quotas.
+  "name": "comeback",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
