@@ -5,7 +5,7 @@ Things Elias must verify or decide. Items 1–10 are copied from SPEC §13. They
 ## From SPEC §13
 
 1. [ ] Verify all Greek 2026 tax parameters (§6.3) against AADE; fill config with sources.
-2. [ ] Resolve the 5C prior-residence window (7-of-8 vs 5 years).
+2. [ ] Resolve the 5C prior-residence window (7-of-8 vs 5 years). See item 14: AADE says 5 of 6.
 3. [ ] Confirm UK / US / Australia meet the 5C cooperation condition.
 4. [ ] Confirm 5C mechanics: what the 50% applies to; interaction with the tax reduction.
 5. [ ] Pick two Greek net-salary calculators as the test oracle; build the 5C test cases.
@@ -19,6 +19,39 @@ Things Elias must verify or decide. Items 1–10 are copied from SPEC §13. They
 
 11. [ ] **Launch switch for `check:params`.** The build fails on unverified tax parameters only when `NOSTOS_ENV=production`. Before launch (M8), set `NOSTOS_ENV=production` as a build variable in Workers Builds. Until then, deploys build with a warning.
 12. [ ] **Solidarity contribution brackets.** The config has both `solidarityContribution.appliesToEmploymentIncome` and `solidarityContribution.brackets`. If it doesn't apply, set `brackets` to `[]` with source and verification so `check:params` passes.
+
+13. [ ] **Open tax-mechanics switches** (all `null` in config; candidates and sources in `docs/tax-research.md`):
+    - `art5c.exemptionMethod`: is 50% of the *income* exempt, or is the *tax* halved?
+    - `art5c.exemptionBase`: 50% of gross, or of gross minus employee EFKA?
+    - `art5c.reductionPhaseOutIncome`: is the art. 16 phase-out measured on income after or before the 5C exemption?
+    - `art5c.reductionOrder`: only if the tax is halved; is the reduction applied before or after halving?
+    - `art5c.youthReliefInteraction`: do youth rates stack with 5C, not apply, or apply only if they're the better option?
+    - `incomeTax.youthChildrenInteraction`: lowest rate per range, or lower total tax?
+    - `taxReduction.phaseOutMethod`: pro rata, or per complete €1,000?
+14. [ ] **5C prior-residence window.** AADE's 5Γ FAQ (02-10-2025) and circular Ε.2224/2021 say *5 of the previous 6 years*, not 7-of-8 or 5 (see `docs/tax-research.md` §8). This would also change SPEC §5.2.
+15. [ ] **How age is counted** for the age band (year of birth vs exact age). This decides the wording of the age question in M4.
+16. [ ] **EFKA ceiling on bonus payments** (Christmas/Easter/holiday). Not modelled: the engine applies the monthly ceiling to 14 equal payments. Only matters above about €108k gross.
+
+## Decisions made without SPEC guidance (M2)
+
+- **Config schema changes:**
+  - `incomeTax.brackets` is one scale per number of children (0–4).
+  - `art5c.taxReductionInteraction` was replaced by two switches, `art5c.reductionPhaseOutIncome` and `art5c.reductionOrder`, because the question depends on the 5C method.
+  - `taxReduction.phaseOutRate` is now euros per euro (€20 per €1,000 = 0.02).
+- **New config switch `art5c.exemptionMethod`.** Sources disagree on whether 5C halves the income or the tax.
+- **Settled assumptions in the engine:**
+  - taxable income = gross − employee EFKA;
+  - final tax = max(0, tax − reduction);
+  - the EFKA ceiling applies to each of `salaryPaymentsPerYear` equal payments;
+  - amounts are rounded to cents only in the output.
+- **The engine computes the annual tax liability, not the monthly withholding (ΦΜΥ).**
+- **The engine only requires the parameters a calculation uses.** For example, it doesn't need 5C parameters when 5C is off, or solidarity brackets when solidarity doesn't apply. If a switch is null, it lists every parameter that switch could require.
+- **Age band is constant across the timeline.** Someone aged 24 at the move is treated as up to 25 for all 8 years. M4 could ask for the birth year instead.
+- **Youth oracle cases** (all 0 children):
+  - 26–30 at €15k, €20k, €25k and €35k (these straddle the €10–20k relief range);
+  - up to 25 at €15k and €25k.
+- **`check:params` is TypeScript** (`scripts/check-params.ts`, run natively by Node 24). It shares its rule with the dev banner via `src/lib/params/verification.ts`.
+- **The banner counts *all* unverified parameters** (including quiz-only ones such as `minimumStayYears`), the same as `check:params`.
 
 ## Decisions made without SPEC guidance (M1)
 
