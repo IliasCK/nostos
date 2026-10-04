@@ -27,6 +27,13 @@
         "verifiedOn": null
       }
     },
+    "youthAgeRule": {
+      "description": "Switch. How a taxpayer's age is counted for the youth age bands in a tax year. Allowed values: \"age_reached_in_tax_year\" (age = tax year − birth year, i.e. the age reached by 31 December) | \"age_on_1_january\" (age on 1 January of the tax year = tax year − birth year − 1, for anyone not born on 1 January). Only needed when the two rules give different bands.",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
     "youthChildrenInteraction": {
       "description": "Switch. How youth relief combines with the per-children scale for a young taxpayer with children. Allowed values: \"lowest_rate_per_range\" (in each income range the lower of the youth rate and the children rate applies) | \"lower_total_tax\" (tax is computed once on the children scale and once on the 0-children scale with youth overrides; the lower total applies). Only used when age band is not 31plus and children > 0.",
       "value": null,

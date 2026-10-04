@@ -124,6 +124,12 @@
         "verifiedOn": null
       }
     },
+    "youthAgeRule": {
+      "value": "age_reached_in_tax_year",
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
     "youthChildrenInteraction": {
       "value": "lowest_rate_per_range",
       "sourceUrl": null,
