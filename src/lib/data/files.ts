@@ -9,4 +9,5 @@ export const rawData = {
   fx: files['../../data/fx.json'],
   priceLevels: files['../../data/price-levels.json'],
   rent: files['../../data/manual/rent.json'],
+  peers: files['../../data/peers.json'],
 };

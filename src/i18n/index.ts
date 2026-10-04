@@ -42,3 +42,8 @@ export function methodologyPath(locale: Locale): string {
 export function calculatorPath(locale: Locale): string {
   return locale === 'el' ? '/ypologistis/' : '/en/calculator/';
 }
+
+/** Greece vs peers page path. */
+export function comparePath(locale: Locale): string {
+  return locale === 'el' ? '/sygkrisi/' : '/en/compare/';
+}

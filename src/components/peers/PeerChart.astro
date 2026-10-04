@@ -1,0 +1,116 @@
+---
+// One Greece-vs-peers chart (SPEC §8): horizontal bars, Greece highlighted by colour
+// AND a text marker, EU-27 as a dashed reference line, computed takeaway, source,
+// data year, and a table alternative (SPEC §10). Pure HTML/CSS, no JavaScript.
+import { format, t, type Locale } from '../../i18n';
+import { periodLabel, rankKey, type PeerChart } from '../../lib/peers';
+
+interface Props {
+  locale: Locale;
+  chart: PeerChart;
+}
+
+const { locale, chart } = Astro.props;
+const ind = chart.indicator;
+const tag = locale === 'el' ? 'el-GR' : 'en-GB';
+const digits = ind === 'priceLevelIndex' || ind === 'housingCostOverburden' ? 1 : 0;
+const number = (v: number) => new Intl.NumberFormat(tag, { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(v);
+const show = (v: number) => (ind === 'housingCostOverburden' ? `${number(v)}%` : number(v));
+
+const gapText = chart.gap
+  ? chart.gap.direction === 'same'
+    ? t(locale, 'peers.gap.same')
+    : format(t(locale, `peers.gap.${chart.gap.kind}.${chart.gap.direction}` as never), {
+        amount: chart.gap.kind === 'points' ? new Intl.NumberFormat(tag, { maximumFractionDigits: 1 }).format(chart.gap.amount) : chart.gap.amount,
+      })
+  : '';
+const rankClause = format(t(locale, 'peers.rankClause'), {
+  rank: t(locale, rankKey(chart.greeceRank, chart.countriesShown) as never),
+  n: chart.countriesShown,
+});
+const takeaway = format(t(locale, `peers.${ind}.takeaway` as never), { gap: gapText, rankClause });
+const sourceUrl = `https://ec.europa.eu/eurostat/databrowser/view/${chart.dataset}/default/table?lang=${locale}`;
+const country = (c: string) => t(locale, `peers.country.${c}` as never);
+const id = `peers-${ind}`;
+const period = periodLabel(chart.year);
+const periodText = format(t(locale, period.key as never), period.values);
+---
+
+<section aria-labelledby={id} class="space-y-4 border-t border-line pt-8" data-indicator={ind}>
+  <div>
+    <h2 id={id} class="text-2xl">{t(locale, `peers.${ind}.title` as never)}</h2>
+    <p class="mt-1 text-sm text-muted">
+      {t(locale, `peers.${ind}.unit` as never)} · <span data-testid="year">{format(t(locale, 'peers.year'), { year: periodText })}</span>
+    </p>
+  </div>
+
+  <p class="font-serif text-lg leading-snug" data-testid="takeaway">{takeaway}</p>
+
+  <ol class="space-y-2" aria-label={t(locale, `peers.${ind}.title` as never)}>
+    {
+      chart.rows.map((row) => (
+        <li class="grid grid-cols-[6.5rem_1fr_4.5rem] items-center gap-2 sm:grid-cols-[8rem_1fr_5rem]" data-country={row.country}>
+          <span class:list={['text-sm', row.isGreece && 'font-semibold text-accent']}>
+            {row.isGreece && <span aria-hidden="true">◆ </span>}
+            {country(row.country)}
+          </span>
+          <span class="relative h-6" aria-hidden="true">
+            <span class:list={['block h-full rounded-r-sm', row.isGreece ? 'bg-accent' : 'bg-muted']} style={`width: ${row.widthPct.toFixed(2)}%`} />
+            {chart.eu && <span class="absolute inset-y-[-4px] border-l-2 border-dashed border-ink" style={`left: ${chart.eu.positionPct.toFixed(2)}%`} />}
+          </span>
+          <span class:list={['text-right text-sm', row.isGreece && 'font-semibold']}>{show(row.value)}</span>
+        </li>
+      ))
+    }
+  </ol>
+
+  <p class="flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted">
+    <span><span aria-hidden="true" class="mr-1 inline-block size-3 rounded-sm bg-accent align-middle" /><span aria-hidden="true">◆ </span>{t(locale, 'peers.legend.greece')}</span>
+    {
+      chart.eu && (
+        <span>
+          <span aria-hidden="true" class="mr-1 inline-block h-3 border-l-2 border-dashed border-ink align-middle" />
+          {format(t(locale, 'peers.legend.eu'), { value: show(chart.eu.value) })}
+        </span>
+      )
+    }
+  </p>
+
+  {ind === 'aicPerCapitaPps' && <p class="text-sm">{t(locale, 'peers.aicPerCapitaPps.why')}</p>}
+  {ind === 'minimumWagePps' && <p class="text-sm" data-testid="note">{t(locale, 'peers.minimumWagePps.note')}</p>}
+
+  <p class="text-sm">
+    <a href={sourceUrl} class="text-accent underline" rel="noopener noreferrer">{format(t(locale, 'peers.source'), { dataset: chart.dataset })}</a>
+  </p>
+
+  <details class="rounded-md border border-line bg-surface p-3">
+    <summary class="cursor-pointer text-sm font-medium">{t(locale, 'peers.table')}</summary>
+    <table class="mt-3 w-full text-sm">
+      <caption class="sr-only">{t(locale, `peers.${ind}.title` as never)}, {periodText}</caption>
+      <thead>
+        <tr class="border-b border-line">
+          <th scope="col" class="py-1 text-left">{t(locale, 'peers.table.country')}</th>
+          <th scope="col" class="py-1 text-right">{t(locale, 'peers.table.value')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          chart.rows.map((row) => (
+            <tr class="border-b border-line">
+              <th scope="row" class:list={['py-1 text-left', row.isGreece ? 'font-semibold' : 'font-normal']}>{country(row.country)}</th>
+              <td class="py-1 text-right">{show(row.value)}</td>
+            </tr>
+          ))
+        }
+        {
+          chart.eu && (
+            <tr>
+              <th scope="row" class="py-1 text-left font-normal">{country('EU27')}</th>
+              <td class="py-1 text-right">{show(chart.eu.value)}</td>
+            </tr>
+          )
+        }
+      </tbody>
+    </table>
+  </details>
+</section>

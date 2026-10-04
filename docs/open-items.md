@@ -40,12 +40,29 @@ Things Elias must verify or decide. Items 1–10 are copied from SPEC §13. They
 21. [x] **Data files for M5:** `src/data/fx.json` and `src/data/price-levels.json` now exist (M5). The comparison still needs rent figures (item 6) and apartment sizes (item 20).
 22. [ ] **Methodology links** (`/methodologia/`, `/en/methodology/`) 404 until M7.
 
-23. [ ] **No published price level index excluding housing (SPEC §6.4).** I checked the OECD and Eurostat PPP tables (`DF_PPP_CPL`, `prc_ppp_ind`). Neither publishes an AIC/HFCE aggregate excluding housing or rent, so the calculator uses the AIC price level, and the rent overlap stays a stated limitation on the Methodology page.
+23. [x] **Decided (after M5): keep the overall (AIC) price level; state the double-counting as a limitation; no home-made index.** Original note: no published price level index excluding housing (SPEC §6.4). I checked the OECD and Eurostat PPP tables (`DF_PPP_CPL`, `prc_ppp_ind`). Neither publishes an AIC/HFCE aggregate excluding housing or rent, so the calculator uses the AIC price level, and the rent overlap stays a stated limitation on the Methodology page.
     - An index *derived* from the published categories is possible (AIC minus A0104, weighted by nominal expenditure), but it would be our own construction, and A0104 also contains utilities.
     - Your call; I've not built it.
 24. [ ] **Peers chart 6 (minimum wage)** can only show GR, BG, RO, PT and ES. Italy has no statutory minimum wage, and Eurostat has no EU27 aggregate. M6 should say so on the chart.
 25. [ ] **Peers indicators have different reference years** (currently GDP 2025, AIC 2024, net earnings 2025, PLI 2024, overburden 2025, minimum wage 2026-S2). Each chart will show its own year.
-26. [ ] **Data commits don't run CI.** GitHub doesn't trigger workflows for pushes made with the workflow token. Workers Builds still builds and deploys them, and `npm run build` still validates the tax config and the demo guard there. If you want CI on data commits too, that needs a personal access token or a GitHub App.
+26. [x] **Decided (after M5): no personal token; data commits don't run CI.** Original note: GitHub doesn't trigger workflows for pushes made with the workflow token. Workers Builds still builds and deploys them, and `npm run build` still validates the tax config and the demo guard there. If you want CI on data commits too, that needs a personal access token or a GitHub App.
+
+27. [ ] **Peers page entry point.** Nothing links to `/sygkrisi/` yet; that comes in M7, like the calculator.
+
+## Decisions made without SPEC guidance (M6)
+
+- **Charts are server-rendered HTML/CSS bars, not Chart.js.**
+  - The page ships no JavaScript and works without it.
+  - Text stays legible at 360px (an SVG viewBox would shrink it), and every value is real text.
+  - CLAUDE.md lists Chart.js for charts. Easy to switch if you prefer.
+- **Greece is highlighted** by the accent colour *and* a ◆ marker plus bold text. The EU-27 average is a dashed reference line with its value in the legend and the table.
+- **Bars are sorted highest first.**
+- **Takeaways are generated from the data** (gap to EU-27, rank counted from the nearer end: "the second-lowest", "the third-highest"…), so they stay correct after monthly updates.
+  - Gaps are relative (%) for levels and in percentage points for the housing-overburden rate.
+  - A gap under 0.5% reads as "about the same".
+- **Price level chart:** "lower" is shown as a neutral fact ("Prices in Greece are 17% below the EU-27 average"), not as good or bad.
+- **Half-year periods** ("2026-S2") are shown as "second half of 2026" / "β΄ εξάμηνο 2026".
+- **Source links** go to each dataset's Eurostat Data Browser page, in the page's language.
 
 ## Decisions made without SPEC guidance (M5)
 

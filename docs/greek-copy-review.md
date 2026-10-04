@@ -240,8 +240,61 @@ Every Greek string drafted by Claude Code, for Elias to review. Source of truth 
 | `calc.email.consent` | Συμφωνώ να λαμβάνω ειδοποιήσεις για αλλαγές κανόνων και νέα του site. Μπορώ να διαγραφώ όποτε θέλω. | I agree to receive rule-change alerts and site updates. I can unsubscribe at any time. | pending (new in M4) |
 | `calc.email.submit` | Εγγραφή | Sign up | pending (new in M4) |
 | `calc.email.comingSoon` | Έρχεται σύντομα | Coming soon | pending (new in M4) |
+| `peers.title` | Η Ελλάδα σε σύγκριση | Greece compared | pending (new in M6) |
+| `peers.intro` | Έξι δείκτες που συγκρίνουν την Ελλάδα με τη Βουλγαρία, τη Ρουμανία, την Πορτογαλία, την Ισπανία, την Ιταλία και τον μέσο όρο της ΕΕ-27. Όλα τα στοιχεία είναι της Eurostat. | Six indicators comparing Greece with Bulgaria, Romania, Portugal, Spain, Italy and the EU-27 average. All figures are from Eurostat. | pending (new in M6) |
+| `peers.pps` | ΜΑΔ (Μονάδες Αγοραστικής Δύναμης): ένα τεχνητό νόμισμα που εξαλείφει τις διαφορές στα επίπεδα τιμών ανάμεσα στις χώρες, ώστε τα ποσά να συγκρίνονται άμεσα. | PPS (purchasing power standard): an artificial currency that removes price-level differences between countries, so amounts can be compared directly. | pending (new in M6) |
+| `peers.updated` | Τελευταία ενημέρωση στοιχείων: {date}. | Data last updated: {date}. | pending (new in M6) |
+| `peers.legend.greece` | Ελλάδα | Greece | pending (new in M6) |
+| `peers.legend.eu` | Μέσος όρος ΕΕ-27: {value} | EU-27 average: {value} | pending (new in M6) |
+| `peers.greeceMarker` | Ελλάδα | Greece | pending (new in M6) |
+| `peers.year` | Στοιχεία: {year} | Data for {year} | pending (new in M6) |
+| `peers.source` | Πηγή: Eurostat, {dataset} | Source: Eurostat, {dataset} | pending (new in M6) |
+| `peers.table` | Δες τους αριθμούς σε πίνακα | Show the numbers as a table | pending (new in M6) |
+| `peers.table.country` | Χώρα | Country | pending (new in M6) |
+| `peers.table.value` | Τιμή | Value | pending (new in M6) |
+| `peers.country.GR` | Ελλάδα | Greece | pending (new in M6) |
+| `peers.country.BG` | Βουλγαρία | Bulgaria | pending (new in M6) |
+| `peers.country.RO` | Ρουμανία | Romania | pending (new in M6) |
+| `peers.country.PT` | Πορτογαλία | Portugal | pending (new in M6) |
+| `peers.country.ES` | Ισπανία | Spain | pending (new in M6) |
+| `peers.country.IT` | Ιταλία | Italy | pending (new in M6) |
+| `peers.country.EU27` | ΕΕ-27 | EU-27 | pending (new in M6) |
+| `peers.gap.relative.below` | {amount}% κάτω από τον | {amount}% below | pending (new in M6) |
+| `peers.gap.relative.above` | {amount}% πάνω από τον | {amount}% above | pending (new in M6) |
+| `peers.gap.points.below` | {amount} ποσοστιαίες μονάδες κάτω από τον | {amount} percentage points below | pending (new in M6) |
+| `peers.gap.points.above` | {amount} ποσοστιαίες μονάδες πάνω από τον | {amount} percentage points above | pending (new in M6) |
+| `peers.gap.same` | περίπου στο ίδιο επίπεδο με τον | about the same as | pending (new in M6) |
+| `peers.rank.top.1` | την υψηλότερη | the highest | pending (new in M6) |
+| `peers.rank.top.2` | τη δεύτερη υψηλότερη | the second-highest | pending (new in M6) |
+| `peers.rank.top.3` | την τρίτη υψηλότερη | the third-highest | pending (new in M6) |
+| `peers.rank.bottom.1` | τη χαμηλότερη | the lowest | pending (new in M6) |
+| `peers.rank.bottom.2` | τη δεύτερη χαμηλότερη | the second-lowest | pending (new in M6) |
+| `peers.rank.bottom.3` | την τρίτη χαμηλότερη | the third-lowest | pending (new in M6) |
+| `peers.half.1` | α΄ εξάμηνο {year} | first half of {year} | pending (new in M6) |
+| `peers.half.2` | β΄ εξάμηνο {year} | second half of {year} | pending (new in M6) |
+| `peers.rankClause` | η Ελλάδα έχει {rank} τιμή ανάμεσα στις {n} χώρες | Greece has {rank} value of the {n} countries shown | pending (new in M6) |
+| `peers.gdpPerCapitaPps.title` | ΑΕΠ ανά κάτοικο | GDP per person | pending (new in M6) |
+| `peers.gdpPerCapitaPps.unit` | ΜΑΔ ανά κάτοικο, τρέχουσες τιμές | PPS per person, current prices | pending (new in M6) |
+| `peers.gdpPerCapitaPps.takeaway` | Το ΑΕΠ ανά κάτοικο στην Ελλάδα βρίσκεται {gap} μέσο όρο της ΕΕ-27· {rankClause}. | GDP per person in Greece is {gap} the EU-27 average; {rankClause}. | pending (new in M6) |
+| `peers.aicPerCapitaPps.title` | Πραγματική ατομική κατανάλωση ανά κάτοικο | Actual individual consumption per person | pending (new in M6) |
+| `peers.aicPerCapitaPps.unit` | ΜΑΔ ανά κάτοικο | PPS per person | pending (new in M6) |
+| `peers.aicPerCapitaPps.why` | Μετρά τα αγαθά και τις υπηρεσίες που χρησιμοποιούν πράγματι τα νοικοκυριά, μαζί με όσα πληρώνει το κράτος, όπως η υγεία και η παιδεία, γι' αυτό δείχνει το βιοτικό επίπεδο καλύτερα από το ΑΕΠ. | It counts the goods and services households actually use, including those the state pays for, such as health and education, so it reflects living standards better than GDP. | pending (new in M6) |
+| `peers.aicPerCapitaPps.takeaway` | Η κατανάλωση ανά κάτοικο στην Ελλάδα βρίσκεται {gap} μέσο όρο της ΕΕ-27· {rankClause}. | Consumption per person in Greece is {gap} the EU-27 average; {rankClause}. | pending (new in M6) |
+| `peers.netEarningsPps.title` | Καθαρές ετήσιες αποδοχές | Annual net earnings | pending (new in M6) |
+| `peers.netEarningsPps.unit` | ΜΑΔ τον χρόνο· άγαμος χωρίς παιδιά, με τον μέσο μισθό | PPS a year; single person, no children, on the average wage | pending (new in M6) |
+| `peers.netEarningsPps.takeaway` | Οι καθαρές αποδοχές αυτού του νοικοκυριού στην Ελλάδα βρίσκονται {gap} μέσο όρο της ΕΕ-27· {rankClause}. | Net earnings for this household in Greece are {gap} the EU-27 average; {rankClause}. | pending (new in M6) |
+| `peers.priceLevelIndex.title` | Επίπεδο τιμών | Price level | pending (new in M6) |
+| `peers.priceLevelIndex.unit` | Δείκτης, ΕΕ-27 = 100 (πραγματική ατομική κατανάλωση) | Index, EU-27 = 100 (actual individual consumption) | pending (new in M6) |
+| `peers.priceLevelIndex.takeaway` | Οι τιμές στην Ελλάδα βρίσκονται {gap} μέσο όρο της ΕΕ-27· {rankClause}. | Prices in Greece are {gap} the EU-27 average; {rankClause}. | pending (new in M6) |
+| `peers.housingCostOverburden.title` | Επιβάρυνση από το κόστος στέγασης | Housing cost overburden | pending (new in M6) |
+| `peers.housingCostOverburden.unit` | % του πληθυσμού που ζει σε νοικοκυριά τα οποία ξοδεύουν πάνω από το 40% του διαθέσιμου εισοδήματός τους για στέγαση | % of people living in households that spend more than 40% of their disposable income on housing | pending (new in M6) |
+| `peers.housingCostOverburden.takeaway` | Το ποσοστό στην Ελλάδα βρίσκεται {gap} μέσο όρο της ΕΕ-27· {rankClause}. | The share in Greece is {gap} the EU-27 average; {rankClause}. | pending (new in M6) |
+| `peers.minimumWagePps.title` | Κατώτατος μισθός | Minimum wage | pending (new in M6) |
+| `peers.minimumWagePps.unit` | ΜΑΔ τον μήνα | PPS a month | pending (new in M6) |
+| `peers.minimumWagePps.takeaway` | Σε όρους αγοραστικής δύναμης, {rankClause}. | In purchasing-power terms, {rankClause}. | pending (new in M6) |
+| `peers.minimumWagePps.note` | Η Ιταλία δεν έχει νομοθετημένο κατώτατο μισθό, και δεν υπάρχει στοιχείο για το σύνολο της ΕΕ. | Italy has no statutory minimum wage, and there is no EU-wide figure. | pending (new in M6) |
 
-Not listed (not Greek text, or identical in both languages): `site.name`, `lang.el.short`, `lang.en.short`, `lang.en.name`, `calc.ageBand.26to30`, `calc.ageBand.31plus`, `calc.email.label`.
+Not listed (not Greek text, or identical in both languages): `site.name`, `lang.el.short`, `lang.en.short`, `lang.en.name`, `calc.ageBand.26to30`, `calc.ageBand.31plus`, `calc.email.label`, `peers.plainYear`.
 
 Notes for review:
 - `banner.unverified.*` is a temporary banner that only appears before launch (it can never appear on the production build), but it is visible on the public workers.dev preview.
@@ -258,3 +311,7 @@ Notes for review:
   - **"ελαφρύνσεις":** used for the youth and children reliefs (never "έκπτωση").
   - **SPEC-mandated texts:** `calc.disclaimer` and `calc.rent.disclaimer` translate SPEC §11. `calc.assume.oneEarner` is the sentence you specified.
   - **Not for review:** the demo-mode labels in `src/demo/bundle.ts` ("ΔΟΚΙΜΗ — ΨΕΥΤΙΚΟΙ ΑΡΙΘΜΟΙ" etc.). They exist only in `npm run dev` and can never ship.
+- **Greece vs peers (M6):**
+  - **Generated takeaways:** each takeaway is assembled from `peers.<indicator>.takeaway` + `peers.gap.*` + `peers.rankClause` + `peers.rank.*`, with numbers from the data. Current Greek output, for example: «Το ΑΕΠ ανά κάτοικο στην Ελλάδα βρίσκεται 32% κάτω από τον μέσο όρο της ΕΕ-27· η Ελλάδα έχει τη δεύτερη χαμηλότερη τιμή ανάμεσα στις 6 χώρες.»
+  - **Phrasing:** "κάτω/πάνω από τον μέσο όρο" was chosen because it needs no gender agreement with the subject.
+  - **ΜΑΔ** (Μονάδες Αγοραστικής Δύναμης) is Eurostat's Greek term for PPS.
