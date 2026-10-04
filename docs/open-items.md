@@ -32,6 +32,26 @@ Things Elias must verify or decide. Items 1–10 are copied from SPEC §13. They
 15. [ ] **How age is counted** for the age band (year of birth vs exact age). This decides the wording of the age question in M4.
 16. [ ] **EFKA ceiling on bonus payments** (Christmas/Easter/holiday). Not modelled: the engine applies the monthly ceiling to 14 equal payments. Only matters above about €108k gross.
 
+17. [ ] **Two new quiz parameters** (null): `art5c.euEeaQualifies` (the source for the EU/EEA pass in Q2) and `art5c.qualifyingWorkTypes` (Q3). Until `qualifyingWorkTypes` is verified, every Q3 answer is borderline, including "not working".
+18. [ ] **Quiz entry point.** Nothing links to `/ypologistis/` yet; the home page CTA is planned for M7.
+
+## Decisions made without SPEC guidance (M3)
+
+- **"Verified" in the quiz means all four fields are set** (the same rule as `check:params` and the banner). A rule that isn't fully verified is borderline with "rule not yet verified", never pass. The tax engine is looser on purpose: it needs only `value`, so M4 can show placeholder figures in dev.
+- **Q1 and Q4 are skipped in the UI while `lookbackYears` / `minimumStayYears` is null.** Their wording needs the number, and I won't hardcode a fallback. Their result cards say "Not asked" and "Rule not yet verified". Once a value is entered (even unverified), the question is asked; it stays borderline until verified.
+- **Q2:**
+  - The EU/EEA membership of the listed countries is in code (geography).
+  - Whether EU/EEA origin qualifies is the config parameter `art5c.euEeaQualifies`. If it is verified as false, the result is fail.
+  - UK/US/AU set to verified false give borderline (SPEC: "otherwise borderline"), with a note.
+- **Q3:**
+  - A work type left out of the verified `qualifyingWorkTypes` list fails.
+  - The remote-work and not-working notes are shown even while the rule is unverified.
+- **Quiz answers out of range throw** (a programming error, since the UI only offers valid answers).
+- **For M4:** the island takes `onComplete(result, answers)`. M4's calculator island will embed `<EligibilityQuiz>` and receive the outcome directly, with no global state.
+- **Only the `art5c` parameters (without descriptions) and the `quiz.*` strings are sent to the browser** as island props.
+- **Calculator page routes are `/ypologistis/` and `/en/calculator/`**, with the language switch linking the two.
+- **UI tests use happy-dom + @testing-library/preact** (devDependencies).
+
 ## Decisions made without SPEC guidance (M2)
 
 - **Config schema changes:**

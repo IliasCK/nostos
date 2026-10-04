@@ -8,7 +8,7 @@ The core is a move-to-Greece calculator: an Article 5C (50% tax break) eligibili
 - Working rules (for humans and Claude Code): [`CLAUDE.md`](CLAUDE.md)
 - Open decisions and verifications: [`docs/open-items.md`](docs/open-items.md)
 
-**Status:** M2 (tax engine). Placeholder pages; the engine in `src/lib/tax` is tested against synthetic parameters, and every real parameter is still unverified.
+**Status:** M3 (eligibility quiz). The 5C quiz is live at `/ypologistis/` and `/en/calculator/`; the tax engine in `src/lib/tax` is tested against synthetic parameters, and every real parameter is still unverified.
 
 ## Stack
 
