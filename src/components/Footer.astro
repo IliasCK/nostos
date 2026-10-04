@@ -1,18 +1,31 @@
 ---
-import { methodologyPath, t, type Locale } from '../i18n';
+import { pathFor, t, type Locale, type PageId } from '../i18n';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
+const links: [PageId, string][] = [
+  ['methodology', 'footer.methodology'],
+  ['privacy', 'footer.privacy'],
+  ['about', 'footer.about'],
+];
 ---
 
 <footer class="mt-16 border-t border-line">
-  <div class="mx-auto max-w-page px-4 py-8 text-sm text-muted">
-    <p>
-      {t(locale, 'footer.disclaimer')}
-      <a href={methodologyPath(locale)} class="ml-1 text-accent underline">{t(locale, 'footer.methodology')}</a>
-    </p>
+  <div class="mx-auto max-w-page space-y-3 px-4 py-8 text-sm text-muted">
+    <p>{t(locale, 'footer.disclaimer')}</p>
+    <ul class="flex flex-wrap gap-x-5 gap-y-1">
+      {
+        links.map(([page, key]) => (
+          <li>
+            <a href={pathFor(page, locale)} class="text-accent underline">
+              {t(locale, key as never)}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </footer>

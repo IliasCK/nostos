@@ -1,0 +1,12 @@
+{
+  "_note": "Site-wide values Elias fills in before launch. A production build (NOSTOS_ENV=production) fails while any of these is null; other builds show visible placeholders. analytics.provider may be \"none\".",
+  "contactEmail": null,
+  "analytics": {
+    "provider": null,
+    "privacyUrl": null
+  },
+  "emailProvider": {
+    "name": null,
+    "privacyUrl": null
+  }
+}

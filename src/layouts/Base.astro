@@ -3,15 +3,25 @@ import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import UnverifiedBanner from '../components/UnverifiedBanner.astro';
-import { t, type Locale } from '../i18n';
+import { locales, pathFor, t, type Locale, type PageId } from '../i18n';
+import { absolute, assertSeoConfig, isIndexable, siteUrl } from '../lib/seo';
 
 interface Props {
   locale: Locale;
+  /** The page's route id; omitted for 404 pages (no alternates, no canonical). */
+  page?: PageId;
+  /** Page heading used in <title> (the site name is appended). */
   title: string;
-  alternates?: Partial<Record<Locale, string>>;
 }
 
-const { locale, title, alternates } = Astro.props;
+const { locale, page, title } = Astro.props;
+assertSeoConfig(process.env);
+const site = siteUrl(process.env);
+const indexable = isIndexable(process.env);
+const description = t(locale, page && page !== 'home' ? (`meta.${page}.description` as never) : 'meta.description');
+const fullTitle = page === 'home' ? `${t(locale, 'site.name')} · ${title}` : `${title} · ${t(locale, 'site.name')}`;
+const ogImage = absolute(`/og/${page ?? 'home'}-${locale}.png`, site);
+const alternates = page ? Object.fromEntries(locales.map((l) => [l, pathFor(page, l)])) : undefined;
 ---
 
 <!doctype html>
@@ -19,13 +29,35 @@ const { locale, title, alternates } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={t(locale, 'meta.description')} />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
     <meta name="color-scheme" content="light dark" />
-    <title>{title}</title>
+    {!indexable && <meta name="robots" content="noindex, nofollow" />}
+    {
+      page && (
+        <>
+          <link rel="canonical" href={absolute(pathFor(page, locale), site)} />
+          {locales.map((l) => (
+            <link rel="alternate" hreflang={l} href={absolute(pathFor(page, l), site)} />
+          ))}
+          <link rel="alternate" hreflang="x-default" href={absolute(pathFor(page, 'el'), site)} />
+        </>
+      )
+    }
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={t(locale, 'site.name')} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={locale === 'el' ? 'el_GR' : 'en_GB'} />
+    {page && <meta property="og:url" content={absolute(pathFor(page, locale), site)} />}
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body class="flex min-h-screen flex-col bg-bg text-ink antialiased">
     <UnverifiedBanner locale={locale} />
-    <Header locale={locale} alternates={alternates} />
+    <Header locale={locale} page={page} alternates={alternates} />
     <main class="mx-auto w-full max-w-page flex-1 px-4 py-10">
       <slot />
     </main>

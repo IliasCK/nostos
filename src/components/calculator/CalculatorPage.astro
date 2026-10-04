@@ -9,10 +9,9 @@ import { rawData } from '../../lib/data/files';
 
 interface Props {
   locale: Locale;
-  alternates: Partial<Record<Locale, string>>;
 }
 
-const { locale, alternates } = Astro.props;
+const { locale } = Astro.props;
 
 // Only the quiz/calculator strings and the config without its long descriptions go to the browser.
 const strings = Object.fromEntries(
@@ -32,7 +31,7 @@ if (import.meta.env.DEV && import.meta.env.MODE === 'development') {
 }
 ---
 
-<Base locale={locale} title={t(locale, 'calculatorPage.title')} alternates={alternates}>
+<Base locale={locale} title={t(locale, 'calculatorPage.title')} page="calculator">
   <h1 class="text-3xl sm:text-4xl">{t(locale, 'calculatorPage.title')}</h1>
   <p class="mt-3 max-w-prose text-lg text-muted">{t(locale, 'calculatorPage.intro')}</p>
   <div class="mt-10">

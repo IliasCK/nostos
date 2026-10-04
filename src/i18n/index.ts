@@ -23,9 +23,24 @@ export function toLocale(value: string | undefined): Locale {
   return value === 'en' ? 'en' : defaultLocale;
 }
 
+/** Every page and its path in each language (SPEC §4). */
+export const ROUTES = {
+  home: { el: '/', en: '/en/' },
+  calculator: { el: '/ypologistis/', en: '/en/calculator/' },
+  compare: { el: '/sygkrisi/', en: '/en/compare/' },
+  methodology: { el: '/methodologia/', en: '/en/methodology/' },
+  privacy: { el: '/aporrito/', en: '/en/privacy/' },
+  about: { el: '/sxetika/', en: '/en/about/' },
+} as const satisfies Record<string, Record<Locale, string>>;
+export type PageId = keyof typeof ROUTES;
+
+export function pathFor(page: PageId, locale: Locale): string {
+  return ROUTES[page][locale];
+}
+
 /** Home path for a locale: "/" for Greek, "/en/" for English. */
 export function homePath(locale: Locale): string {
-  return locale === defaultLocale ? '/' : `/${locale}/`;
+  return pathFor('home', locale);
 }
 
 /** Replaces {name} placeholders in a string. */
@@ -33,17 +48,8 @@ export function format(template: string, values: Record<string, string | number>
   return template.replace(/\{(\w+)\}/g, (match, name: string) => (name in values ? String(values[name]) : match));
 }
 
-/** Methodology page path (page itself arrives in M7). */
-export function methodologyPath(locale: Locale): string {
-  return locale === 'el' ? '/methodologia/' : '/en/methodology/';
-}
+export const methodologyPath = (locale: Locale): string => pathFor('methodology', locale);
 
-/** Calculator page path. */
-export function calculatorPath(locale: Locale): string {
-  return locale === 'el' ? '/ypologistis/' : '/en/calculator/';
-}
+export const calculatorPath = (locale: Locale): string => pathFor('calculator', locale);
 
-/** Greece vs peers page path. */
-export function comparePath(locale: Locale): string {
-  return locale === 'el' ? '/sygkrisi/' : '/en/compare/';
-}
+export const comparePath = (locale: Locale): string => pathFor('compare', locale);

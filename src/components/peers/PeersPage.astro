@@ -9,17 +9,16 @@ import { buildPeerCharts } from '../../lib/peers';
 
 interface Props {
   locale: Locale;
-  alternates: Partial<Record<Locale, string>>;
 }
 
-const { locale, alternates } = Astro.props;
+const { locale } = Astro.props;
 if (!rawData.peers) throw new Error('src/data/peers.json is missing; run python pipeline/fetch_eurostat.py');
 const peers = rawData.peers as PeersFile;
 const charts = buildPeerCharts(peers);
 const updated = new Intl.DateTimeFormat(locale === 'el' ? 'el-GR' : 'en-GB', { dateStyle: 'long' }).format(new Date(peers.fetchedAt));
 ---
 
-<Base locale={locale} title={t(locale, 'peers.title')} alternates={alternates}>
+<Base locale={locale} title={t(locale, 'peers.title')} page="compare">
   <h1 class="text-3xl sm:text-4xl">{t(locale, 'peers.title')}</h1>
   <p class="mt-3 max-w-prose text-lg text-muted">{t(locale, 'peers.intro')}</p>
   <p class="mt-3 max-w-prose text-sm">{t(locale, 'peers.pps')}</p>

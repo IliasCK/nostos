@@ -5,7 +5,7 @@ import { t } from '../i18n';
 const locale = 'el';
 ---
 
-<Base locale={locale} title={t(locale, 'home.title')} alternates={{ en: '/en/' }}>
+<Base locale={locale} title={t(locale, 'home.title')} page="home">
   <h1 class="text-3xl sm:text-4xl">{t(locale, 'home.title')}</h1>
   <p class="mt-4 max-w-prose text-lg text-muted">{t(locale, 'home.comingSoon')}</p>
 </Base>

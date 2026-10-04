@@ -31,7 +31,7 @@ A secondary page compares Greece with peer countries (Bulgaria, Romania, Portuga
 
 - **Astro** (static output) + **TypeScript** (strict)
 - Interactive parts (quiz, calculator) as Astro islands; use **Preact** for small bundles
-- **Chart.js** for charts
+- **Charts:** Chart.js for the calculator's timeline chart (lazy-loaded inside the calculator island); server-rendered HTML/CSS bar charts (no JavaScript) for the Greece vs peers page. Every chart has a table alternative.
 - **Tailwind CSS** for styling, mobile-first (most traffic will arrive from Facebook on phones). All colours, fonts and the type scale are tokens in `src/styles/tokens.css` (Tailwind's default palette is disabled); never hardcode a colour. Better/worse must never rely on colour alone.
 - **Vitest** for unit tests
 - **Python 3.12** for the data pipeline (`/pipeline`): standard library only (urllib, json, csv), raw SDMX/JSON calls. Unit tests: `python -m unittest discover -s pipeline/tests -p 'test_*.py'`

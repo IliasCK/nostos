@@ -293,5 +293,16 @@
   "peers.minimumWagePps.title": "Minimum wage",
   "peers.minimumWagePps.unit": "PPS a month",
   "peers.minimumWagePps.takeaway": "In purchasing-power terms, {rankClause}.",
-  "peers.minimumWagePps.note": "Italy has no statutory minimum wage, and there is no EU-wide figure."
+  "peers.minimumWagePps.note": "Italy has no statutory minimum wage, and there is no EU-wide figure.",
+  "nav.main": "Main menu",
+  "nav.calculator": "Calculator",
+  "nav.compare": "Comparison",
+  "nav.methodology": "Methodology",
+  "footer.privacy": "Privacy",
+  "footer.about": "About",
+  "meta.calculator.description": "Work out what you'd have left each month in Greece after rent, with and without the Article 5C tax break.",
+  "meta.compare.description": "Greece compared with Bulgaria, Romania, Portugal, Spain, Italy and the EU average, using Eurostat data.",
+  "meta.methodology.description": "How we calculate net pay, rent and purchasing power, our sources and our limitations.",
+  "meta.privacy.description": "What happens to your data: nothing is stored, and there are no cookies.",
+  "meta.about.description": "Who makes Nostos and why. Not tax advice."
 }
