@@ -98,6 +98,7 @@ Dropdown: the 8 origin countries + "Other EU/EEA country" + "Other country".
 | Current **net** monthly take-home pay | In local currency. User enters it themselves; we don't compute foreign tax. |
 | Current monthly rent | Local currency. "I own / no rent" option = 0. |
 | Household | Adults (1–2), children (0–4). Affects Greek tax credits. |
+| Age band | Up to 25 / 26–30 / 31 or over. Affects Greek tax rates from 2026 (youth relief). Engine value: `upTo25` \| `26to30` \| `31plus`. |
 | Greek destination city | From §3 |
 | Expected **gross annual** salary in Greece | EUR. Helper text explains the 14-payment system. |
 | Apartment size | Studio / 1-bed / 2-bed / 3-bed → m² from config (`rent.sizes`, default proposal: 40 / 60 / 80 / 100 m², **Elias to confirm**) |
@@ -112,12 +113,13 @@ Dropdown: the 8 origin countries + "Other EU/EEA country" + "Other country".
 7. Email signup prompt (soft, below results).
 
 ### 6.3 Greek net-salary engine (`src/lib/tax/`)
-Pure function: `computeGreekNet({ grossAnnual, children, apply5C, params }) → breakdown`.
+Pure function: `computeGreekNet({ grossAnnual, children, ageBand, apply5C, params }) → breakdown`.
 
 The breakdown returns: gross, employee social contributions, taxable income, income tax before reductions, tax reduction, final income tax, any other levies, annual net, monthly net (÷12), per-payment net (÷14).
 
 **Parameters**, all in config, **all `null` until Elias verifies them**:
-- Income tax brackets and rates for employment income (tax year 2026)
+- Income tax brackets and rates for employment income (tax year 2026), per number of dependent children
+- Youth relief: rate overrides for ages up to 25 and 26–30, and how they combine with the children rates and with 5C
 - Employee tax reduction (μείωση φόρου), including its dependence on number of children and its phase-out above an income threshold
 - EFKA employee contribution rate(s) and the monthly insurable-earnings ceiling
 - Special solidarity contribution: whether it currently applies to employment income at all
@@ -128,7 +130,7 @@ The breakdown returns: gross, employee social contributions, taxable income, inc
   - duration in years.
 
 **Test oracle (instead of an accountant):**
-- Elias picks **two reputable Greek online net-salary calculators**. Claude Code builds ≥ 12 test cases (gross €12k / €18k / €25k / €35k / €50k / €80k × 0 and 2 children). The engine must match both calculators within **€2/month**. Record the calculator URLs and their outputs in `tests/fixtures/oracle.json`.
+- Elias picks **two reputable Greek online net-salary calculators**. Claude Code builds ≥ 12 test cases (gross €12k / €18k / €25k / €35k / €50k / €80k × 0 and 2 children, age 31+), plus 6 youth cases with 0 children (age 26–30: €15k / €20k / €25k / €35k; age up to 25: €15k / €25k). The engine must match both calculators within **€2/month**. Record the calculator URLs and their outputs in `tests/fixtures/oracle.json`.
 - **5C cases:** 6–10 hand-built cases derived from the law text by Elias, stored in `tests/fixtures/art5c.json`.
 
 ### 6.4 Purchasing-power comparison (`src/lib/compare/`)

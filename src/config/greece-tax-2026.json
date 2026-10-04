@@ -1,11 +1,34 @@
 {
   "_meta": {
     "taxYear": 2026,
-    "note": "Every parameter has value, sourceUrl, verifiedBy (name) and verifiedOn (YYYY-MM-DD). All stay null until Elias verifies them against AADE / the law text. Never fill in estimates. 'description' is documentation only."
+    "note": "Every parameter has value, sourceUrl, verifiedBy (name) and verifiedOn (YYYY-MM-DD). All stay null until Elias verifies them against AADE / the law text. Never fill in estimates. 'description' is documentation only. Candidate values and sources: docs/tax-research.md. Switches (values from a fixed list) are listed with their allowed values in the description."
   },
   "incomeTax": {
     "brackets": {
-      "description": "Income tax scale for employment income, tax year 2026. Expected shape: [{ \"upTo\": number | null, \"rate\": number }], upTo in EUR of taxable income per year (null = no upper limit), rate as a fraction (0.22 = 22%).",
+      "description": "Income tax scale for employment income, tax year 2026, one scale per number of dependent children. Shape: { \"0\": Bracket[], \"1\": Bracket[], \"2\": Bracket[], \"3\": Bracket[], \"4\": Bracket[] } where Bracket = { \"upTo\": number | null, \"rate\": number }. upTo is the top of the bracket in EUR of taxable income per year (null = no upper limit, last bracket only), rate is a fraction (0.22 = 22%). If the scale doesn't vary with children, repeat the same list under every key.",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "youthRelief": {
+      "upTo25": {
+        "description": "Rate overrides for taxpayers aged up to 25 (age band \"upTo25\"), applied on top of the 0-children scale. Shape: [{ \"from\": number, \"upTo\": number | null, \"rate\": number }]: within taxable income from..upTo (EUR per year), the rate becomes 'rate'. Use [] if there is no relief.",
+        "value": null,
+        "sourceUrl": null,
+        "verifiedBy": null,
+        "verifiedOn": null
+      },
+      "26to30": {
+        "description": "Rate overrides for taxpayers aged 26 to 30 (age band \"26to30\"). Same shape as upTo25.",
+        "value": null,
+        "sourceUrl": null,
+        "verifiedBy": null,
+        "verifiedOn": null
+      }
+    },
+    "youthChildrenInteraction": {
+      "description": "Switch. How youth relief combines with the per-children scale for a young taxpayer with children. Allowed values: \"lowest_rate_per_range\" (in each income range the lower of the youth rate and the children rate applies) | \"lower_total_tax\" (tax is computed once on the children scale and once on the 0-children scale with youth overrides; the lower total applies). Only used when age band is not 31plus and children > 0.",
       "value": null,
       "sourceUrl": null,
       "verifiedBy": null,
@@ -14,21 +37,28 @@
   },
   "taxReduction": {
     "baseAmountByChildren": {
-      "description": "Employee tax reduction (μείωση φόρου) in EUR by number of dependent children. Expected shape: { \"0\": number, \"1\": number, ... } plus how to handle more children than listed.",
+      "description": "Employee tax reduction (μείωση φόρου, art. 16 ΚΦΕ) in EUR per year by number of dependent children. Shape: { \"0\": number, \"1\": number, \"2\": number, \"3\": number, \"4\": number }.",
       "value": null,
       "sourceUrl": null,
       "verifiedBy": null,
       "verifiedOn": null
     },
     "phaseOutThreshold": {
-      "description": "Taxable income in EUR above which the tax reduction starts to shrink (and whether it differs by number of children).",
+      "description": "Taxable income in EUR per year above which the tax reduction starts to shrink.",
       "value": null,
       "sourceUrl": null,
       "verifiedBy": null,
       "verifiedOn": null
     },
     "phaseOutRate": {
-      "description": "How fast the tax reduction shrinks above the threshold, e.g. EUR per EUR 1,000 of income above it.",
+      "description": "EUR of reduction lost per EUR 1 of taxable income above the threshold (EUR 20 per EUR 1,000 = 0.02).",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "phaseOutMethod": {
+      "description": "Switch. Allowed values: \"continuous\" (reduction shrinks pro rata for every euro above the threshold) | \"per_full_1000\" (reduction shrinks only per complete EUR 1,000 above the threshold).",
       "value": null,
       "sourceUrl": null,
       "verifiedBy": null,
@@ -44,7 +74,7 @@
       "verifiedOn": null
     },
     "monthlyInsurableCeiling": {
-      "description": "Monthly insurable-earnings ceiling in EUR above which no employee contributions are due.",
+      "description": "Monthly insurable-earnings ceiling in EUR above which no employee contributions are due. The engine applies it to each of the salaryPaymentsPerYear equal payments (bonus-payment ceilings are an open item, not modelled).",
       "value": null,
       "sourceUrl": null,
       "verifiedBy": null,
@@ -53,14 +83,14 @@
   },
   "solidarityContribution": {
     "appliesToEmploymentIncome": {
-      "description": "true / false: whether the special solidarity contribution applies to employment income in tax year 2026.",
+      "description": "true / false: whether the special solidarity contribution (art. 43A ΚΦΕ) applies to employment income in tax year 2026.",
       "value": null,
       "sourceUrl": null,
       "verifiedBy": null,
       "verifiedOn": null
     },
     "brackets": {
-      "description": "Solidarity contribution scale, same shape as incomeTax.brackets. If it does not apply, set to [] (still with source and verification).",
+      "description": "Solidarity contribution scale: Bracket[] (same shape as one entry of incomeTax.brackets). Only used if appliesToEmploymentIncome is true; if it does not apply, set to [] (still with source and verification).",
       "value": null,
       "sourceUrl": null,
       "verifiedBy": null,
@@ -76,28 +106,56 @@
   },
   "art5c": {
     "exemptionRate": {
-      "description": "Share of the covered income exempted under Article 5C, as a fraction (expected 0.5; verify).",
+      "description": "Share exempted under Article 5C, as a fraction (expected 0.5; verify).",
       "value": null,
       "sourceUrl": null,
       "verifiedBy": null,
       "verifiedOn": null
     },
     "exemptionAppliesTo": {
-      "description": "Which items the exemption reduces. Expected shape: list drawn from [\"incomeTax\", \"solidarityContribution\", \"socialContributions\"]. Expected: not social contributions; verify.",
+      "description": "Which items the exemption reduces. Shape: list drawn from [\"incomeTax\", \"solidarityContribution\", \"socialContributions\"]. Use [] if none (unlikely).",
       "value": null,
       "sourceUrl": null,
       "verifiedBy": null,
       "verifiedOn": null
     },
-    "taxReductionInteraction": {
-      "description": "How the employee tax reduction interacts with 5C: whether it is computed on the reduced taxable amount or some other way. Free text until the mechanics are confirmed; M2 turns it into an enum.",
+    "exemptionMethod": {
+      "description": "Switch. How the exemption works. Allowed values: \"exempt_share_of_income\" (exemptionRate of the income is exempt; the tax scale is applied to the remaining income) | \"reduce_tax_by_share\" (tax is computed on the full income on the normal scale, then reduced by exemptionRate). These differ because the scale is progressive.",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "exemptionBase": {
+      "description": "Switch. Only used with exemptionMethod \"exempt_share_of_income\". What the exempt share is taken of. Allowed values: \"gross_employment_income\" | \"net_of_employee_contributions\" (gross minus employee EFKA).",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "reductionPhaseOutIncome": {
+      "description": "Switch. Only used with exemptionMethod \"exempt_share_of_income\". Which income the art. 16 tax-reduction phase-out is measured against. Allowed values: \"after_exemption\" (the reduced taxable income) | \"before_exemption\" (taxable income without the 5C exemption).",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "reductionOrder": {
+      "description": "Switch. Only used with exemptionMethod \"reduce_tax_by_share\". Allowed values: \"reduce_then_exempt\" (final tax = (scale tax − reduction) × (1 − exemptionRate)) | \"exempt_then_reduce\" (final tax = scale tax × (1 − exemptionRate) − reduction).",
+      "value": null,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "youthReliefInteraction": {
+      "description": "Switch. Whether youth relief (incomeTax.youthRelief) also applies to someone under 5C. Allowed values: \"stack\" (5C exemption applied, youth rates on the remainder) | \"no_youth_relief_with_5c\" (5C taxpayers are taxed on the normal scale) | \"lower_of_two\" (the taxpayer gets whichever is lower: 5C without youth relief, or youth relief without 5C). Only used when apply5C is on and age band is not 31plus.",
       "value": null,
       "sourceUrl": null,
       "verifiedBy": null,
       "verifiedOn": null
     },
     "durationYears": {
-      "description": "Number of tax years the 5C exemption applies for.",
+      "description": "Number of tax years the 5C exemption applies for. Drives the timeline cliff.",
       "value": null,
       "sourceUrl": null,
       "verifiedBy": null,
