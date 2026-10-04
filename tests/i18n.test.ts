@@ -13,3 +13,9 @@ describe('i18n dictionaries', () => {
     }
   });
 });
+
+describe('Greek terminology', () => {
+  it('calls the 5C break "απαλλαγή", never "έκπτωση"', () => {
+    for (const [key, value] of Object.entries(el)) expect(value, key).not.toMatch(/[έΈε]κπτωσ/);
+  });
+});
