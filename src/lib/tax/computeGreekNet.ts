@@ -23,7 +23,6 @@ import {
   REDUCTION_PHASE_OUT_INCOMES,
   YOUTH_5C_INTERACTIONS,
   YOUTH_CHILDREN_INTERACTIONS,
-  type AgeBand,
   type Bracket,
   type ExemptItem,
   type GreekNetBreakdown,
