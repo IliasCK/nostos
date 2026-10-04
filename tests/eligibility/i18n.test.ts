@@ -26,11 +26,10 @@ describe('quiz strings', () => {
     expect(en['quiz.note.notWorking']).toContain('Other regimes exist for pensioners and investors');
   });
 
-  it('never says "eligible" without "likely"', () => {
-    for (const dict of [en]) {
-      for (const [key, value] of Object.entries(dict)) {
-        if (/\beligib/i.test(value)) expect(value, key).toMatch(/likely|Only AADE decides eligibility/i);
-      }
+  it('never calls anyone "eligible" without "likely" (CLAUDE.md rule 3)', () => {
+    for (const [key, value] of Object.entries(en)) {
+      const bare = value.replace(/\blikely (not )?eligible\b/gi, '');
+      expect(bare, key).not.toMatch(/\beligible\b/i);
     }
   });
 });
