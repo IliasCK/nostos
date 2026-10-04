@@ -1,0 +1,290 @@
+{
+  "_note": "SYNTHETIC TEST DATA. Made-up round numbers chosen so expected results can be worked out by hand. This is NOT Greek tax law and must never be used as, or copied into, src/config/greece-tax-2026.json.",
+  "incomeTax": {
+    "brackets": {
+      "value": {
+        "0": [
+          {
+            "upTo": 10000,
+            "rate": 0.1
+          },
+          {
+            "upTo": 20000,
+            "rate": 0.2
+          },
+          {
+            "upTo": 30000,
+            "rate": 0.3
+          },
+          {
+            "upTo": null,
+            "rate": 0.4
+          }
+        ],
+        "1": [
+          {
+            "upTo": 10000,
+            "rate": 0.1
+          },
+          {
+            "upTo": 20000,
+            "rate": 0.15
+          },
+          {
+            "upTo": 30000,
+            "rate": 0.25
+          },
+          {
+            "upTo": null,
+            "rate": 0.4
+          }
+        ],
+        "2": [
+          {
+            "upTo": 10000,
+            "rate": 0.1
+          },
+          {
+            "upTo": 20000,
+            "rate": 0.1
+          },
+          {
+            "upTo": 30000,
+            "rate": 0.2
+          },
+          {
+            "upTo": null,
+            "rate": 0.4
+          }
+        ],
+        "3": [
+          {
+            "upTo": 10000,
+            "rate": 0.1
+          },
+          {
+            "upTo": 20000,
+            "rate": 0.05
+          },
+          {
+            "upTo": 30000,
+            "rate": 0.15
+          },
+          {
+            "upTo": null,
+            "rate": 0.4
+          }
+        ],
+        "4": [
+          {
+            "upTo": 10000,
+            "rate": 0.1
+          },
+          {
+            "upTo": 20000,
+            "rate": 0
+          },
+          {
+            "upTo": 30000,
+            "rate": 0.1
+          },
+          {
+            "upTo": null,
+            "rate": 0.4
+          }
+        ]
+      },
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "youthRelief": {
+      "upTo25": {
+        "value": [
+          {
+            "from": 0,
+            "upTo": 20000,
+            "rate": 0
+          }
+        ],
+        "sourceUrl": null,
+        "verifiedBy": null,
+        "verifiedOn": null
+      },
+      "26to30": {
+        "value": [
+          {
+            "from": 10000,
+            "upTo": 20000,
+            "rate": 0.12
+          }
+        ],
+        "sourceUrl": null,
+        "verifiedBy": null,
+        "verifiedOn": null
+      }
+    },
+    "youthChildrenInteraction": {
+      "value": "lowest_rate_per_range",
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    }
+  },
+  "taxReduction": {
+    "baseAmountByChildren": {
+      "value": {
+        "0": 1000,
+        "1": 1100,
+        "2": 1200,
+        "3": 1300,
+        "4": 1400
+      },
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "phaseOutThreshold": {
+      "value": 10000,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "phaseOutRate": {
+      "value": 0.02,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "phaseOutMethod": {
+      "value": "continuous",
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    }
+  },
+  "efka": {
+    "employeeRate": {
+      "value": 0.1,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "monthlyInsurableCeiling": {
+      "value": 5000,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    }
+  },
+  "solidarityContribution": {
+    "appliesToEmploymentIncome": {
+      "value": false,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "brackets": {
+      "value": [],
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    }
+  },
+  "salaryPaymentsPerYear": {
+    "value": 14,
+    "sourceUrl": null,
+    "verifiedBy": null,
+    "verifiedOn": null
+  },
+  "art5c": {
+    "exemptionRate": {
+      "value": 0.5,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "exemptionAppliesTo": {
+      "value": [
+        "incomeTax"
+      ],
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "exemptionMethod": {
+      "value": "exempt_share_of_income",
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "exemptionBase": {
+      "value": "net_of_employee_contributions",
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "reductionPhaseOutIncome": {
+      "value": "after_exemption",
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "reductionOrder": {
+      "value": "reduce_then_exempt",
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "youthReliefInteraction": {
+      "value": "no_youth_relief_with_5c",
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "durationYears": {
+      "value": 7,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "lookbackYears": {
+      "value": 8,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "requiredNonResidentYears": {
+      "value": 7,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "minimumStayYears": {
+      "value": 2,
+      "sourceUrl": null,
+      "verifiedBy": null,
+      "verifiedOn": null
+    },
+    "cooperationCountries": {
+      "GB": {
+        "value": true,
+        "sourceUrl": null,
+        "verifiedBy": null,
+        "verifiedOn": null
+      },
+      "US": {
+        "value": true,
+        "sourceUrl": null,
+        "verifiedBy": null,
+        "verifiedOn": null
+      },
+      "AU": {
+        "value": true,
+        "sourceUrl": null,
+        "verifiedBy": null,
+        "verifiedOn": null
+      }
+    }
+  }
+}
