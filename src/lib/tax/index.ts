@@ -1,3 +1,4 @@
-// Greek net-salary engine: computeGreekNet({ grossAnnual, children, apply5C, params }). Implemented in M2 (SPEC §6.3).
-// Pure TypeScript, no UI dependencies.
-export {};
+// Greek net-salary engine (SPEC §6.3). Pure TypeScript, no UI dependencies.
+// Every number comes from the tax config; nothing is hardcoded.
+export { computeGreekNet } from './computeGreekNet';
+export * from './types';
