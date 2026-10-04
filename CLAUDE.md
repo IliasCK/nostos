@@ -32,7 +32,7 @@ A secondary page compares Greece with peer countries (Bulgaria, Romania, Portuga
 - **Astro** (static output) + **TypeScript** (strict)
 - Interactive parts (quiz, calculator) as Astro islands; use **Preact** for small bundles
 - **Chart.js** for charts
-- **Tailwind CSS** for styling, mobile-first (most traffic will arrive from Facebook on phones)
+- **Tailwind CSS** for styling, mobile-first (most traffic will arrive from Facebook on phones). All colours, fonts and the type scale are tokens in `src/styles/tokens.css` (Tailwind's default palette is disabled); never hardcode a colour. Better/worse must never rely on colour alone.
 - **Vitest** for unit tests
 - **Python 3.12** for the data pipeline (`/pipeline`): `requests`, `pandas`, `sdmx1` or raw SDMX/JSON calls
 - **GitHub Actions** for scheduled data refresh + CI
@@ -65,8 +65,8 @@ wrangler.jsonc                   # Cloudflare Workers config (static assets only
 
 ## Commands
 
-- `npm run dev`: local dev server
-- `npm run build`: build (runs `check:params`, then `astro check`, then `astro build`)
+- `npm run dev`: local dev server. The calculator page has a **demo mode** toggle (synthetic params + fake data, watermarked) that exists only here; `?demo=likely_eligible&view=results` opens it directly.
+- `npm run build`: build (runs `check:params`, then `astro check`, then `astro build`, then `scripts/check-no-demo.ts`, which fails if demo content reached `dist/`)
 - `npm run test`: Vitest
 - `npm run check:params`: lists every tax parameter with a null `value`, `sourceUrl`, `verifiedBy` or `verifiedOn`. Exits non-zero (failing the build) only when `NOSTOS_ENV=production`; otherwise it only warns.
 - `python pipeline/<script>.py`: run a fetch locally; every script writes to `src/data/` only after `validate.py` passes

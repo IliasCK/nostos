@@ -35,6 +35,36 @@ Things Elias must verify or decide. Items 1–10 are copied from SPEC §13. They
 17. [ ] **Two new quiz parameters** (null): `art5c.euEeaQualifies` (the source for the EU/EEA pass in Q2) and `art5c.qualifyingWorkTypes` (Q3). Until `qualifyingWorkTypes` is verified, every Q3 answer is borderline, including "not working".
 18. [ ] **Quiz entry point.** Nothing links to `/ypologistis/` yet; the home page CTA is planned for M7.
 
+19. [ ] **How age is counted** (item 15) is now a config switch, `incomeTax.youthAgeRule`, with the options "age reached during the tax year" and "age on 1 January". It's only needed when the two rules give different age bands. Until it's set, those users see "not yet verified".
+20. [ ] **Apartment sizes** (SPEC §6.1): `src/data/manual/rent.json` → `sizes` (m² per size) are null. The proposal was 40 / 60 / 80 / 100.
+21. [ ] **Data files for M5:** the calculator expects `src/data/fx.json` and `src/data/price-levels.json` in the shapes defined in `src/lib/data/types.ts`. Until they exist, the comparison shows "data not yet available".
+22. [ ] **Methodology links** (`/methodologia/`, `/en/methodology/`) 404 until M7.
+
+## Decisions made without SPEC guidance (M4)
+
+- **Design:** tokens live in `src/styles/tokens.css`, with Tailwind's default palette switched off.
+  - Accent: deep terracotta `#9C3D21` (dark mode `#E7967A`).
+  - Fonts: Literata and Inter, self-hosted through @fontsource.
+  - Contrast ratios are noted per token.
+  - Better/worse is always shown with ▲ ▼ ≈ plus words; quiz verdicts use ✓ ? ✕.
+- **No "Adults" input** (agreed). Greek employment tax is per person. The assumptions list says "Calculated for one earner. Rent is assumed to be paid in full by you."
+- **Year 1 = the config's tax year (2026).** The same rules apply to every later year, as stated in the assumptions list.
+- **Age band per timeline year** is derived from birth year. The headline uses the *average* monthly net over the 5C years when it varies, and says "on average".
+- **Purchasing power:** the origin's left-after-rent is expressed in Greek prices: EUR × PLI(GR) / PLI(origin).
+  - A change under 1% reads as "about the same".
+  - There's no percentage when the origin has nothing left after rent.
+- **Borderline mode:** the headline and comparison use the with-5C scenario, the net-pay cards show both side by side, and an "ask an adviser" note is shown.
+- **"Likely not eligible" mode:** the 5C figures and chart are inside a collapsed "What if you did qualify?" section.
+- **Chart:** bars show the net pay that applies each year (with 5C, then without from the cliff), and a dashed line shows without-5C for every year. The y-axis starts at €0 (honest scale). A table version is always available.
+- **Amounts** can be typed in Greek or English style ("2.500,50" or "2,500.50"). Sanity limits catch typos only; they are not tax rules.
+- **Demo mode (dev only):**
+  - Gated on `import.meta.env.DEV && MODE === 'development'`. Found while building M4: `DEV` alone becomes true in `astro build` when `NODE_ENV=development` or `test`.
+  - `npm run build` ends with `scripts/check-no-demo.ts`, which fails the build if any demo marker reaches `dist/`.
+  - Dev-only URL shortcut: `?demo=likely_eligible|borderline|likely_not_eligible&view=results`.
+- **Screenshots** were taken with headless Chromium, not Firefox. Firefox's `--screenshot` captures before the island hydrates and can't wait; Chromium's `--virtual-time-budget` can.
+- **Astro's dev toolbar is disabled** (it overlaid the page).
+- **The quiz still uses the real config in demo mode** (so it stays borderline). The demo's "pretend quiz outcome" selector sets the display mode instead.
+
 ## Decisions made without SPEC guidance (M3)
 
 - **"Verified" in the quiz means all four fields are set** (the same rule as `check:params` and the banner). A rule that isn't fully verified is borderline with "rule not yet verified", never pass. The tax engine is looser on purpose: it needs only `value`, so M4 can show placeholder figures in dev.
