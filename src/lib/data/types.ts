@@ -58,3 +58,38 @@ export interface RentFile {
   /** m² per apartment size. */
   sizes: Partial<Record<ApartmentSize, number | null>>;
 }
+
+export const PEER_COUNTRIES = ['GR', 'BG', 'RO', 'PT', 'ES', 'IT', 'EU27'] as const;
+export type PeerCountry = (typeof PEER_COUNTRIES)[number];
+
+export const PEER_INDICATORS = [
+  'gdpPerCapitaPps',
+  'aicPerCapitaPps',
+  'netEarningsPps',
+  'priceLevelIndex',
+  'housingCostOverburden',
+  'minimumWagePps',
+] as const;
+export type PeerIndicator = (typeof PEER_INDICATORS)[number];
+
+/** src/data/peers.json: Eurostat indicators for the Greece vs peers page (SPEC §8). */
+export interface PeersFile {
+  source: string;
+  fetchedAt: string;
+  countries: PeerCountry[];
+  indicators: Record<
+    PeerIndicator,
+    {
+      label: string;
+      dataset: string;
+      filters: Record<string, string>;
+      url: string;
+      unit: string;
+      /** Reference period, e.g. "2025" or "2026-S2". */
+      year: string;
+      values: Partial<Record<PeerCountry, number>>;
+      /** Countries with no value in that period (e.g. no statutory minimum wage). */
+      notAvailable: PeerCountry[];
+    }
+  >;
+}

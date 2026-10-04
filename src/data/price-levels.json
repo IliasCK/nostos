@@ -1,0 +1,18 @@
+{
+  "source": "https://sdmx.oecd.org/public/rest/data/OECD.SDD.TPS,DSD_PPP@DF_PPP_CPL,1.1/GRC+DEU+GBR+NLD+AUS+USA+BEL+SWE+CYP.A.PL.A01.IX.USA?startPeriod=2020&format=csv",
+  "dataset": "OECD.SDD.TPS,DSD_PPP@DF_PPP_CPL,1.1",
+  "fetchedAt": "2026-10-04T09:45:59Z",
+  "year": 2024,
+  "basis": "OECD price level indices, actual individual consumption (AIC), USA=100",
+  "indices": {
+    "GR": 54.7,
+    "DE": 71.5,
+    "GB": 84.3,
+    "NL": 78.4,
+    "AU": 92.7,
+    "US": 100.0,
+    "BE": 77.5,
+    "SE": 81.5,
+    "CY": 61.4
+  }
+}

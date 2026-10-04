@@ -1,0 +1,144 @@
+{
+  "source": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
+  "fetchedAt": "2026-10-04T09:46:07Z",
+  "countries": [
+    "GR",
+    "BG",
+    "RO",
+    "PT",
+    "ES",
+    "IT",
+    "EU27"
+  ],
+  "indicators": {
+    "gdpPerCapitaPps": {
+      "label": "GDP per capita in PPS",
+      "dataset": "nama_10_pc",
+      "filters": {
+        "unit": "CP_PPS_EU27_2020_HAB",
+        "na_item": "B1GQ"
+      },
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nama_10_pc?format=JSON&lang=EN&geo=EL&geo=BG&geo=RO&geo=PT&geo=ES&geo=IT&geo=EU27_2020&unit=CP_PPS_EU27_2020_HAB&na_item=B1GQ",
+      "unit": "PPS (EU27_2020) per inhabitant, current prices",
+      "year": "2025",
+      "values": {
+        "GR": 28469.9,
+        "BG": 28332.0,
+        "RO": 32353.1,
+        "PT": 34022.2,
+        "ES": 38161.7,
+        "IT": 40075.0,
+        "EU27": 41698.7
+      },
+      "notAvailable": []
+    },
+    "aicPerCapitaPps": {
+      "label": "Actual individual consumption per capita in PPS",
+      "dataset": "prc_ppp_ind",
+      "filters": {
+        "na_item": "EXP_PPS_EU27_2020_HAB",
+        "ppp_cat": "A01"
+      },
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_ppp_ind?format=JSON&lang=EN&geo=EL&geo=BG&geo=RO&geo=PT&geo=ES&geo=IT&geo=EU27_2020&na_item=EXP_PPS_EU27_2020_HAB&ppp_cat=A01",
+      "unit": "PPS (EU27_2020) per inhabitant",
+      "year": "2024",
+      "values": {
+        "GR": 21200,
+        "BG": 19300,
+        "RO": 23100,
+        "PT": 22400,
+        "ES": 24300,
+        "IT": 25700,
+        "EU27": 26300
+      },
+      "notAvailable": []
+    },
+    "netEarningsPps": {
+      "label": "Annual net earnings in PPS",
+      "dataset": "earn_nt_net",
+      "filters": {
+        "currency": "PPS",
+        "estruct": "NET",
+        "ecase": "P1_NCH_AW100"
+      },
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/earn_nt_net?format=JSON&lang=EN&geo=EL&geo=BG&geo=RO&geo=PT&geo=ES&geo=IT&geo=EU27_2020&currency=PPS&estruct=NET&ecase=P1_NCH_AW100",
+      "unit": "PPS per year, single person without children earning 100% of the average wage",
+      "year": "2025",
+      "values": {
+        "GR": 25010.87,
+        "BG": 12374.07,
+        "RO": 22097.95,
+        "PT": 24665.51,
+        "ES": 29750.29,
+        "IT": 28495.76,
+        "EU27": 29350.19
+      },
+      "notAvailable": []
+    },
+    "priceLevelIndex": {
+      "label": "Price level index",
+      "dataset": "prc_ppp_ind",
+      "filters": {
+        "na_item": "PLI_EU27_2020",
+        "ppp_cat": "A01"
+      },
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_ppp_ind?format=JSON&lang=EN&geo=EL&geo=BG&geo=RO&geo=PT&geo=ES&geo=IT&geo=EU27_2020&na_item=PLI_EU27_2020&ppp_cat=A01",
+      "unit": "Index, EU27_2020 = 100 (actual individual consumption)",
+      "year": "2024",
+      "values": {
+        "GR": 83.0,
+        "BG": 56.9,
+        "RO": 57.4,
+        "PT": 85.0,
+        "ES": 90.7,
+        "IT": 98.1,
+        "EU27": 100.0
+      },
+      "notAvailable": []
+    },
+    "housingCostOverburden": {
+      "label": "Housing cost overburden rate",
+      "dataset": "ilc_lvho07a",
+      "filters": {
+        "unit": "PC",
+        "age": "TOTAL",
+        "sex": "T",
+        "rskpovth": "TOTAL"
+      },
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/ilc_lvho07a?format=JSON&lang=EN&geo=EL&geo=BG&geo=RO&geo=PT&geo=ES&geo=IT&geo=EU27_2020&unit=PC&age=TOTAL&sex=T&rskpovth=TOTAL",
+      "unit": "% of population",
+      "year": "2025",
+      "values": {
+        "GR": 26.4,
+        "BG": 6.9,
+        "RO": 5.0,
+        "PT": 6.3,
+        "ES": 7.2,
+        "IT": 5.0,
+        "EU27": 7.7
+      },
+      "notAvailable": []
+    },
+    "minimumWagePps": {
+      "label": "Monthly minimum wage in PPS",
+      "dataset": "earn_mw_cur",
+      "filters": {
+        "currency": "PPS"
+      },
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/earn_mw_cur?format=JSON&lang=EN&geo=EL&geo=BG&geo=RO&geo=PT&geo=ES&geo=IT&geo=EU27_2020&currency=PPS",
+      "unit": "PPS per month",
+      "year": "2026-S2",
+      "values": {
+        "GR": 1229,
+        "BG": 993,
+        "RO": 1317,
+        "PT": 1240,
+        "ES": 1556
+      },
+      "notAvailable": [
+        "IT",
+        "EU27"
+      ]
+    }
+  }
+}

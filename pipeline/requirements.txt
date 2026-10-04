@@ -1,4 +1,2 @@
-# Data pipeline dependencies (Python 3.12). Versions get pinned in M5.
-requests
-pandas
-sdmx1
+# The pipeline uses the Python 3.12 standard library only (urllib, json, csv);
+# nothing to install.
