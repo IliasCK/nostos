@@ -34,3 +34,24 @@ export function unverifiedParams(config: unknown): ParamStatus[] {
 export function isProduction(env: string | undefined): boolean {
   return env === 'production';
 }
+
+export interface ParamEntry {
+  value: unknown;
+  sourceUrl: string | null;
+  verifiedBy: string | null;
+  verifiedOn: string | null;
+}
+
+/** The parameter object at a dotted path, or undefined if there is none. */
+export function getParam(config: unknown, path: string): ParamEntry | undefined {
+  let node: unknown = config;
+  for (const key of path.split('.')) {
+    node = node !== null && typeof node === 'object' ? (node as Record<string, unknown>)[key] : undefined;
+  }
+  return node !== null && typeof node === 'object' && 'value' in node ? (node as ParamEntry) : undefined;
+}
+
+/** Verified = value, sourceUrl, verifiedBy and verifiedOn all set (same rule as check:params). */
+export function isVerified(param: ParamEntry | undefined): boolean {
+  return param !== undefined && VERIFICATION_FIELDS.every((f) => param[f] !== null && param[f] !== undefined);
+}
