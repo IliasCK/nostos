@@ -37,8 +37,27 @@ Things Elias must verify or decide. Items 1–10 are copied from SPEC §13. They
 
 19. [ ] **How age is counted** (item 15) is now a config switch, `incomeTax.youthAgeRule`, with the options "age reached during the tax year" and "age on 1 January". It's only needed when the two rules give different age bands. Until it's set, those users see "not yet verified".
 20. [ ] **Apartment sizes** (SPEC §6.1): `src/data/manual/rent.json` → `sizes` (m² per size) are null. The proposal was 40 / 60 / 80 / 100.
-21. [ ] **Data files for M5:** the calculator expects `src/data/fx.json` and `src/data/price-levels.json` in the shapes defined in `src/lib/data/types.ts`. Until they exist, the comparison shows "data not yet available".
+21. [x] **Data files for M5:** `src/data/fx.json` and `src/data/price-levels.json` now exist (M5). The comparison still needs rent figures (item 6) and apartment sizes (item 20).
 22. [ ] **Methodology links** (`/methodologia/`, `/en/methodology/`) 404 until M7.
+
+23. [ ] **No published price level index excluding housing (SPEC §6.4).** I checked the OECD and Eurostat PPP tables (`DF_PPP_CPL`, `prc_ppp_ind`). Neither publishes an AIC/HFCE aggregate excluding housing or rent, so the calculator uses the AIC price level, and the rent overlap stays a stated limitation on the Methodology page.
+    - An index *derived* from the published categories is possible (AIC minus A0104, weighted by nominal expenditure), but it would be our own construction, and A0104 also contains utilities.
+    - Your call; I've not built it.
+24. [ ] **Peers chart 6 (minimum wage)** can only show GR, BG, RO, PT and ES. Italy has no statutory minimum wage, and Eurostat has no EU27 aggregate. M6 should say so on the chart.
+25. [ ] **Peers indicators have different reference years** (currently GDP 2025, AIC 2024, net earnings 2025, PLI 2024, overburden 2025, minimum wage 2026-S2). Each chart will show its own year.
+26. [ ] **Data commits don't run CI.** GitHub doesn't trigger workflows for pushes made with the workflow token. Workers Builds still builds and deploys them, and `npm run build` still validates the tax config and the demo guard there. If you want CI on data commits too, that needs a personal access token or a GitHub App.
+
+## Decisions made without SPEC guidance (M5)
+
+- **The pipeline uses the Python standard library only** (urllib/json/csv) instead of requests/pandas/sdmx1. Nothing is installed in the workflows, and `python3-venv` isn't installed on the dev machine.
+- **OECD base area USA=100** (one decimal place) rather than OECD=100 (3 significant figures). Results are unaffected, since only ratios are used.
+- **The latest year where all required countries have a value** is used for OECD and for each Eurostat indicator, so countries are always compared for the same period.
+- **Change bands:** ±20% for FX and price levels (SPEC example), ±25% for peers indicators (annual series can move more). The bands for price levels and peers only compare against the previous file when the basis is the same.
+- **No-op protection:** files are rewritten only when the data changes, not just `fetchedAt`. The workflows commit only if `src/data` changed.
+- **Monthly workflow:** if OECD or Eurostat fails, the other's valid data is still committed, but the run fails so you get the email.
+- **Rent staleness** is measured from the end of the quarter (warning after ~4 months). A missing quarter also produces a warning.
+- **Demo mode now uses the real data files where available** (FX and price levels today) and fake sample data only for what's missing (rent). The demo panel lists which is which.
+- **CI** also runs the pipeline's unit tests and `pipeline/validate.py` on the committed data.
 
 ## Decisions made without SPEC guidance (M4)
 

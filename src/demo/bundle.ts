@@ -15,12 +15,16 @@ const strings = {
     toggle: 'Λειτουργία δοκιμής (μόνο npm run dev): συνθετικοί φορολογικοί παράμετροι και ψεύτικα δεδομένα',
     outcome: 'Αποτέλεσμα κουίζ (για δοκιμή)',
     fill: 'Συμπλήρωσε δείγμα στοιχείων',
+    real: 'Πραγματικά δεδομένα',
+    fake: 'ΨΕΥΤΙΚΑ',
   },
   en: {
     watermark: 'DEMO — FAKE NUMBERS',
     toggle: 'Demo mode (npm run dev only): synthetic tax parameters and fake data',
     outcome: 'Pretend quiz outcome',
     fill: 'Fill sample inputs',
+    real: 'Real data',
+    fake: 'FAKE',
   },
 };
 

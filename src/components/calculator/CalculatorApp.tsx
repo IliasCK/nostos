@@ -40,7 +40,20 @@ export default function CalculatorApp({ locale, strings, config, data, methodolo
 
   const demoActive = !!demo && demoOn;
   const params = demoActive ? demo.params : config;
-  const activeData = demoActive ? demo.data : data;
+  // Demo mode uses the real data files wherever they are available and fills
+  // only the gaps (e.g. rent) with fake sample data.
+  const activeData = useMemo<CalculatorData>(
+    () =>
+      demoActive
+        ? {
+            fx: data.fx.status === 'ok' ? data.fx : demo.data.fx,
+            priceLevels: data.priceLevels.status === 'ok' ? data.priceLevels : demo.data.priceLevels,
+            rent: data.rent.status === 'ok' ? data.rent : demo.data.rent,
+          }
+        : data,
+    [demoActive, data, demo],
+  );
+  const dataSources = (['fx', 'priceLevels', 'rent'] as const).map((k) => ({ k, real: data[k].status === 'ok' }));
   const outcome: Outcome | null = demoActive ? demoOutcome : (quiz?.outcome ?? null);
   const paymentsValue = getParam(params, 'salaryPaymentsPerYear')?.value;
   const payments = Number.isInteger(paymentsValue) && (paymentsValue as number) > 0 ? (paymentsValue as number) : null;
@@ -85,6 +98,12 @@ export default function CalculatorApp({ locale, strings, config, data, methodolo
             <input type="checkbox" class="mt-1 size-5" checked={demoOn} onChange={(e) => setDemoOn(e.currentTarget.checked)} />
             <span>{demo.strings[locale].toggle}</span>
           </label>
+          {demoOn && (
+            <p class="text-sm" data-demo-sources>
+              {demo.strings[locale].real}: {dataSources.filter((d) => d.real).map((d) => d.k).join(', ') || '–'} ·{' '}
+              {demo.strings[locale].fake}: {['tax params', ...dataSources.filter((d) => !d.real).map((d) => d.k)].join(', ')}
+            </p>
+          )}
           {demoOn && (
             <div class="flex flex-wrap items-end gap-3">
               <label class="block">

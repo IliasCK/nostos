@@ -34,7 +34,7 @@ A secondary page compares Greece with peer countries (Bulgaria, Romania, Portuga
 - **Chart.js** for charts
 - **Tailwind CSS** for styling, mobile-first (most traffic will arrive from Facebook on phones). All colours, fonts and the type scale are tokens in `src/styles/tokens.css` (Tailwind's default palette is disabled); never hardcode a colour. Better/worse must never rely on colour alone.
 - **Vitest** for unit tests
-- **Python 3.12** for the data pipeline (`/pipeline`): `requests`, `pandas`, `sdmx1` or raw SDMX/JSON calls
+- **Python 3.12** for the data pipeline (`/pipeline`): standard library only (urllib, json, csv), raw SDMX/JSON calls. Unit tests: `python -m unittest discover -s pipeline/tests -p 'test_*.py'`
 - **GitHub Actions** for scheduled data refresh + CI
 - **Cloudflare Workers with static assets**, configured in `wrangler.jsonc` (`"assets": { "directory": "./dist", "not_found_handling": "404-page" }`). **Asset-only in v1: no Worker script**, so page requests never count against Worker quotas. Deployed via **Workers Builds** connected to the GitHub repo: build `npm run build`, deploy `npx wrangler deploy`. Do NOT use Cloudflare Pages; Cloudflare recommends Workers for new projects.
 - **Cloudflare Web Analytics** (cookieless). No Google Analytics.

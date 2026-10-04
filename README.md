@@ -8,7 +8,7 @@ The core is a move-to-Greece calculator: an Article 5C (50% tax break) eligibili
 - Working rules (for humans and Claude Code): [`CLAUDE.md`](CLAUDE.md)
 - Open decisions and verifications: [`docs/open-items.md`](docs/open-items.md)
 
-**Status:** M4 (calculator UI). The quiz and calculator are live at `/ypologistis/` and `/en/calculator/`. Every real tax parameter is still unverified, so results show a "can't calculate this yet" state; `npm run dev` has a demo mode with synthetic numbers.
+**Status:** M5 (data pipeline). The quiz and calculator are live at `/ypologistis/` and `/en/calculator/`. Every real tax parameter is still unverified, so results show a "can't calculate this yet" state; `npm run dev` has a demo mode with synthetic numbers.
 
 ## Stack
 
@@ -40,6 +40,24 @@ Every Greek tax parameter must carry a value, source URL and verification (who a
 
 - without `NOSTOS_ENV=production`, unverified parameters only produce a warning, so pre-launch builds succeed;
 - with `NOSTOS_ENV=production`, any unverified parameter fails the build.
+
+## Data pipeline
+
+Python 3.12, standard library only (nothing to install).
+
+| Command | What it does |
+|---|---|
+| `python pipeline/fetch_fx.py` | ECB rates → `src/data/fx.json` |
+| `python pipeline/fetch_oecd.py` | OECD price levels → `src/data/price-levels.json` |
+| `python pipeline/fetch_eurostat.py` | Eurostat peers indicators → `src/data/peers.json` |
+| `python pipeline/validate.py` | Checks the committed files and warns if the rent figures are stale |
+| `python -m unittest discover -s pipeline/tests -p 'test_*.py'` | Pipeline tests |
+
+- **Validation first:** every fetcher validates before writing. A failed check writes nothing and exits non-zero.
+- **No-op runs write nothing:** a file is only rewritten when its data changes, not just its timestamp.
+- **Schedules:** `data-daily.yml` (FX, weekdays) and `data-monthly.yml` (OECD + Eurostat, the 3rd of each month) commit only when data changed. Each such commit triggers a Workers Build.
+- **Rent** (`src/data/manual/rent.json`) is edited by hand from published Spitogatos figures.
+- **Sources:** see [`docs/sources.md`](docs/sources.md).
 
 ## How deploys work
 
