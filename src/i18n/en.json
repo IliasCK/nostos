@@ -11,5 +11,7 @@
   "home.comingSoon": "A tool to help you work out whether moving to Greece makes financial sense. Coming soon.",
   "notFound.title": "Page not found",
   "notFound.body": "The page you're looking for doesn't exist or has moved.",
-  "notFound.backHome": "Back to the home page"
+  "notFound.backHome": "Back to the home page",
+  "banner.unverified.title": "UNVERIFIED TAX PARAMETERS",
+  "banner.unverified.detail": "{count} of {total} parameters are not verified yet. Figures are not final."
 }

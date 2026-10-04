@@ -22,3 +22,8 @@ export function toLocale(value: string | undefined): Locale {
 export function homePath(locale: Locale): string {
   return locale === defaultLocale ? '/' : `/${locale}/`;
 }
+
+/** Replaces {name} placeholders in a string. */
+export function format(template: string, values: Record<string, string | number>): string {
+  return template.replace(/\{(\w+)\}/g, (match, name: string) => (name in values ? String(values[name]) : match));
+}

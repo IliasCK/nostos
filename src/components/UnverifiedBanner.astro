@@ -1,0 +1,27 @@
+---
+// Red build-time banner shown on every page while any tax parameter is unverified
+// and NOSTOS_ENV is not "production" (production builds fail instead: check:params).
+import config from '../config/greece-tax-2026.json';
+import { format, t, type Locale } from '../i18n';
+import { isProduction, listParams } from '../lib/params/verification';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const params = listParams(config);
+const unverified = params.filter((p) => p.missing.length > 0);
+const show = unverified.length > 0 && !isProduction(process.env.NOSTOS_ENV);
+---
+
+{
+  show && (
+    <div role="alert" class="bg-red-700 px-4 py-2 text-center text-sm text-white" data-testid="unverified-banner">
+      <strong class="font-bold tracking-wide">{t(locale, 'banner.unverified.title')}</strong>
+      <span class="block sm:ml-2 sm:inline">
+        {format(t(locale, 'banner.unverified.detail'), { count: unverified.length, total: params.length })}
+      </span>
+    </div>
+  )
+}
