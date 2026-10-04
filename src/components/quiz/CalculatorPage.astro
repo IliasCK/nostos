@@ -1,0 +1,28 @@
+---
+// Shared body of /ypologistis/ and /en/calculator/. M3: eligibility quiz only.
+import Base from '../../layouts/Base.astro';
+import EligibilityQuiz from './EligibilityQuiz';
+import config from '../../config/greece-tax-2026.json';
+import { dictionary, t, type Locale } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+  alternates: Partial<Record<Locale, string>>;
+}
+
+const { locale, alternates } = Astro.props;
+
+// Send the browser only what the quiz needs: its strings and the art5c parameters
+// (without the long descriptions).
+const strings = Object.fromEntries(Object.entries(dictionary(locale)).filter(([key]) => key.startsWith('quiz.')));
+const art5c = JSON.parse(JSON.stringify(config.art5c, (key, value) => (key === 'description' ? undefined : value)));
+---
+
+<Base locale={locale} title={t(locale, 'calculatorPage.title')} alternates={alternates}>
+  <h1 class="text-2xl font-bold sm:text-3xl">{t(locale, 'calculatorPage.title')}</h1>
+  <p class="mt-3 text-stone-700">{t(locale, 'calculatorPage.intro')}</p>
+  <div class="mt-8">
+    <EligibilityQuiz client:load strings={strings} config={{ art5c }} />
+    <noscript><p class="text-amber-800">{t(locale, 'calculatorPage.noscript')}</p></noscript>
+  </div>
+</Base>

@@ -14,6 +14,11 @@ export function t(locale: Locale, key: StringKey): string {
   return dictionaries[locale][key];
 }
 
+/** The whole dictionary for a locale. */
+export function dictionary(locale: Locale): Record<StringKey, string> {
+  return dictionaries[locale];
+}
+
 export function toLocale(value: string | undefined): Locale {
   return value === 'en' ? 'en' : defaultLocale;
 }
