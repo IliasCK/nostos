@@ -26,6 +26,7 @@ const localized404 = {
 export default defineConfig({
   site,
   output: 'static',
+  devToolbar: { enabled: false },
   integrations: [preact(), localized404],
   i18n: {
     locales: ['el', 'en'],

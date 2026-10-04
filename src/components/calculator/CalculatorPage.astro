@@ -1,9 +1,11 @@
 ---
-// Shared body of /ypologistis/ and /en/calculator/. M3: eligibility quiz only.
+// Shared body of /ypologistis/ and /en/calculator/: quiz → inputs → results.
 import Base from '../../layouts/Base.astro';
-import EligibilityQuiz from './EligibilityQuiz';
+import CalculatorApp from './CalculatorApp';
 import config from '../../config/greece-tax-2026.json';
-import { dictionary, t, type Locale } from '../../i18n';
+import { dictionary, methodologyPath, t, type Locale } from '../../i18n';
+import { loadFx, loadPriceLevels, loadRent } from '../../lib/data';
+import { rawData } from '../../lib/data/files';
 
 interface Props {
   locale: Locale;
@@ -12,17 +14,29 @@ interface Props {
 
 const { locale, alternates } = Astro.props;
 
-// Send the browser only what the quiz needs: its strings and the art5c parameters
-// (without the long descriptions).
-const strings = Object.fromEntries(Object.entries(dictionary(locale)).filter(([key]) => key.startsWith('quiz.')));
-const art5c = JSON.parse(JSON.stringify(config.art5c, (key, value) => (key === 'description' ? undefined : value)));
+// Only the quiz/calculator strings and the config without its long descriptions go to the browser.
+const strings = Object.fromEntries(
+  Object.entries(dictionary(locale)).filter(([key]) => key.startsWith('quiz.') || key.startsWith('calc.')),
+);
+const params = JSON.parse(JSON.stringify(config, (key, value) => (key === 'description' ? undefined : value)));
+const data = { fx: loadFx(rawData.fx), priceLevels: loadPriceLevels(rawData.priceLevels), rent: loadRent(rawData.rent) };
+
+// DEV ONLY: synthetic params + fake data for reviewing the layout.
+// Both checks are needed: import.meta.env.DEV follows NODE_ENV, so a build run with
+// NODE_ENV=development (or =test) would otherwise include the demo; MODE comes from
+// `astro build --mode` (default "production"). scripts/check-no-demo.ts additionally
+// fails the build if anything from the demo bundle reaches dist/.
+let demo = undefined;
+if (import.meta.env.DEV && import.meta.env.MODE === 'development') {
+  demo = (await import('../../demo/bundle')).demoBundle;
+}
 ---
 
 <Base locale={locale} title={t(locale, 'calculatorPage.title')} alternates={alternates}>
   <h1 class="text-3xl sm:text-4xl">{t(locale, 'calculatorPage.title')}</h1>
   <p class="mt-3 max-w-prose text-lg text-muted">{t(locale, 'calculatorPage.intro')}</p>
-  <div class="mt-8">
-    <EligibilityQuiz client:load strings={strings} config={{ art5c }} />
+  <div class="mt-10">
+    <CalculatorApp client:load locale={locale} strings={strings} config={params} data={data} methodologyHref={methodologyPath(locale)} demo={demo} />
     <noscript><p class="text-caution">{t(locale, 'calculatorPage.noscript')}</p></noscript>
   </div>
 </Base>
