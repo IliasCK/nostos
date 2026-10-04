@@ -1,0 +1,107 @@
+/*
+ * Nostos design tokens: the ONE place for colours, fonts, type scale and widths.
+ * Components use the Tailwind names defined in @theme below (bg-surface,
+ * text-ink, text-accent…); Tailwind's default palette is switched off so nothing
+ * bypasses these tokens. Contrast (WCAG AA) is noted next to each text colour.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  --nostos-bg: #f7f3ec; /* warm off-white page */
+  --nostos-surface: #fffdf9; /* cards */
+  --nostos-surface-muted: #efe9df; /* quiet panels, table stripes */
+  --nostos-ink: #1c1a17; /* body text: 17.1:1 on surface */
+  --nostos-muted: #5c564d; /* secondary text: 7.1:1 on surface */
+  --nostos-line: #cfc5b6; /* decorative rules only */
+  --nostos-line-strong: #857b6c; /* form-control borders: ≥3:1 (WCAG 1.4.11) */
+
+  --nostos-accent: #9c3d21; /* deep terracotta: 6.7:1 on surface */
+  --nostos-accent-ink: #ffffff; /* text on accent: 6.8:1 */
+  --nostos-accent-soft: #f4e4db; /* tinted panels; accent text on it 5.5:1 */
+
+  --nostos-caution: #7a4e00; /* "unclear / not verified": 6.0:1 on caution-soft */
+  --nostos-caution-soft: #f6ead2;
+
+  --nostos-danger: #a3261d; /* unverified-parameters banner only; white text 7.4:1 */
+  --nostos-danger-ink: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --nostos-bg: #171512;
+    --nostos-surface: #201d19;
+    --nostos-surface-muted: #2a2621;
+    --nostos-ink: #ede7dd; /* 13.7:1 on surface */
+    --nostos-muted: #b3aa9c; /* 7.3:1 */
+    --nostos-line: #4a443b;
+    --nostos-line-strong: #8a8173; /* ≥3:1 */
+
+    --nostos-accent: #e7967a; /* 7.2:1 on surface */
+    --nostos-accent-ink: #171512; /* 7.9:1 */
+    --nostos-accent-soft: #3b2620; /* accent text on it 6.1:1 */
+
+    --nostos-caution: #e6bc66; /* 7.9:1 on caution-soft */
+    --nostos-caution-soft: #352a17;
+  }
+}
+
+@theme inline {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-bg: var(--nostos-bg);
+  --color-surface: var(--nostos-surface);
+  --color-surface-muted: var(--nostos-surface-muted);
+  --color-ink: var(--nostos-ink);
+  --color-muted: var(--nostos-muted);
+  --color-line: var(--nostos-line);
+  --color-line-strong: var(--nostos-line-strong);
+  --color-accent: var(--nostos-accent);
+  --color-accent-ink: var(--nostos-accent-ink);
+  --color-accent-soft: var(--nostos-accent-soft);
+  --color-caution: var(--nostos-caution);
+  --color-caution-soft: var(--nostos-caution-soft);
+  --color-danger: var(--nostos-danger);
+  --color-danger-ink: var(--nostos-danger-ink);
+
+  --font-serif: 'Literata Variable', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Type scale (mobile first; display sizes grow on wider screens via sm:). */
+  --text-figure: 2.5rem; /* headline result numbers */
+  --text-figure--line-height: 1.1;
+  --text-figure-lg: 3.25rem;
+  --text-figure-lg--line-height: 1.05;
+
+  /* Widths */
+  --container-prose: 40rem;
+  --container-page: 48rem;
+}
+
+@layer base {
+  html {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    /* Tabular figures everywhere so numbers line up. */
+    font-variant-numeric: tabular-nums;
+    -webkit-text-size-adjust: 100%;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  a {
+    text-underline-offset: 0.15em;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
