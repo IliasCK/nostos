@@ -20,7 +20,7 @@ A secondary page compares Greece with peer countries (Bulgaria, Romania, Portuga
 ## Non-negotiable rules
 
 1. **Never invent tax numbers.** Every Greek tax parameter lives in `src/config/greece-tax-2026.json` with `value`, `sourceUrl`, `verifiedBy`, `verifiedOn`. If you don't have a verified value, set `value: null` and `verifiedBy: null`, and add the item to `docs/open-items.md`. Do not "fill in a reasonable estimate".
-2. **The production build must fail if any tax parameter is unverified.** `npm run check:params` runs in the production build. Dev builds show a visible red "UNVERIFIED PARAMETERS" banner instead.
+2. **The production build must fail if any tax parameter is unverified.** `npm run check:params` runs as part of every `npm run build`. It fails the build only when the environment variable `NOSTOS_ENV=production` is set; without it, it prints a warning listing the unverified parameters and the build continues (so pre-launch deploys still build while parameters are `null`). Set `NOSTOS_ENV=production` in Workers Builds at launch. Dev builds show a visible red "UNVERIFIED PARAMETERS" banner.
 3. **Never tell a user they ARE eligible.** Eligibility outcomes are exactly three: `likely_eligible`, `borderline`, `likely_not_eligible`. Every answer shows the rule it was judged against and a source link.
 4. **No backend, no database, no cookies, no storing user input.** All calculation runs client-side. User inputs never leave the browser (the only exception is the email signup form, which posts directly to the email provider).
 5. **No scraping** of Spitogatos, XE or any listing site. Rent data is entered by hand from published Spitogatos SPI figures (see SPEC §7).
@@ -66,9 +66,9 @@ wrangler.jsonc                   # Cloudflare Workers config (static assets only
 ## Commands
 
 - `npm run dev`: local dev server
-- `npm run build`: production build (runs `check:params`, then `astro build`)
+- `npm run build`: build (runs `check:params`, then `astro check`, then `astro build`)
 - `npm run test`: Vitest
-- `npm run check:params`: fails if any tax parameter has `value: null` or `verifiedBy: null`
+- `npm run check:params`: lists every tax parameter with a null `value`, `sourceUrl`, `verifiedBy` or `verifiedOn`. Exits non-zero (failing the build) only when `NOSTOS_ENV=production`; otherwise it only warns.
 - `python pipeline/<script>.py`: run a fetch locally; every script writes to `src/data/` only after `validate.py` passes
 
 ## i18n
