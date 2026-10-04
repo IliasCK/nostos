@@ -1,0 +1,15 @@
+{
+  "site.name": "Nostos",
+  "meta.description": "Would you be better or worse off financially if you moved to Greece? Calculator and comparisons, coming soon.",
+  "header.homeLabel": "Nostos, home page",
+  "header.languageNav": "Choose language",
+  "lang.el.short": "GR",
+  "lang.el.name": "Ελληνικά",
+  "lang.en.short": "EN",
+  "lang.en.name": "English",
+  "home.title": "Nostos — coming soon",
+  "home.comingSoon": "A tool to help you work out whether moving to Greece makes financial sense. Coming soon.",
+  "notFound.title": "Page not found",
+  "notFound.body": "The page you're looking for doesn't exist or has moved.",
+  "notFound.backHome": "Back to the home page"
+}

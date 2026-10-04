@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t, homePath } from '../../i18n';
+
+const locale = 'en';
+---
+
+<Base locale={locale} title={t(locale, 'notFound.title')}>
+  <h1 class="text-2xl font-bold sm:text-3xl">{t(locale, 'notFound.title')}</h1>
+  <p class="mt-4 text-stone-700">{t(locale, 'notFound.body')}</p>
+  <p class="mt-6">
+    <a href={homePath(locale)} class="underline">{t(locale, 'notFound.backHome')}</a>
+  </p>
+</Base>

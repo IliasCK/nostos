@@ -1,0 +1,15 @@
+{
+  "site.name": "Nostos",
+  "meta.description": "Θα ήσασταν οικονομικά καλύτερα αν μετακομίζατε στην Ελλάδα; Υπολογιστής και συγκρίσεις, σύντομα.",
+  "header.homeLabel": "Nostos, αρχική σελίδα",
+  "header.languageNav": "Επιλογή γλώσσας",
+  "lang.el.short": "GR",
+  "lang.el.name": "Ελληνικά",
+  "lang.en.short": "EN",
+  "lang.en.name": "English",
+  "home.title": "Nostos — έρχεται σύντομα",
+  "home.comingSoon": "Ένα εργαλείο που θα σας βοηθά να υπολογίσετε αν η επιστροφή στην Ελλάδα βγαίνει οικονομικά. Έρχεται σύντομα.",
+  "notFound.title": "Η σελίδα δεν βρέθηκε",
+  "notFound.body": "Η σελίδα που αναζητάτε δεν υπάρχει ή έχει μετακινηθεί.",
+  "notFound.backHome": "Επιστροφή στην αρχική"
+}

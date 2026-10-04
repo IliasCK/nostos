@@ -1,0 +1,29 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import { t, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  alternates?: Partial<Record<Locale, string>>;
+}
+
+const { locale, title, alternates } = Astro.props;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={t(locale, 'meta.description')} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-white text-stone-900 antialiased">
+    <Header locale={locale} alternates={alternates} />
+    <main class="mx-auto max-w-3xl px-4 py-10">
+      <slot />
+    </main>
+  </body>
+</html>
