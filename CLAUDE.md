@@ -68,7 +68,9 @@ wrangler.jsonc                   # Cloudflare Workers config (static assets only
 - `npm run dev`: local dev server. The calculator page has a **demo mode** toggle (synthetic params + fake data, watermarked) that exists only here; `?demo=likely_eligible&view=results` opens it directly.
 - `npm run build`: build (runs `check:params`, then `astro check`, then `astro build`, then `scripts/check-no-demo.ts`, which fails if demo content reached `dist/`)
 - `npm run test`: Vitest
-- `npm run check:params`: lists every tax parameter with a null `value`, `sourceUrl`, `verifiedBy` or `verifiedOn`. Exits non-zero (failing the build) only when `NOSTOS_ENV=production`; otherwise it only warns.
+- `npm run check:params`: lists every tax parameter with a null `value`, `sourceUrl`, `verifiedBy` or `verifiedOn`, and every unset value in `src/config/site.json`. Exits non-zero (failing the build) only when `NOSTOS_ENV=production`; otherwise it only warns.
+- `npm run og`: regenerates the static OG images (`public/og/<page>-<locale>.png`) from the i18n strings and design tokens; rerun and commit after changing a page title or description.
+- Indexing: unless `SITE_INDEXABLE=true`, every page is noindex and `robots.txt` disallows all (the workers.dev URL must never be indexed). `SITE_INDEXABLE=true` requires `SITE_URL`.
 - `python pipeline/<script>.py`: run a fetch locally; every script writes to `src/data/` only after `validate.py` passes
 
 ## i18n

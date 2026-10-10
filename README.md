@@ -8,7 +8,7 @@ The core is a move-to-Greece calculator: an Article 5C (50% tax break) eligibili
 - Working rules (for humans and Claude Code): [`CLAUDE.md`](CLAUDE.md)
 - Open decisions and verifications: [`docs/open-items.md`](docs/open-items.md)
 
-**Status:** M6 (Greece vs peers page at `/sygkrisi/` and `/en/compare/`). The quiz and calculator are live at `/ypologistis/` and `/en/calculator/`. Every real tax parameter is still unverified, so results show a "can't calculate this yet" state; `npm run dev` has a demo mode with synthetic numbers.
+**Status:** M7 (content: home, methodology, privacy and about pages; SEO; OG images). The peers page is at `/sygkrisi/` and `/en/compare/`. The quiz and calculator are live at `/ypologistis/` and `/en/calculator/`. Every real tax parameter is still unverified, so results show a "can't calculate this yet" state; `npm run dev` has a demo mode with synthetic numbers.
 
 ## Stack
 
@@ -32,7 +32,8 @@ Other commands:
 | `npm run build` | `check:params` → `astro check` (types) → `astro build` into `dist/` |
 | `npm run preview` | Serve the built `dist/` locally |
 | `npx wrangler dev` | Serve `dist/` with the real Cloudflare asset handling (404 pages, trailing slashes); no login needed. Run `npm run build` first. |
-| `npm run check:params` | Lists unverified tax parameters in `src/config/greece-tax-2026.json` |
+| `npm run check:params` | Lists unverified tax parameters in `src/config/greece-tax-2026.json` and unset values in `src/config/site.json` |
+| `npm run og` | Regenerates the Open Graph images in `public/og/` (one per page per language) from the i18n strings and design tokens. Run it after changing a page title or description, then commit the PNGs. |
 
 ### Tax parameters and `NOSTOS_ENV`
 
@@ -40,6 +41,19 @@ Every Greek tax parameter must carry a value, source URL and verification (who a
 
 - without `NOSTOS_ENV=production`, unverified parameters only produce a warning, so pre-launch builds succeed;
 - with `NOSTOS_ENV=production`, any unverified parameter fails the build.
+
+The same rule applies to the launch values in `src/config/site.json` (contact email, analytics, email provider). Until they're set, pages show a visible placeholder.
+
+### Indexing: `SITE_INDEXABLE` and `SITE_URL`
+
+The workers.dev preview must not be indexed. Unless `SITE_INDEXABLE` is exactly `true`:
+
+- every page has `<meta name="robots" content="noindex, nofollow">`;
+- `robots.txt` disallows everything;
+- `dist/_headers` sends `X-Robots-Tag: noindex, nofollow`;
+- `sitemap.xml` is empty.
+
+`SITE_URL` (e.g. `https://example.gr`, no trailing slash) is the only place the domain is configured. It makes the canonical, hreflang, `og:url`/`og:image` and sitemap URLs absolute. `SITE_INDEXABLE=true` without `SITE_URL` fails the build.
 
 ## Data pipeline
 
@@ -67,7 +81,7 @@ Deploys run through **Cloudflare Workers Builds** connected to this GitHub repo:
 
 1. A push to `main` triggers a build in Cloudflare.
 2. Build command: `npm run build`. Deploy command: `npx wrangler deploy`.
-3. Build variables: none for now. At launch (M8), add `NOSTOS_ENV=production` so unverified tax parameters block the deploy.
+3. Build variables: none for now. At launch (M8), add `NOSTOS_ENV=production` so unverified tax parameters and unset site values block the deploy. Add `SITE_URL` and `SITE_INDEXABLE=true` only once the site is on its own domain.
 
 GitHub Actions (`.github/workflows/ci.yml`) runs tests and the build on every push and pull request. It does not deploy.
 
