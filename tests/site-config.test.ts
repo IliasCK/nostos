@@ -4,20 +4,23 @@ import { missingSiteValues, type SiteConfig } from '../src/lib/site-config';
 import { isIndexable, robotsTxt } from '../src/lib/seo';
 
 const filled: SiteConfig = {
-  contactEmail: 'a@example.org',
   analytics: { provider: 'Cloudflare Web Analytics', privacyUrl: 'https://example.org/privacy' },
   emailProvider: { name: 'Provider', privacyUrl: 'https://example.org/p' },
 };
 
 describe('missingSiteValues', () => {
-  it('lists every unset launch value in the committed site.json', () => {
-    expect(missingSiteValues(site as SiteConfig)).toEqual([
-      'contactEmail',
-      'analytics.provider',
-      'analytics.privacyUrl',
-      'emailProvider.name',
-      'emailProvider.privacyUrl',
-    ]);
+  it('has nothing unset in the committed site.json', () => {
+    expect(missingSiteValues(site as SiteConfig)).toEqual([]);
+  });
+
+  it('lists every unset value', () => {
+    expect(
+      missingSiteValues({ analytics: { provider: null, privacyUrl: null }, emailProvider: { name: null, privacyUrl: null } }),
+    ).toEqual(['analytics.provider', 'analytics.privacyUrl', 'emailProvider.name', 'emailProvider.privacyUrl']);
+  });
+
+  it('needs nothing else when the email provider is "none"', () => {
+    expect(missingSiteValues({ ...filled, emailProvider: 'none' })).toEqual([]);
   });
 
   it('is empty when everything is filled in', () => {

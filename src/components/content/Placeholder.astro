@@ -7,11 +7,9 @@ interface Props {
   locale: Locale;
   value: string | null;
   placeholder: StringKey;
-  /** Render the value as a mailto: link. */
-  email?: boolean;
 }
 
-const { locale, value, placeholder, email = false } = Astro.props;
+const { locale, value, placeholder } = Astro.props;
 ---
 
 {
@@ -19,10 +17,6 @@ const { locale, value, placeholder, email = false } = Astro.props;
     <mark class="rounded-sm bg-caution-soft px-1 font-semibold text-caution" data-placeholder={placeholder}>
       {t(locale, placeholder)}
     </mark>
-  ) : email ? (
-    <a href={`mailto:${value}`} class="text-accent underline">
-      {value}
-    </a>
   ) : (
     value
   )

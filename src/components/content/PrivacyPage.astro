@@ -1,6 +1,6 @@
 ---
-// Shared body of /aporrito/ and /en/privacy/. Provider names and the contact
-// address come from src/config/site.json (visible placeholders until filled in).
+// Shared body of /aporrito/ and /en/privacy/. The analytics provider comes from
+// src/config/site.json (visible placeholder until filled in). No email signup in v1.
 import Base from '../../layouts/Base.astro';
 import Placeholder from './Placeholder.astro';
 import site from '../../config/site.json';
@@ -12,10 +12,8 @@ interface Props {
 }
 
 const { locale } = Astro.props;
-const { analytics, emailProvider, contactEmail } = site as SiteConfig;
+const { analytics } = site as SiteConfig;
 const [analyticsBefore, analyticsAfter] = t(locale, 'privacy.analytics.body').split('{provider}');
-const [emailBefore, emailAfter] = t(locale, 'privacy.email.body').split('{provider}');
-const [contactBefore, contactAfter] = t(locale, 'privacy.contact').split('{email}');
 const h2 = 'mt-10 text-xl';
 const p = 'mt-3 max-w-prose';
 const link = 'text-accent underline';
@@ -50,23 +48,7 @@ const link = 'text-accent underline';
     )
   }
 
-  <h2 class={h2}>{t(locale, 'privacy.email.title')}</h2>
-  <p class={p}>
-    {emailBefore}<Placeholder locale={locale} value={emailProvider.name} placeholder="placeholder.emailProvider" />{emailAfter}
-    {
-      emailProvider.name && emailProvider.privacyUrl && (
-        <>
-          {' '}
-          <a href={emailProvider.privacyUrl} class={link}>{format(t(locale, 'privacy.policyLink'), { provider: emailProvider.name })}</a>
-        </>
-      )
-    }
-  </p>
-
   <h2 class={h2}>{t(locale, 'privacy.hosting.title')}</h2>
   <p class={p}>{t(locale, 'privacy.hosting.body')}</p>
 
-  <p class="mt-10 max-w-prose border-t border-line pt-6">
-    {contactBefore}<Placeholder locale={locale} value={contactEmail} placeholder="placeholder.contactEmail" email />{contactAfter}
-  </p>
 </Base>

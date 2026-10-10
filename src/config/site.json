@@ -1,12 +1,8 @@
 {
-  "_note": "Site-wide values Elias fills in before launch. A production build (NOSTOS_ENV=production) fails while any of these is null; other builds show visible placeholders. analytics.provider may be \"none\".",
-  "contactEmail": null,
+  "_note": "Site-wide values Elias fills in before launch. A production build (NOSTOS_ENV=production) fails while any of these is null; other builds show visible placeholders. analytics.provider and emailProvider may be \"none\".",
   "analytics": {
-    "provider": null,
-    "privacyUrl": null
+    "provider": "Cloudflare Web Analytics",
+    "privacyUrl": "https://www.cloudflare.com/privacypolicy/"
   },
-  "emailProvider": {
-    "name": null,
-    "privacyUrl": null
-  }
+  "emailProvider": "none"
 }

@@ -400,11 +400,8 @@
   "privacy.analytics.body": "We count visits with {provider}. It uses no cookies and never sees what you enter in the calculator.",
   "privacy.analytics.none": "We don't use any visitor statistics tool.",
   "privacy.policyLink": "{provider} privacy policy",
-  "privacy.email.title": "Email updates",
-  "privacy.email.body": "If you sign up for updates, your email address goes directly to our email provider, {provider}, and is used only to send you tax-rule changes and site news. You confirm your subscription by email first, and every message has an unsubscribe link.",
   "privacy.hosting.title": "Hosting",
   "privacy.hosting.body": "The pages are served by Cloudflare. Like any web host, it processes your IP address to deliver the pages and to protect the site from abuse. We don't keep any logs.",
-  "privacy.contact": "Questions about privacy: {email}",
   "about.title": "About",
   "about.name": "Nostos (νόστος) is Greek for homecoming.",
   "about.who.title": "Who makes it",
@@ -415,10 +412,6 @@
   "about.disclaimer.body1": "Everything here is an estimate based on published figures and the rules as we understand them. Tax rules change, and individual circumstances differ.",
   "about.disclaimer.body2": "Nothing on this site is tax, legal or financial advice. Only AADE decides whether you qualify for Article 5C. Confirm with a Greek tax adviser before making decisions.",
   "about.method": "How we calculate, and where the data comes from",
-  "about.contact.title": "Contact",
-  "about.contact.body": "Spotted a mistake or an out-of-date figure? Email {email}.",
-  "placeholder.contactEmail": "[contact email: to be added]",
   "placeholder.analytics": "[analytics provider: to be confirmed]",
-  "placeholder.emailProvider": "[email provider: to be confirmed]",
   "home.stat.housingCostOverburden.unit": "of people live in households that spend more than 40% of their disposable income on housing"
 }

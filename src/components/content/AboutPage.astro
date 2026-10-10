@@ -1,19 +1,14 @@
 ---
 // Shared body of /sxetika/ and /en/about/: independent project (no personal
-// name), the "not tax advice" disclaimer and a contact address from site.json.
+// name) and the "not tax advice" disclaimer. No contact address in v1.
 import Base from '../../layouts/Base.astro';
-import Placeholder from './Placeholder.astro';
-import site from '../../config/site.json';
 import { methodologyPath, t, type Locale } from '../../i18n';
-import type { SiteConfig } from '../../lib/site-config';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
-const { contactEmail } = site as SiteConfig;
-const [contactBefore, contactAfter] = t(locale, 'about.contact.body').split('{email}');
 const h2 = 'mt-10 text-xl';
 const p = 'mt-3 max-w-prose';
 ---
@@ -35,8 +30,4 @@ const p = 'mt-3 max-w-prose';
     <p class="mt-4"><a href={methodologyPath(locale)} class="text-accent underline">{t(locale, 'about.method')}</a></p>
   </section>
 
-  <h2 class={h2}>{t(locale, 'about.contact.title')}</h2>
-  <p class={p}>
-    {contactBefore}<Placeholder locale={locale} value={contactEmail} placeholder="placeholder.contactEmail" email />{contactAfter}
-  </p>
 </Base>

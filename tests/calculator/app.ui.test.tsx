@@ -56,7 +56,7 @@ describe('CalculatorApp, live configuration (all unverified)', () => {
     expect(results.textContent).not.toMatch(/€\s?\d/); // never a number built on a null
     expect(within(results).getByText(en['calc.assume.oneEarner'])).toBeTruthy();
     expect(within(results).getByText(en['calc.disclaimer'])).toBeTruthy();
-    expect(within(results).getByTestId('email-signup').querySelector('fieldset')!.disabled).toBe(true);
+    expect(within(results).queryByTestId('email-signup')).toBeNull(); // no email signup in v1
   });
 
   it('shows field errors instead of results for an incomplete form', () => {
