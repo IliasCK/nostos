@@ -91,3 +91,32 @@ export function periodLabel(period: string): { key: string; values: Record<strin
   const m = /^(\d{4})-S([12])$/.exec(period);
   return m ? { key: `peers.half.${m[2]}`, values: { year: m[1]! } } : { key: 'peers.plainYear', values: { year: period } };
 }
+
+/**
+ * The headline stats on the home page (SPEC §4), read live from peers.json:
+ * a welfare measure, prices and housing costs, so the mix is neither upbeat nor gloomy.
+ */
+export const HOME_STATS = ['aicPerCapitaPps', 'priceLevelIndex', 'housingCostOverburden'] as const satisfies readonly PeerIndicator[];
+
+export interface HomeStat {
+  indicator: PeerIndicator;
+  greece: number;
+  eu: number | null;
+  year: string;
+  dataset: string;
+  gap: PeerChart['gap'];
+}
+
+export function buildHomeStats(file: PeersFile): HomeStat[] {
+  return HOME_STATS.map((ind) => {
+    const chart = buildPeerChart(file, ind);
+    return {
+      indicator: ind,
+      greece: chart.rows.find((r) => r.isGreece)!.value,
+      eu: chart.eu?.value ?? null,
+      year: chart.year,
+      dataset: chart.dataset,
+      gap: chart.gap,
+    };
+  });
+}

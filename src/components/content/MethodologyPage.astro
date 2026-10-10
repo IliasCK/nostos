@@ -1,0 +1,281 @@
+---
+// Shared body of /methodologia/ and /en/methodology/: formulas, the Article 5C
+// rules, every data source with its last-updated date (read from the data files)
+// and known limitations. Nothing here is a hand-typed number.
+import Base from '../../layouts/Base.astro';
+import config from '../../config/greece-tax-2026.json';
+import { format, t, type Locale, type StringKey } from '../../i18n';
+import { rawData } from '../../lib/data/files';
+import { PEER_INDICATORS, type FxFile, type PeersFile, type PriceLevelsFile, type RentFile } from '../../lib/data';
+import { periodLabel } from '../../lib/peers';
+import { getParam, isVerified, listParams } from '../../lib/params/verification';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const fx = rawData.fx as FxFile;
+const priceLevels = rawData.priceLevels as PriceLevelsFile;
+const peers = rawData.peers as PeersFile;
+const rent = rawData.rent as RentFile;
+if (!fx || !priceLevels || !peers || !rent) throw new Error('methodology: a data file in src/data/ is missing');
+
+const tag = locale === 'el' ? 'el-GR' : 'en-GB';
+const date = (iso: string) => new Intl.DateTimeFormat(tag, { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(iso));
+const pct = (v: number) => new Intl.NumberFormat(tag, { style: 'percent', maximumFractionDigits: 1 }).format(v);
+const period = (p: string) => {
+  const l = periodLabel(p);
+  return format(t(locale, l.key as never), l.values);
+};
+
+// Article 5C: rate and duration only when verified, otherwise the generic wording.
+const rate = getParam(config, 'art5c.exemptionRate');
+const years = getParam(config, 'art5c.durationYears');
+const fiveCWhat =
+  isVerified(rate) && isVerified(years)
+    ? format(t(locale, 'method.fiveC.what'), { rate: pct(rate!.value as number), years: years!.value as number })
+    : t(locale, 'method.fiveC.what.generic');
+const method = getParam(config, 'art5c.exemptionMethod');
+
+// Quiz rules (the same strings the quiz shows), with config values when verified.
+const ruleText = (key: 'priorResidence' | 'stay', paths: string[]) => {
+  const ps = paths.map((p) => getParam(config, `art5c.${p}`));
+  if (!ps.every(isVerified)) return t(locale, `quiz.rule.${key}.generic`);
+  return format(t(locale, `quiz.rule.${key}`), Object.fromEntries(paths.map((p, i) => [p, ps[i]!.value as number])));
+};
+const conditions = [
+  ruleText('priorResidence', ['requiredNonResidentYears', 'lookbackYears']),
+  t(locale, 'quiz.rule.origin'),
+  t(locale, 'quiz.rule.work'),
+  ruleText('stay', ['minimumStayYears']),
+];
+const AADE_5C_FAQ = 'https://www.aade.gr/sites/default/files/2025-10/FAQS_5G_KFE.pdf';
+
+// Tax parameters, each with status and source.
+const params = listParams(config).map((p) => ({ ...p, entry: getParam(config, p.path)! }));
+const fiveCParams = params.filter((p) => p.path.startsWith('art5c.'));
+const verifiedCount = params.filter((p) => p.missing.length === 0).length;
+const verifiedDates = params.map((p) => p.entry.verifiedOn).filter((d): d is string => !!d).sort();
+const status = (p: (typeof params)[number]) =>
+  p.missing.length === 0 ? format(t(locale, 'method.verifiedOn'), { date: date(p.entry.verifiedOn!) }) : t(locale, 'method.notVerified');
+
+// Data sources. Dates come from each file's fetchedAt / reference period.
+interface SourceRow {
+  label: string;
+  provider: string;
+  href: string | null;
+  period: string;
+  updated: string;
+}
+const sources: SourceRow[] = [
+  { label: t(locale, 'method.src.fx'), provider: 'ECB, EXR', href: fx.source, period: date(fx.date), updated: date(fx.fetchedAt) },
+  {
+    label: t(locale, 'method.src.priceLevels'),
+    provider: 'OECD, PPP (DF_PPP_CPL)',
+    href: priceLevels.source,
+    period: String(priceLevels.year),
+    updated: date(priceLevels.fetchedAt),
+  },
+  ...PEER_INDICATORS.map((ind) => ({
+    label: t(locale, `peers.${ind}.title` as never),
+    provider: `Eurostat, ${peers.indicators[ind].dataset}`,
+    href: `https://ec.europa.eu/eurostat/databrowser/view/${peers.indicators[ind].dataset}/default/table?lang=${locale}`,
+    period: period(peers.indicators[ind].year),
+    updated: date(peers.fetchedAt),
+  })),
+  {
+    label: t(locale, 'method.src.rent'),
+    provider: t(locale, 'method.src.rent.provider'),
+    href: rent.sourceUrl,
+    period: rent.quarter ?? t(locale, 'method.src.rent.missing'),
+    updated: t(locale, 'method.src.rent.manual'),
+  },
+  {
+    label: t(locale, 'method.src.tax'),
+    provider: t(locale, 'method.src.tax.provider'),
+    href: null,
+    period: '2026',
+    updated:
+      verifiedCount === params.length
+        ? date(verifiedDates.at(-1)!)
+        : format(t(locale, 'method.src.tax.pending'), { count: params.length - verifiedCount, total: params.length }),
+  },
+];
+
+const sizes = (['studio', 'one_bed', 'two_bed', 'three_bed'] as const).map((s) => ({
+  label: t(locale, `calc.size.${s}`),
+  m2: rent.sizes[s] ?? null,
+}));
+
+const netSteps: StringKey[] = [1, 2, 3, 4, 5, 6, 7].map((n) => `method.net.step${n}` as StringKey);
+const limits = ['housing', 'asking', 'oneEarner', 'rules', 'age', 'remote'] as const;
+const toc = [
+  ['formulas', 'method.formulas.title'],
+  ['five-c', 'method.fiveC.title'],
+  ['sources', 'method.sources.title'],
+  ['limits', 'method.limits.title'],
+] as const;
+const h3 = 'mt-8 text-xl';
+const p = 'mt-3 max-w-prose';
+const link = 'text-accent underline';
+---
+
+<Base locale={locale} title={t(locale, 'method.title')} page="methodology">
+  <h1 class="text-3xl sm:text-4xl">{t(locale, 'method.title')}</h1>
+  <p class="mt-3 max-w-prose text-lg text-muted">{t(locale, 'method.intro')}</p>
+
+  <nav aria-labelledby="toc" class="mt-6 rounded-lg border border-line bg-surface p-4">
+    <h2 id="toc" class="font-sans text-sm font-semibold text-muted">{t(locale, 'method.toc')}</h2>
+    <ul class="mt-2 space-y-1">
+      {toc.map(([id, key]) => <li><a href={`#${id}`} class={link}>{t(locale, key)}</a></li>)}
+    </ul>
+  </nav>
+
+  <section id="formulas" aria-labelledby="formulas-h" class="mt-12 border-t border-line pt-8">
+    <h2 id="formulas-h" class="text-2xl">{t(locale, 'method.formulas.title')}</h2>
+
+    <h3 class={h3}>{t(locale, 'method.net.title')}</h3>
+    <p class={p}>{t(locale, 'method.net.intro')}</p>
+    <ol class="mt-3 max-w-prose list-decimal space-y-2 pl-6">
+      {netSteps.map((k) => <li>{t(locale, k)}</li>)}
+    </ol>
+    <p class={p}>{t(locale, 'method.net.params')}</p>
+
+    <h3 class={h3}>{t(locale, 'method.fiveCCalc.title')}</h3>
+    <p class={p}>{t(locale, 'method.fiveCCalc.body')}</p>
+    {!isVerified(method) && <p class="mt-3 max-w-prose rounded-md bg-caution-soft p-3 text-sm text-caution">{t(locale, 'method.fiveCCalc.open')}</p>}
+
+    <h3 class={h3}>{t(locale, 'method.rent.title')}</h3>
+    <p class={p}>{t(locale, 'method.rent.body')}</p>
+    <p class={p}>{t(locale, 'method.rent.sizes')}</p>
+    <ul class="mt-2 max-w-prose list-disc space-y-1 pl-6">
+      {sizes.map((s) => <li>{s.label}: {s.m2 === null ? t(locale, 'method.notSet') : `${s.m2} m²`}</li>)}
+    </ul>
+
+    <h3 class={h3}>{t(locale, 'method.left.title')}</h3>
+    <p class={p}>{t(locale, 'method.left.body')}</p>
+
+    <h3 class={h3}>{t(locale, 'method.fx.title')}</h3>
+    <p class={p}>{t(locale, 'method.fx.body')}</p>
+
+    <h3 class={h3}>{t(locale, 'method.ppp.title')}</h3>
+    <p class={p}>{t(locale, 'method.ppp.body')}</p>
+    <p class={`${p} text-muted`}>{t(locale, 'method.ppp.example')}</p>
+
+    <h3 class={h3}>{t(locale, 'method.headline.title')}</h3>
+    <p class={p}>{t(locale, 'method.headline.body')}</p>
+
+    <h3 class={h3}>{t(locale, 'method.peers.title')}</h3>
+    <p class={p}>{t(locale, 'method.peers.body')}</p>
+  </section>
+
+  <section id="five-c" aria-labelledby="five-c-h" class="mt-12 border-t border-line pt-8">
+    <h2 id="five-c-h" class="text-2xl">{t(locale, 'method.fiveC.title')}</h2>
+    <p class={p}>{fiveCWhat}</p>
+    <p class={p}>{t(locale, 'method.fiveC.conditions')}</p>
+    <ul class="mt-2 max-w-prose list-disc space-y-2 pl-6">
+      {conditions.map((c) => <li>{c}</li>)}
+    </ul>
+    <p class={p}>{t(locale, 'method.fiveC.outcomes')}</p>
+    <p class={p}>
+      <a href={AADE_5C_FAQ} class={link} hreflang="el">{t(locale, 'method.fiveC.official')}</a>
+    </p>
+
+    <h3 class={h3}>{t(locale, 'method.fiveC.rules')}</h3>
+    <div class="mt-3 overflow-x-auto">
+      <table class="w-full text-left text-sm">
+        <thead class="border-b border-line-strong">
+          <tr>
+            <th scope="col" class="py-2 pr-3">{t(locale, 'method.params.col.param')}</th>
+            <th scope="col" class="py-2 pr-3">{t(locale, 'method.params.col.status')}</th>
+            <th scope="col" class="py-2">{t(locale, 'method.params.col.source')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            fiveCParams.map((row) => (
+              <tr class="border-b border-line">
+                <td class="py-2 pr-3"><code class="text-xs">{row.path}</code></td>
+                <td class="py-2 pr-3">{status(row)}</td>
+                <td class="py-2">{row.entry.sourceUrl ? <a href={row.entry.sourceUrl} class={link}>{t(locale, 'method.params.source')}</a> : '—'}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="sources" aria-labelledby="sources-h" class="mt-12 border-t border-line pt-8">
+    <h2 id="sources-h" class="text-2xl">{t(locale, 'method.sources.title')}</h2>
+    <div class="mt-4 overflow-x-auto">
+      <table class="w-full text-left text-sm" data-testid="sources-table">
+        <thead class="border-b border-line-strong">
+          <tr>
+            <th scope="col" class="py-2 pr-3">{t(locale, 'method.sources.col.data')}</th>
+            <th scope="col" class="py-2 pr-3">{t(locale, 'method.sources.col.source')}</th>
+            <th scope="col" class="py-2 pr-3">{t(locale, 'method.sources.col.period')}</th>
+            <th scope="col" class="py-2">{t(locale, 'method.sources.col.updated')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            sources.map((s) => (
+              <tr class="border-b border-line align-top">
+                <th scope="row" class="py-2 pr-3 font-normal">{s.label}</th>
+                <td class="py-2 pr-3">{s.href ? <a href={s.href} class={link}>{s.provider}</a> : s.provider}</td>
+                <td class="py-2 pr-3">{s.period}</td>
+                <td class="py-2">{s.updated}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class={`${p} text-sm`}>{t(locale, 'method.sources.cadence')}</p>
+    <p class={`${p} text-sm text-muted`}>{t(locale, 'method.sources.licence')}</p>
+
+    <details class="mt-6 rounded-lg border border-line bg-surface p-4">
+      <summary class="cursor-pointer font-semibold">
+        {format(t(locale, 'method.params.all'), { verified: verifiedCount, total: params.length })}
+      </summary>
+      <div class="mt-3 overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead class="border-b border-line-strong">
+            <tr>
+              <th scope="col" class="py-2 pr-3">{t(locale, 'method.params.col.param')}</th>
+              <th scope="col" class="py-2 pr-3">{t(locale, 'method.params.col.status')}</th>
+              <th scope="col" class="py-2">{t(locale, 'method.params.col.source')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              params.map((row) => (
+                <tr class="border-b border-line">
+                  <td class="py-2 pr-3"><code class="text-xs">{row.path}</code></td>
+                  <td class="py-2 pr-3">{status(row)}</td>
+                  <td class="py-2">{row.entry.sourceUrl ? <a href={row.entry.sourceUrl} class={link}>{t(locale, 'method.params.source')}</a> : '—'}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </section>
+
+  <section id="limits" aria-labelledby="limits-h" class="mt-12 border-t border-line pt-8">
+    <h2 id="limits-h" class="text-2xl">{t(locale, 'method.limits.title')}</h2>
+    <ul class="mt-4 max-w-prose space-y-5">
+      {
+        limits.map((id) => (
+          <li data-limit={id}>
+            <h3 class="text-lg">{t(locale, `method.limit.${id}.title`)}</h3>
+            <p class="mt-1">{t(locale, `method.limit.${id}.body`)}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

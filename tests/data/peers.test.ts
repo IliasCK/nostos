@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import committed from '../../src/data/peers.json';
 import type { PeersFile } from '../../src/lib/data';
-import { buildPeerChart, buildPeerCharts, periodLabel, rankKey } from '../../src/lib/peers';
+import { buildHomeStats, buildPeerChart, buildPeerCharts, HOME_STATS, periodLabel, rankKey } from '../../src/lib/peers';
 
 function file(values: Record<string, number>, notAvailable: string[] = []): PeersFile {
   const block = { label: 'x', dataset: 'ds', filters: {}, url: 'u', unit: 'u', year: '2025', values, notAvailable };
@@ -82,5 +82,25 @@ describe('peers strings', async () => {
   it.each(keys)('%s exists in both languages', (key) => {
     expect(el).toHaveProperty([key]);
     expect(en).toHaveProperty([key]);
+  });
+});
+
+describe('buildHomeStats', () => {
+  it('reads Greece, the EU-27 value and the gap from the file for each home stat', () => {
+    const stats = buildHomeStats(file(SIX));
+    expect(stats.map((s) => s.indicator)).toEqual([...HOME_STATS]);
+    for (const s of stats) {
+      expect(s.greece).toBe(80);
+      expect(s.eu).toBe(100);
+      expect(s.year).toBe('2025');
+    }
+    expect(stats[0]!.gap).toEqual({ kind: 'relative', amount: 20, direction: 'below' });
+    expect(stats[2]!.gap).toEqual({ kind: 'points', amount: 20, direction: 'below' });
+  });
+
+  it('works on the committed peers.json', () => {
+    const stats = buildHomeStats(committed as unknown as PeersFile);
+    expect(stats).toHaveLength(3);
+    for (const s of stats) expect(s.greece).toBe((committed as unknown as PeersFile).indicators[s.indicator].values.GR);
   });
 });

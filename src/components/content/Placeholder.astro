@@ -1,0 +1,29 @@
+---
+// A value from src/config/site.json, or a visible placeholder while it is unset
+// (production builds fail on unset values: scripts/check-params.ts).
+import { t, type Locale, type StringKey } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+  value: string | null;
+  placeholder: StringKey;
+  /** Render the value as a mailto: link. */
+  email?: boolean;
+}
+
+const { locale, value, placeholder, email = false } = Astro.props;
+---
+
+{
+  value === null ? (
+    <mark class="rounded-sm bg-caution-soft px-1 font-semibold text-caution" data-placeholder={placeholder}>
+      {t(locale, placeholder)}
+    </mark>
+  ) : email ? (
+    <a href={`mailto:${value}`} class="text-accent underline">
+      {value}
+    </a>
+  ) : (
+    value
+  )
+}

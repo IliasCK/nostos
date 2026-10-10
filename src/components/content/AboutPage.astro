@@ -1,0 +1,42 @@
+---
+// Shared body of /sxetika/ and /en/about/: independent project (no personal
+// name), the "not tax advice" disclaimer and a contact address from site.json.
+import Base from '../../layouts/Base.astro';
+import Placeholder from './Placeholder.astro';
+import site from '../../config/site.json';
+import { methodologyPath, t, type Locale } from '../../i18n';
+import type { SiteConfig } from '../../lib/site-config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { contactEmail } = site as SiteConfig;
+const [contactBefore, contactAfter] = t(locale, 'about.contact.body').split('{email}');
+const h2 = 'mt-10 text-xl';
+const p = 'mt-3 max-w-prose';
+---
+
+<Base locale={locale} title={t(locale, 'about.title')} page="about">
+  <h1 class="text-3xl sm:text-4xl">{t(locale, 'about.title')}</h1>
+  <p class="mt-4 max-w-prose font-serif text-xl italic text-muted">{t(locale, 'about.name')}</p>
+
+  <h2 class={h2}>{t(locale, 'about.who.title')}</h2>
+  <p class={p}>{t(locale, 'about.who.body')}</p>
+
+  <h2 class={h2}>{t(locale, 'about.why.title')}</h2>
+  <p class={p}>{t(locale, 'about.why.body')}</p>
+
+  <section aria-labelledby="disclaimer" class="mt-10 max-w-prose rounded-lg border border-line-strong bg-surface p-5" data-testid="disclaimer">
+    <h2 id="disclaimer" class="text-xl">{t(locale, 'about.disclaimer.title')}</h2>
+    <p class="mt-3">{t(locale, 'about.disclaimer.body1')}</p>
+    <p class="mt-3 font-semibold">{t(locale, 'about.disclaimer.body2')}</p>
+    <p class="mt-4"><a href={methodologyPath(locale)} class="text-accent underline">{t(locale, 'about.method')}</a></p>
+  </section>
+
+  <h2 class={h2}>{t(locale, 'about.contact.title')}</h2>
+  <p class={p}>
+    {contactBefore}<Placeholder locale={locale} value={contactEmail} placeholder="placeholder.contactEmail" email />{contactAfter}
+  </p>
+</Base>

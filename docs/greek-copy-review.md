@@ -6,12 +6,11 @@ Every Greek string drafted by Claude Code, for Elias to review. Source of truth 
 
 | Key | Greek (draft) | English | Status |
 |---|---|---|---|
-| `meta.description` | Θα ήσουν οικονομικά καλύτερα αν μετακόμιζες στην Ελλάδα; Υπολογιστής και συγκρίσεις, σύντομα. | Would you be better or worse off financially if you moved to Greece? Calculator and comparisons, coming soon. | pending (M2: switched to εσύ) |
+| `meta.description` | Θα ήσουν οικονομικά καλύτερα ή χειρότερα αν μετακόμιζες στην Ελλάδα; Υπολόγισε τι θα σου έμενε μετά το ενοίκιο, σε πραγματική αγοραστική δύναμη. | Would you be better or worse off financially if you moved to Greece? Work out what you'd have left after rent, in real purchasing power. | pending (rewritten in M7) |
 | `header.homeLabel` | Nostos, αρχική σελίδα | Nostos, home page | pending |
 | `header.languageNav` | Επιλογή γλώσσας | Choose language | pending |
 | `lang.el.name` | Ελληνικά | (same in both files) | pending |
-| `home.title` | Nostos — έρχεται σύντομα | Nostos — coming soon | pending |
-| `home.comingSoon` | Ένα εργαλείο που θα σε βοηθά να υπολογίσεις αν η επιστροφή στην Ελλάδα βγαίνει οικονομικά. Έρχεται σύντομα. | A tool to help you work out whether moving to Greece makes financial sense. Coming soon. | pending (M2: switched to εσύ) |
+| `home.title` | Θα σε συνέφερε η μετακόμιση στην Ελλάδα; | Would moving to Greece pay off? | pending (rewritten in M7) |
 | `notFound.title` | Η σελίδα δεν βρέθηκε | Page not found | pending |
 | `notFound.body` | Η σελίδα που ψάχνεις δεν υπάρχει ή έχει μετακινηθεί. | The page you're looking for doesn't exist or has moved. | pending (M2: switched to εσύ) |
 | `notFound.backHome` | Επιστροφή στην αρχική | Back to the home page | pending |
@@ -293,6 +292,134 @@ Every Greek string drafted by Claude Code, for Elias to review. Source of truth 
 | `peers.minimumWagePps.unit` | ΜΑΔ τον μήνα | PPS a month | pending (new in M6) |
 | `peers.minimumWagePps.takeaway` | Σε όρους αγοραστικής δύναμης, {rankClause}. | In purchasing-power terms, {rankClause}. | pending (new in M6) |
 | `peers.minimumWagePps.note` | Η Ιταλία δεν έχει νομοθετημένο κατώτατο μισθό, και δεν υπάρχει στοιχείο για το σύνολο της ΕΕ. | Italy has no statutory minimum wage, and there is no EU-wide figure. | pending (new in M6) |
+| `nav.main` | Κύριο μενού | Main menu | pending (new in M7) |
+| `nav.calculator` | Υπολογιστής | Calculator | pending (new in M7) |
+| `nav.compare` | Σύγκριση | Comparison | pending (new in M7) |
+| `nav.methodology` | Μεθοδολογία | Methodology | pending (new in M7) |
+| `footer.privacy` | Απόρρητο | Privacy | pending (new in M7) |
+| `footer.about` | Σχετικά | About | pending (new in M7) |
+| `meta.calculator.description` | Υπολόγισε τι θα σου έμενε κάθε μήνα στην Ελλάδα μετά το ενοίκιο, με και χωρίς την απαλλαγή του άρθρου 5Γ. | Work out what you'd have left each month in Greece after rent, with and without the Article 5C tax break. | pending (new in M7) |
+| `meta.compare.description` | Η Ελλάδα σε σύγκριση με Βουλγαρία, Ρουμανία, Πορτογαλία, Ισπανία, Ιταλία και τον μέσο όρο της ΕΕ, με στοιχεία της Eurostat. | Greece compared with Bulgaria, Romania, Portugal, Spain, Italy and the EU average, using Eurostat data. | pending (new in M7) |
+| `meta.methodology.description` | Πώς υπολογίζουμε τον καθαρό μισθό, το ενοίκιο και την αγοραστική δύναμη, οι πηγές μας και οι περιορισμοί. | How we calculate net pay, rent and purchasing power, our sources and our limitations. | pending (new in M7) |
+| `meta.privacy.description` | Τι γίνεται με τα στοιχεία σου: τίποτα δεν αποθηκεύεται και δεν υπάρχουν cookies. | What happens to your data: nothing is stored, and there are no cookies. | pending (new in M7) |
+| `meta.about.description` | Ποιος φτιάχνει το Nostos και γιατί. Δεν είναι φορολογική συμβουλή. | Who makes Nostos and why. Not tax advice. | pending (new in M7) |
+| `home.hook` | Θα ήσουν οικονομικά καλύτερα ή χειρότερα στην Ελλάδα; | Would you be better or worse off in Greece? | pending (new in M7) |
+| `home.pitch` | Σύγκρινε τι θα σου έμενε κάθε μήνα στην Ελλάδα μετά το ενοίκιο με όσα σου μένουν σήμερα, σε πραγματική αγοραστική δύναμη, με και χωρίς την απαλλαγή του άρθρου 5Γ. | Compare what you'd have left each month in Greece after rent with what you have now, in real purchasing power, with and without the Article 5C tax break. | pending (new in M7) |
+| `home.cta` | Ξεκίνα τον υπολογισμό | Start the calculator | pending (new in M7) |
+| `home.ctaNote` | Περίπου 3 λεπτά. Ό,τι συμπληρώνεις δεν φεύγει από τη συσκευή σου. | About 3 minutes. Nothing you enter leaves your device. | pending (new in M7) |
+| `home.stats.title` | Η Ελλάδα σε αριθμούς | Greece in numbers | pending (new in M7) |
+| `home.stats.intro` | Σε σύγκριση με τον μέσο όρο της ΕΕ-27, με τα πιο πρόσφατα στοιχεία της Eurostat. | Compared with the EU-27 average, using the latest Eurostat figures. | pending (new in M7) |
+| `home.stat.vsEu` | {gap} μέσο όρο της ΕΕ-27 ({eu}) | {gap} the EU-27 average ({eu}) | pending (new in M7) |
+| `home.stat.source` | Eurostat, {dataset} · {year} | Eurostat, {dataset} · {year} | pending (new in M7) |
+| `home.stats.more` | Δες ολόκληρη τη σύγκριση με Βουλγαρία, Ρουμανία, Πορτογαλία, Ισπανία και Ιταλία | See the full comparison with Bulgaria, Romania, Portugal, Spain and Italy | pending (new in M7) |
+| `home.trust` | Κάθε αριθμός έχει πηγή, και κάθε εκτίμηση αναφέρεται ως εκτίμηση. | Every figure has a source, and every estimate is labelled as one. | pending (new in M7) |
+| `home.trustLink` | Δες πώς υπολογίζουμε | See how we calculate | pending (new in M7) |
+| `method.title` | Μεθοδολογία και πηγές | Methodology and sources | pending (new in M7) |
+| `method.intro` | Πώς δουλεύουν ο υπολογιστής και η σύγκριση: κάθε τύπος, κάθε πηγή δεδομένων και τα όρια όσων μπορούμε να εκτιμήσουμε. | How the calculator and the comparison work: every formula, every data source, and the limits of what we can estimate. | pending (new in M7) |
+| `method.toc` | Σε αυτή τη σελίδα | On this page | pending (new in M7) |
+| `method.notVerified` | δεν έχει επαληθευτεί ακόμα | not yet verified | pending (new in M7) |
+| `method.verifiedOn` | επαληθεύτηκε {date} | verified {date} | pending (new in M7) |
+| `method.notSet` | δεν έχει οριστεί ακόμα | not set yet | pending (new in M7) |
+| `method.formulas.title` | Πώς υπολογίζουμε | How the calculator works | pending (new in M7) |
+| `method.net.title` | Καθαρός μισθός στην Ελλάδα | Greek net pay | pending (new in M7) |
+| `method.net.intro` | Ξεκινάμε από τον μικτό ετήσιο μισθό που συμπληρώνεις: | We start from the gross annual salary you enter: | pending (new in M7) |
+| `method.net.step1` | Ασφαλιστικές εισφορές εργαζομένου (e-ΕΦΚΑ) = μικτές αποδοχές × το ποσοστό εισφορών του εργαζομένου. Υπολογίζονται μόνο μέχρι ένα μηνιαίο ανώτατο όριο αποδοχών. | Employee social contributions (EFKA) = gross pay × the employee contribution rate. They are charged only on pay up to a monthly ceiling. | pending (new in M7) |
+| `method.net.step2` | Φορολογητέο εισόδημα = μικτές αποδοχές − εισφορές εργαζομένου. | Taxable income = gross pay − employee contributions. | pending (new in M7) |
+| `method.net.step3` | Φόρος εισοδήματος: το φορολογητέο εισόδημα φορολογείται κλιμάκιο προς κλιμάκιο με τους συντελεστές του 2026. Οι συντελεστές εξαρτώνται από τον αριθμό των εξαρτώμενων τέκνων, και έως τα 30 ισχύουν χαμηλότεροι συντελεστές. | Income tax: taxable income is taxed band by band at the 2026 rates. The rates depend on how many dependent children you have, and lower rates apply up to age 30. | pending (new in M7) |
+| `method.net.step4` | Μείωση φόρου: ένα σταθερό ποσό, ανάλογα με τον αριθμό των τέκνων, αφαιρείται από τον φόρο. Πάνω από ένα όριο εισοδήματος, το ποσό μικραίνει όσο αυξάνεται το εισόδημα. | Tax reduction: a fixed amount, depending on the number of children, is taken off the tax. Above an income threshold it shrinks as income rises. | pending (new in M7) |
+| `method.net.step5` | Άλλες επιβαρύνσεις, όπως η ειδική εισφορά αλληλεγγύης, προστίθενται μόνο αν ισχύουν για εισόδημα από μισθωτή εργασία το 2026. | Other levies, such as the special solidarity contribution, are added only if they apply to employment income in 2026. | pending (new in M7) |
+| `method.net.step6` | Ετήσιες καθαρές αποδοχές = μικτές αποδοχές − εισφορές − τελικός φόρος − άλλες επιβαρύνσεις. | Annual net pay = gross pay − contributions − final tax − other levies. | pending (new in M7) |
+| `method.net.step7` | Μηνιαίες καθαρές αποδοχές = ετήσιες καθαρές ÷ 12. Στην Ελλάδα ο μισθός συνήθως καταβάλλεται σε 14 δόσεις (μαζί με τα δώρα Χριστουγέννων και Πάσχα και το επίδομα αδείας), οπότε κάθε πραγματική καταβολή είναι οι ετήσιες καθαρές ÷ 14. | Monthly net pay = annual net ÷ 12. Greek salaries are usually paid in 14 instalments (including the Christmas, Easter and holiday bonuses), so each actual payment is annual net ÷ 14. | pending (new in M7) |
+| `method.net.params` | Οι ακριβείς συντελεστές, τα κλιμάκια και τα όρια βρίσκονται στη λίστα φορολογικών παραμέτρων παρακάτω, η καθεμία με την πηγή της. | The exact rates, bands and thresholds are in the list of tax parameters below, each with its source. | pending (new in M7) |
+| `method.fiveCCalc.title` | Με την απαλλαγή του άρθρου 5Γ | With the Article 5C break | pending (new in M7) |
+| `method.fiveCCalc.body` | Με την απαλλαγή, μέρος του εισοδήματός σου δεν φορολογείται, οπότε ο φόρος στα βήματα 3–5 είναι μικρότερος. Η απαλλαγή διαρκεί ορισμένο αριθμό ετών· μετά, ο υπολογιστής δείχνει τον μισθό σου χωρίς αυτήν. Αυτή η πτώση είναι το «σκαλοπάτι» στο διάγραμμα. | With the break, part of your income is not taxed, so the tax in steps 3–5 is lower. The break lasts a set number of years; after that, the calculator shows your pay without it. That drop is the "cliff" in the timeline chart. | pending (new in M7) |
+| `method.fiveCCalc.open` | Πώς ακριβώς εφαρμόζεται η απαλλαγή (στο εισόδημα ή στον φόρο, και με ποια σειρά σε σχέση με τη μείωση φόρου) επαληθεύεται ακόμα. Ο υπολογιστής ακολουθεί τον κανόνα που είναι καταγεγραμμένος στις φορολογικές παραμέτρους. | Exactly how the break is applied (to the income or to the tax, and in what order relative to the tax reduction) is still being verified. The calculator follows the rule recorded in the tax parameters. | pending (new in M7) |
+| `method.rent.title` | Ενοίκιο στην Ελλάδα | Rent in Greece | pending (new in M7) |
+| `method.rent.body` | Εκτιμώμενο ενοίκιο = μέση ζητούμενη τιμή ενοικίου στην πόλη (€ ανά τ.μ. τον μήνα, από τη Spitogatos) × το εμβαδόν του διαμερίσματος σε τ.μ. | Estimated rent = average asking rent in the city (€ per m² per month, from Spitogatos) × the apartment size in m². | pending (new in M7) |
+| `method.rent.sizes` | Εμβαδά που χρησιμοποιούμε: | Apartment sizes we use: | pending (new in M7) |
+| `method.left.title` | Τι μένει μετά το ενοίκιο | Left after rent | pending (new in M7) |
+| `method.left.body` | Υπόλοιπο μετά το ενοίκιο = μηνιαίες καθαρές αποδοχές − μηνιαίο ενοίκιο, στην Ελλάδα και στη χώρα όπου ζεις τώρα. Για τη χώρα σου χρησιμοποιούμε τις καθαρές αποδοχές και το ενοίκιο που συμπληρώνεις· δεν υπολογίζουμε ξένους φόρους. | Left after rent = monthly net pay − monthly rent, in Greece and in the country where you live now. For your current country we use the net pay and rent you enter; we don't calculate foreign taxes. | pending (new in M7) |
+| `method.fx.title` | Νόμισμα | Currency | pending (new in M7) |
+| `method.fx.body` | Ποσά σε λίρες, δολάρια ή κορόνες μετατρέπονται σε ευρώ με την πιο πρόσφατη ισοτιμία αναφοράς της ΕΚΤ: ποσό σε ευρώ = ποσό ÷ μονάδες του νομίσματος ανά 1 €. | Amounts in pounds, dollars or kronor are converted to euros at the latest ECB euro reference rate: amount in EUR = amount ÷ units of that currency per €1. | pending (new in M7) |
+| `method.ppp.title` | Αγοραστική δύναμη | Purchasing power | pending (new in M7) |
+| `method.ppp.body` | Το ίδιο ευρώ αγοράζει διαφορετικά πράγματα σε κάθε χώρα. Για να συγκρίνουμε ισότιμα, εκφράζουμε το υπόλοιπο στη χώρα σου σε τιμές Ελλάδας: ποσό σε τιμές Ελλάδας = ποσό σε ευρώ × επίπεδο τιμών Ελλάδας ÷ επίπεδο τιμών της χώρας σου. Τα επίπεδα τιμών είναι οι δείκτες επιπέδου τιμών του ΟΟΣΑ για την πραγματική ατομική κατανάλωση. | The same euro buys different amounts in different countries. To compare like with like, we express what's left in your current country in Greek prices: amount in Greek prices = amount in EUR × Greek price level ÷ your country's price level. Price levels are OECD price level indices for actual individual consumption. | pending (new in M7) |
+| `method.ppp.example` | Παράδειγμα: αν οι τιμές στη χώρα σου είναι 40% υψηλότερες από ό,τι στην Ελλάδα, 1.400 € που σου μένουν εκεί αντιστοιχούν σε περίπου 1.000 € σε τιμές Ελλάδας. | Example: if prices in your country are 40% higher than in Greece, €1,400 left over there is worth about €1,000 in Greek prices. | pending (new in M7) |
+| `method.headline.title` | Το ποσοστό της σύνοψης | The headline percentage | pending (new in M7) |
+| `method.headline.body` | Διαφορά = (υπόλοιπο στην Ελλάδα − υπόλοιπο στη χώρα σου σε τιμές Ελλάδας) ÷ υπόλοιπο στη χώρα σου σε τιμές Ελλάδας × 100, στρογγυλεμένο σε ακέραιο. Κάτω από 1% προς οποιαδήποτε κατεύθυνση εμφανίζεται ως «περίπου το ίδιο». Υπολογίζεται χωριστά για τα χρόνια με την απαλλαγή του άρθρου 5Γ και για τα χρόνια μετά. | Difference = (left in Greece − left in your country in Greek prices) ÷ left in your country in Greek prices × 100, rounded to a whole percent. Under 1% either way reads as "about the same". It is worked out separately for the years with the Article 5C break and the years after. | pending (new in M7) |
+| `method.peers.title` | Σελίδα σύγκρισης | The comparison page | pending (new in M7) |
+| `method.peers.body` | Έξι δείκτες της Eurostat, ο καθένας για την πιο πρόσφατη περίοδο για την οποία υπάρχουν στοιχεία για όλες τις χώρες. Η σύντομη πρόταση πάνω από κάθε διάγραμμα δημιουργείται από τα στοιχεία: η απόσταση της Ελλάδας από τον μέσο όρο της ΕΕ-27 και η θέση της ανάμεσα στις χώρες. | Six Eurostat indicators, each for the latest period in which every country shown has a figure. The short sentence above each chart is generated from the data: Greece's gap to the EU-27 average and its rank among the countries shown. | pending (new in M7) |
+| `method.fiveC.title` | Άρθρο 5Γ: η απαλλαγή 50% | Article 5C: the 50% tax break | pending (new in M7) |
+| `method.fiveC.what` | Αν μεταφέρεις τη φορολογική σου κατοικία στην Ελλάδα και εργάζεσαι εδώ, το άρθρο 5Γ του Κώδικα Φορολογίας Εισοδήματος (ΚΦΕ) απαλλάσσει από τον φόρο εισοδήματος το {rate} του εισοδήματός σου από εργασία, για {years} χρόνια. | If you move your tax residence to Greece and work here, Article 5C of the Greek Income Tax Code exempts {rate} of your income from work from income tax, for {years} years. | pending (new in M7) |
+| `method.fiveC.what.generic` | Αν μεταφέρεις τη φορολογική σου κατοικία στην Ελλάδα και εργάζεσαι εδώ, το άρθρο 5Γ του Κώδικα Φορολογίας Εισοδήματος (ΚΦΕ) απαλλάσσει από τον φόρο εισοδήματος το 50% του εισοδήματός σου από εργασία, για περιορισμένο αριθμό ετών. Το ακριβές ποσοστό και η διάρκεια δεν έχουν επαληθευτεί ακόμα με βάση τις οδηγίες της ΑΑΔΕ. | If you move your tax residence to Greece and work here, Article 5C of the Greek Income Tax Code exempts 50% of your income from work from income tax, for a limited number of years. The exact rate and duration have not yet been verified against AADE guidance. | pending (new in M7) |
+| `method.fiveC.conditions` | Οι βασικές προϋποθέσεις, όπως τις ελέγχουμε στο κουίζ: | The main conditions, as the quiz checks them: | pending (new in M7) |
+| `method.fiveC.outcomes` | Το κουίζ δεν λέει ποτέ ότι πληροίς τις προϋποθέσεις. Δίνει ένα από τρία αποτελέσματα: «Πιθανότατα πληροίς τις προϋποθέσεις», «Οριακή περίπτωση» ή «Πιθανότατα δεν πληροίς τις προϋποθέσεις». Μόνο η ΑΑΔΕ αποφασίζει. | The quiz never tells you that you qualify. It gives one of three outcomes: "Likely eligible", "Borderline" or "Likely not eligible". Only AADE decides. | pending (new in M7) |
+| `method.fiveC.rules` | Οι κανόνες του άρθρου 5Γ και οι πηγές τους | Article 5C rules and their sources | pending (new in M7) |
+| `method.fiveC.official` | Επίσημη ενημέρωση: ΑΑΔΕ, συχνές ερωτήσεις για το άρθρο 5Γ ΚΦΕ (Οκτώβριος 2025) | Official guidance: AADE, frequently asked questions on Article 5C (October 2025, in Greek) | pending (new in M7) |
+| `method.params.col.param` | Παράμετρος | Parameter | pending (new in M7) |
+| `method.params.col.status` | Κατάσταση | Status | pending (new in M7) |
+| `method.params.col.source` | Πηγή | Source | pending (new in M7) |
+| `method.params.source` | πηγή | source | pending (new in M7) |
+| `method.params.all` | Όλες οι φορολογικές παράμετροι ({verified} από {total} επαληθευμένες) | All tax parameters ({verified} of {total} verified) | pending (new in M7) |
+| `method.sources.title` | Πηγές δεδομένων | Data sources | pending (new in M7) |
+| `method.sources.col.data` | Στοιχεία | Data | pending (new in M7) |
+| `method.sources.col.source` | Πηγή | Source | pending (new in M7) |
+| `method.sources.col.period` | Περίοδος στοιχείων | Data period | pending (new in M7) |
+| `method.sources.col.updated` | Τελευταία ενημέρωση | Last updated | pending (new in M7) |
+| `method.src.fx` | Συναλλαγματικές ισοτιμίες | Exchange rates | pending (new in M7) |
+| `method.src.priceLevels` | Επίπεδα τιμών (υπολογιστής) | Price levels (calculator) | pending (new in M7) |
+| `method.src.rent` | Ενοίκια ανά τ.μ. (Αθήνα, Θεσσαλονίκη, Ηράκλειο, Πάτρα) | Rent per m² (Athens, Thessaloniki, Heraklion, Patras) | pending (new in M7) |
+| `method.src.rent.provider` | Spitogatos, Spitogatos Property Index | Spitogatos, Spitogatos Property Index | pending (new in M7) |
+| `method.src.rent.missing` | δεν έχουν καταχωριστεί ακόμα | not entered yet | pending (new in M7) |
+| `method.src.rent.manual` | καταχωρίζεται με το χέρι κάθε τρίμηνο | entered by hand each quarter | pending (new in M7) |
+| `method.src.tax` | Φορολογικοί κανόνες 2026 | Greek tax rules for 2026 | pending (new in M7) |
+| `method.src.tax.provider` | ΑΑΔΕ και νομοθεσία (μία πηγή ανά παράμετρο) | AADE and legislation (one source per parameter) | pending (new in M7) |
+| `method.src.tax.pending` | {count} από {total} δεν έχουν επαληθευτεί ακόμα | {count} of {total} not yet verified | pending (new in M7) |
+| `method.sources.cadence` | Οι ισοτιμίες ανανεώνονται κάθε εργάσιμη μέρα, τα στοιχεία ΟΟΣΑ και Eurostat ελέγχονται κάθε μήνα, τα ενοίκια καταχωρίζονται με το χέρι κάθε τρίμηνο και οι φορολογικοί κανόνες ελέγχονται μία φορά τον χρόνο. | Exchange rates are refreshed every working day, OECD and Eurostat data are checked monthly, rents are entered by hand each quarter, and tax rules are checked once a year. | pending (new in M7) |
+| `method.sources.licence` | Πηγές: ΕΚΤ, ΟΟΣΑ, Eurostat, Spitogatos. Τα στοιχεία χρησιμοποιούνται σύμφωνα με τους όρους τους, με αναφορά της πηγής. | Sources: ECB, OECD, Eurostat, Spitogatos. Data are reused under their terms, with attribution. | pending (new in M7) |
+| `method.limits.title` | Γνωστοί περιορισμοί | Known limitations | pending (new in M7) |
+| `method.limit.housing.title` | Η στέγαση μετριέται εν μέρει δύο φορές | Housing is partly counted twice | pending (new in M7) |
+| `method.limit.housing.body` | Ο δείκτης επιπέδου τιμών καλύπτει όλη την κατανάλωση των νοικοκυριών, μαζί με τη στέγαση, και εμείς αφαιρούμε επιπλέον το ενοίκιο χωριστά. Δεν υπάρχει δημοσιευμένος δείκτης χωρίς τη στέγαση για όλες τις χώρες που καλύπτουμε, οπότε δεχόμαστε αυτή την επικάλυψη. Μπορεί να αλλοιώνει λίγο τη σύγκριση. | The price level index covers all household consumption, housing included, and we also subtract rent separately. No published index excludes housing for all the countries we cover, so we accept this overlap. It can skew the comparison slightly. | pending (new in M7) |
+| `method.limit.asking.title` | Ζητούμενα, όχι συμφωνημένα ενοίκια | Asking rents, not signed rents | pending (new in M7) |
+| `method.limit.asking.body` | Τα στοιχεία της Spitogatos είναι μέσοι όροι τιμών αγγελιών. Τα ενοίκια που τελικά συμφωνούνται είναι συχνά χαμηλότερα. | Spitogatos figures are averages of advertised prices. The rents people actually sign for are often lower. | pending (new in M7) |
+| `method.limit.oneEarner.title` | Ένας εργαζόμενος | One earner | pending (new in M7) |
+| `method.limit.oneEarner.body` | Υπολογίζουμε με τον μισθό ενός ατόμου. Δεύτερο εισόδημα στο νοικοκυριό δεν λαμβάνεται υπόψη, και θεωρούμε ότι το ενοίκιο το πληρώνεις ολόκληρο εσύ. | We calculate with one person's salary. A second household income isn't included, and we assume you pay the full rent yourself. | pending (new in M7) |
+| `method.limit.rules.title` | Οι κανόνες του 2026 για όλα τα χρόνια | 2026 rules for every year | pending (new in M7) |
+| `method.limit.rules.body` | Το διάγραμμα εφαρμόζει τους φορολογικούς κανόνες του 2026 σε όλα τα χρόνια. Οι συντελεστές και τα όρια θα αλλάξουν, αλλά δεν προσπαθούμε να μαντέψουμε πώς. Μισθοί, ενοίκια και τιμές μένουν επίσης στα σημερινά επίπεδα. | The timeline applies the 2026 tax rules to every year. Rates and thresholds will change, but we don't try to guess how. Pay, rents and prices also stay at today's levels. | pending (new in M7) |
+| `method.limit.age.title` | Πώς μετράμε την ηλικία | How age is counted | pending (new in M7) |
+| `method.limit.age.body` | Έως τα 30 ισχύουν χαμηλότεροι φορολογικοί συντελεστές. Υπολογίζουμε την ηλικιακή σου ομάδα για κάθε χρόνο από το έτος γέννησής σου. Ο ακριβής κανόνας (η ηλικία που συμπληρώνεις μέσα στο έτος ή η ηλικία την 1η Ιανουαρίου) επαληθεύεται ακόμα· όπου οι δύο κανόνες δίνουν διαφορετικό αποτέλεσμα, το λέμε. | Lower tax rates apply up to age 30. We work out your age band for each year from your year of birth. The exact rule (the age you reach during the year, or your age on 1 January) is still being verified; where the two rules give different results, we say so. | pending (new in M7) |
+| `method.limit.remote.title` | Η εξ αποστάσεως εργασία είναι γκρίζα ζώνη | Remote work is a grey area | pending (new in M7) |
+| `method.limit.remote.body` | Αν θα εργάζεσαι εξ αποστάσεως για ξένη εταιρεία χωρίς παρουσία στην Ελλάδα, δεν είναι ξεκάθαρο αν ισχύει το άρθρο 5Γ. Το κουίζ το χαρακτηρίζει οριακή περίπτωση. Ζήτησε επιβεβαίωση από Έλληνα φοροτεχνικό πριν βασιστείς στην απαλλαγή 50%. | If you'd work remotely for a foreign company with no presence in Greece, it isn't clear whether Article 5C applies. The quiz marks this as borderline. Get confirmation from a Greek tax adviser before relying on the 50% break. | pending (new in M7) |
+| `privacy.title` | Απόρρητο | Privacy | pending (new in M7) |
+| `privacy.intro` | Με λίγα λόγια: τίποτα από όσα συμπληρώνεις δεν αποθηκεύεται ούτε στέλνεται πουθενά, και ο ιστότοπος δεν χρησιμοποιεί cookies. | In short: nothing you enter is stored or sent anywhere, and the site uses no cookies. | pending (new in M7) |
+| `privacy.inputs.title` | Τι συμπληρώνεις στον υπολογιστή | What you enter in the calculator | pending (new in M7) |
+| `privacy.inputs.body` | Οι απαντήσεις σου στο κουίζ και τα ποσά που συμπληρώνεις επεξεργάζονται μέσα στον browser σου, στη συσκευή σου. Δεν στέλνονται σε εμάς ούτε σε κανέναν άλλο και δεν αποθηκεύονται: αν κλείσεις ή ανανεώσεις τη σελίδα, χάνονται. | Your quiz answers and the figures you enter are processed in your browser, on your device. They are not sent to us or to anyone else, and they are not saved: close or reload the page and they're gone. | pending (new in M7) |
+| `privacy.cookies.title` | Cookies | Cookies | pending (new in M7) |
+| `privacy.cookies.body` | Ο ιστότοπος δεν ορίζει cookies και δεν αποθηκεύει τίποτα στη συσκευή σου. Γι' αυτό δεν θα δεις μήνυμα για cookies. | The site sets no cookies and stores nothing on your device. That's why there's no cookie banner. | pending (new in M7) |
+| `privacy.analytics.title` | Στατιστικά επισκεψιμότητας | Visitor statistics | pending (new in M7) |
+| `privacy.analytics.body` | Μετράμε τις επισκέψεις με το {provider}. Δεν χρησιμοποιεί cookies και δεν βλέπει ποτέ όσα συμπληρώνεις στον υπολογιστή. | We count visits with {provider}. It uses no cookies and never sees what you enter in the calculator. | pending (new in M7) |
+| `privacy.analytics.none` | Δεν χρησιμοποιούμε κανένα εργαλείο στατιστικών επισκεψιμότητας. | We don't use any visitor statistics tool. | pending (new in M7) |
+| `privacy.policyLink` | Πολιτική απορρήτου: {provider} | {provider} privacy policy | pending (new in M7) |
+| `privacy.email.title` | Ενημερώσεις με email | Email updates | pending (new in M7) |
+| `privacy.email.body` | Αν γραφτείς για ενημερώσεις, η διεύθυνση email σου πηγαίνει απευθείας στον πάροχο email που χρησιμοποιούμε, {provider}, και χρησιμοποιείται μόνο για να σου στέλνουμε αλλαγές στους φορολογικούς κανόνες και νέα του ιστότοπου. Πρώτα επιβεβαιώνεις την εγγραφή σου με email, και κάθε μήνυμα έχει σύνδεσμο διαγραφής. | If you sign up for updates, your email address goes directly to our email provider, {provider}, and is used only to send you tax-rule changes and site news. You confirm your subscription by email first, and every message has an unsubscribe link. | pending (new in M7) |
+| `privacy.hosting.title` | Φιλοξενία | Hosting | pending (new in M7) |
+| `privacy.hosting.body` | Τις σελίδες τις σερβίρει η Cloudflare. Όπως κάθε πάροχος φιλοξενίας, επεξεργάζεται τη διεύθυνση IP σου για να σου στείλει τις σελίδες και να προστατεύσει τον ιστότοπο από κακόβουλη χρήση. Εμείς δεν κρατάμε αρχεία καταγραφής. | The pages are served by Cloudflare. Like any web host, it processes your IP address to deliver the pages and to protect the site from abuse. We don't keep any logs. | pending (new in M7) |
+| `privacy.contact` | Ερωτήσεις για το απόρρητο: {email} | Questions about privacy: {email} | pending (new in M7) |
+| `about.title` | Σχετικά | About | pending (new in M7) |
+| `about.name` | Νόστος: η επιστροφή στην πατρίδα. | Nostos (νόστος) is Greek for homecoming. | pending (new in M7) |
+| `about.who.title` | Ποιος το φτιάχνει | Who makes it | pending (new in M7) |
+| `about.who.body` | Το Nostos είναι ανεξάρτητο εγχείρημα. Δεν συνδέεται με κανέναν δημόσιο φορέα, καμία εταιρεία και κανέναν φοροτεχνικό. | Nostos is an independent project. It isn't affiliated with any public body, company or tax adviser. | pending (new in M7) |
+| `about.why.title` | Γιατί | Why | pending (new in M7) |
+| `about.why.body` | Πολλοί από όσους έφυγαν από την Ελλάδα τα χρόνια της κρίσης, αλλά και πολλοί που δεν έχουν ζήσει ποτέ εδώ, σκέφτονται να έρθουν. Οι αριθμοί που χρειάζονται είναι σκόρπιοι σε νόμους, στατιστικές και αγγελίες. Το Nostos τους μαζεύει σε ένα σημείο, με τις πηγές τους, για να κρίνεις εσύ. | Many people who left Greece during the crisis years, and many who have never lived here, are thinking about moving. The numbers they need are scattered across tax law, statistics and listings. Nostos brings them together, with their sources, so you can judge for yourself. | pending (new in M7) |
+| `about.disclaimer.title` | Δεν είναι φορολογική συμβουλή | Not tax advice | pending (new in M7) |
+| `about.disclaimer.body1` | Όλα όσα βλέπεις εδώ είναι εκτιμήσεις με βάση δημοσιευμένα στοιχεία και τους κανόνες όπως τους καταλαβαίνουμε. Οι φορολογικοί κανόνες αλλάζουν, και η κατάσταση του καθενός είναι διαφορετική. | Everything here is an estimate based on published figures and the rules as we understand them. Tax rules change, and individual circumstances differ. | pending (new in M7) |
+| `about.disclaimer.body2` | Τίποτα σε αυτόν τον ιστότοπο δεν αποτελεί φορολογική, νομική ή χρηματοοικονομική συμβουλή. Μόνο η ΑΑΔΕ αποφασίζει αν πληροίς τις προϋποθέσεις του άρθρου 5Γ. Επιβεβαίωσε με Έλληνα φοροτεχνικό πριν πάρεις αποφάσεις. | Nothing on this site is tax, legal or financial advice. Only AADE decides whether you qualify for Article 5C. Confirm with a Greek tax adviser before making decisions. | pending (new in M7) |
+| `about.method` | Πώς υπολογίζουμε και από πού προέρχονται τα στοιχεία | How we calculate, and where the data comes from | pending (new in M7) |
+| `about.contact.title` | Επικοινωνία | Contact | pending (new in M7) |
+| `about.contact.body` | Βρήκες λάθος ή στοιχείο που δεν είναι ενημερωμένο; Γράψε μας στο {email}. | Spotted a mistake or an out-of-date figure? Email {email}. | pending (new in M7) |
+| `placeholder.contactEmail` | [email επικοινωνίας: θα προστεθεί] | [contact email: to be added] | pending (new in M7) |
+| `placeholder.analytics` | [εργαλείο στατιστικών: θα επιβεβαιωθεί] | [analytics provider: to be confirmed] | pending (new in M7) |
+| `placeholder.emailProvider` | [πάροχος email: θα επιβεβαιωθεί] | [email provider: to be confirmed] | pending (new in M7) |
+| `home.stat.housingCostOverburden.unit` | του πληθυσμού ζει σε νοικοκυριά που ξοδεύουν πάνω από το 40% του διαθέσιμου εισοδήματός τους για στέγαση | of people live in households that spend more than 40% of their disposable income on housing | pending (new in M7) |
 
 Not listed (not Greek text, or identical in both languages): `site.name`, `lang.el.short`, `lang.en.short`, `lang.en.name`, `calc.ageBand.26to30`, `calc.ageBand.31plus`, `calc.email.label`, `peers.plainYear`.
 
@@ -315,3 +442,10 @@ Notes for review:
   - **Generated takeaways:** each takeaway is assembled from `peers.<indicator>.takeaway` + `peers.gap.*` + `peers.rankClause` + `peers.rank.*`, with numbers from the data. Current Greek output, for example: «Το ΑΕΠ ανά κάτοικο στην Ελλάδα βρίσκεται 32% κάτω από τον μέσο όρο της ΕΕ-27· η Ελλάδα έχει τη δεύτερη χαμηλότερη τιμή ανάμεσα στις 6 χώρες.»
   - **Phrasing:** "κάτω/πάνω από τον μέσο όρο" was chosen because it needs no gender agreement with the subject.
   - **ΜΑΔ** (Μονάδες Αγοραστικής Δύναμης) is Eurostat's Greek term for PPS.
+- **Content pages (M7):**
+  - **Also listed now:** the navigation, footer and meta-description strings added at the start of M7 (`nav.*`, `footer.privacy`, `footer.about`, `meta.*.description`) were missing from this list.
+  - **Placeholders:** `{gap}` in `home.stat.vsEu` is a `peers.gap.*` phrase (e.g. «19% κάτω από τον»), so the tile reads «19% κάτω από τον μέσο όρο της ΕΕ-27 (26.300)». `{provider}` and `{email}` come from `src/config/site.json`. Until those are set, the page shows the `placeholder.*` text in a highlighted box.
+  - **"browser":** kept in English in `privacy.inputs.body` («μέσα στον browser σου»), as most people say it. The alternative is «πρόγραμμα περιήγησης».
+  - **Gender:** «για να κρίνεις εσύ» was used instead of «μόνος σου» to stay gender-neutral. «Έλληνα φοροτεχνικό» uses the generic masculine.
+  - **"50%":** `method.fiveC.title`, `method.fiveC.what.generic` and `method.limit.remote.body` state 50%, as requested. See open item 29.
+  - **OG images** (`public/og/*.png`) use `home.hook` + `home.pitch` for the home page and `<page title>` + `meta.<page>.description` for the rest, plus `footer.disclaimer`. If you change any of these, run `npm run og`.
