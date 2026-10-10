@@ -85,6 +85,13 @@ wrangler.jsonc                   # Cloudflare Workers config (static assets only
 - `validate.py` sanity-checks every dataset before it's written (ranges, no missing countries, change vs previous value within a sane band). If validation fails, the workflow fails and nothing is committed.
 - Scheduled workflows commit only when the data actually changed (every commit triggers a Workers Build; don't burn the free build allowance on no-op commits).
 
+## Speed rules
+
+- Skip the plan-and-wait step unless the spec is ambiguous.
+- No clean reinstall before pushing; CI covers it.
+- Run only related tests while working, the full suite once at the end.
+- No screenshots unless asked.
+
 ## Working style
 
 - Work milestone by milestone (SPEC §12). Finish one, show Elias, then move on.

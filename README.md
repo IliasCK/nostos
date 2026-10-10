@@ -42,7 +42,7 @@ Every Greek tax parameter must carry a value, source URL and verification (who a
 - without `NOSTOS_ENV=production`, unverified parameters only produce a warning, so pre-launch builds succeed;
 - with `NOSTOS_ENV=production`, any unverified parameter fails the build.
 
-The same rule applies to the launch values in `src/config/site.json` (contact email, analytics, email provider). Until they're set, pages show a visible placeholder.
+The same rule applies to the launch values in `src/config/site.json` (analytics provider and its privacy URL; `emailProvider` is `"none"` in v1). Until they're set, pages show a visible placeholder.
 
 ### Indexing: `SITE_INDEXABLE` and `SITE_URL`
 

@@ -399,11 +399,8 @@ Every Greek string drafted by Claude Code, for Elias to review. Source of truth 
 | `privacy.analytics.body` | Μετράμε τις επισκέψεις με το {provider}. Δεν χρησιμοποιεί cookies και δεν βλέπει ποτέ όσα συμπληρώνεις στον υπολογιστή. | We count visits with {provider}. It uses no cookies and never sees what you enter in the calculator. | pending (new in M7) |
 | `privacy.analytics.none` | Δεν χρησιμοποιούμε κανένα εργαλείο στατιστικών επισκεψιμότητας. | We don't use any visitor statistics tool. | pending (new in M7) |
 | `privacy.policyLink` | Πολιτική απορρήτου: {provider} | {provider} privacy policy | pending (new in M7) |
-| `privacy.email.title` | Ενημερώσεις με email | Email updates | pending (new in M7) |
-| `privacy.email.body` | Αν γραφτείς για ενημερώσεις, η διεύθυνση email σου πηγαίνει απευθείας στον πάροχο email που χρησιμοποιούμε, {provider}, και χρησιμοποιείται μόνο για να σου στέλνουμε αλλαγές στους φορολογικούς κανόνες και νέα του ιστότοπου. Πρώτα επιβεβαιώνεις την εγγραφή σου με email, και κάθε μήνυμα έχει σύνδεσμο διαγραφής. | If you sign up for updates, your email address goes directly to our email provider, {provider}, and is used only to send you tax-rule changes and site news. You confirm your subscription by email first, and every message has an unsubscribe link. | pending (new in M7) |
 | `privacy.hosting.title` | Φιλοξενία | Hosting | pending (new in M7) |
 | `privacy.hosting.body` | Τις σελίδες τις σερβίρει η Cloudflare. Όπως κάθε πάροχος φιλοξενίας, επεξεργάζεται τη διεύθυνση IP σου για να σου στείλει τις σελίδες και να προστατεύσει τον ιστότοπο από κακόβουλη χρήση. Εμείς δεν κρατάμε αρχεία καταγραφής. | The pages are served by Cloudflare. Like any web host, it processes your IP address to deliver the pages and to protect the site from abuse. We don't keep any logs. | pending (new in M7) |
-| `privacy.contact` | Ερωτήσεις για το απόρρητο: {email} | Questions about privacy: {email} | pending (new in M7) |
 | `about.title` | Σχετικά | About | pending (new in M7) |
 | `about.name` | Νόστος: η επιστροφή στην πατρίδα. | Nostos (νόστος) is Greek for homecoming. | pending (new in M7) |
 | `about.who.title` | Ποιος το φτιάχνει | Who makes it | pending (new in M7) |
@@ -414,11 +411,7 @@ Every Greek string drafted by Claude Code, for Elias to review. Source of truth 
 | `about.disclaimer.body1` | Όλα όσα βλέπεις εδώ είναι εκτιμήσεις με βάση δημοσιευμένα στοιχεία και τους κανόνες όπως τους καταλαβαίνουμε. Οι φορολογικοί κανόνες αλλάζουν, και η κατάσταση του καθενός είναι διαφορετική. | Everything here is an estimate based on published figures and the rules as we understand them. Tax rules change, and individual circumstances differ. | pending (new in M7) |
 | `about.disclaimer.body2` | Τίποτα σε αυτόν τον ιστότοπο δεν αποτελεί φορολογική, νομική ή χρηματοοικονομική συμβουλή. Μόνο η ΑΑΔΕ αποφασίζει αν πληροίς τις προϋποθέσεις του άρθρου 5Γ. Επιβεβαίωσε με Έλληνα φοροτεχνικό πριν πάρεις αποφάσεις. | Nothing on this site is tax, legal or financial advice. Only AADE decides whether you qualify for Article 5C. Confirm with a Greek tax adviser before making decisions. | pending (new in M7) |
 | `about.method` | Πώς υπολογίζουμε και από πού προέρχονται τα στοιχεία | How we calculate, and where the data comes from | pending (new in M7) |
-| `about.contact.title` | Επικοινωνία | Contact | pending (new in M7) |
-| `about.contact.body` | Βρήκες λάθος ή στοιχείο που δεν είναι ενημερωμένο; Γράψε μας στο {email}. | Spotted a mistake or an out-of-date figure? Email {email}. | pending (new in M7) |
-| `placeholder.contactEmail` | [email επικοινωνίας: θα προστεθεί] | [contact email: to be added] | pending (new in M7) |
 | `placeholder.analytics` | [εργαλείο στατιστικών: θα επιβεβαιωθεί] | [analytics provider: to be confirmed] | pending (new in M7) |
-| `placeholder.emailProvider` | [πάροχος email: θα επιβεβαιωθεί] | [email provider: to be confirmed] | pending (new in M7) |
 | `home.stat.housingCostOverburden.unit` | του πληθυσμού ζει σε νοικοκυριά που ξοδεύουν πάνω από το 40% του διαθέσιμου εισοδήματός τους για στέγαση | of people live in households that spend more than 40% of their disposable income on housing | pending (new in M7) |
 
 Not listed (not Greek text, or identical in both languages): `site.name`, `lang.el.short`, `lang.en.short`, `lang.en.name`, `calc.ageBand.26to30`, `calc.ageBand.31plus`, `calc.email.label`, `peers.plainYear`.
