@@ -1,6 +1,6 @@
 {
   "source": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/",
-  "fetchedAt": "2026-10-04T09:46:07Z",
+  "fetchedAt": "2026-11-03T13:06:54Z",
   "countries": [
     "GR",
     "BG",
@@ -22,13 +22,13 @@
       "unit": "PPS (EU27_2020) per inhabitant, current prices",
       "year": "2025",
       "values": {
-        "GR": 28469.9,
-        "BG": 28332.0,
-        "RO": 32353.1,
+        "GR": 29083.4,
+        "BG": 28433.4,
+        "RO": 32575.8,
         "PT": 34022.2,
         "ES": 38161.7,
         "IT": 40075.0,
-        "EU27": 41698.7
+        "EU27": 41773.5
       },
       "notAvailable": []
     },
@@ -115,7 +115,7 @@
         "PT": 6.3,
         "ES": 7.2,
         "IT": 5.0,
-        "EU27": 7.7
+        "EU27": 7.6
       },
       "notAvailable": []
     },
