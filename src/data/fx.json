@@ -1,12 +1,12 @@
 {
   "source": "https://data-api.ecb.europa.eu/service/data/EXR/D.GBP+USD+AUD+SEK.EUR.SP00.A?lastNObservations=1&format=csvdata",
-  "fetchedAt": "2026-11-24T02:28:22Z",
-  "date": "2026-11-23",
+  "fetchedAt": "2026-11-25T00:00:05Z",
+  "date": "2026-11-24",
   "base": "EUR",
   "rates": {
-    "GBP": 0.83673,
-    "USD": 1.0939,
-    "AUD": 1.6532,
-    "SEK": 11.2375
+    "GBP": 0.837,
+    "USD": 1.0963,
+    "AUD": 1.6507,
+    "SEK": 11.221
   }
 }
